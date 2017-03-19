@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by codeest on 16/11/27.
+ *tab+viewPager
  */
 
 public class GoldMainFragment extends BaseFragment<GoldMainPresenter> implements GoldMainContract.View {
@@ -52,7 +52,7 @@ public class GoldMainFragment extends BaseFragment<GoldMainPresenter> implements
 
     @Override
     protected void initEventAndData() {
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置tab滚动
         mTabLayout.setupWithViewPager(mViewPager);
         mPresenter.initManagerList();
     }

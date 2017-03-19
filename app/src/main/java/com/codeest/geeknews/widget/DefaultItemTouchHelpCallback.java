@@ -32,8 +32,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 设置Item操作的回调，去更新UI和数据源
-     *
-     * @param onItemTouchCallbackListener
      */
     public void setOnItemTouchCallbackListener(OnItemTouchCallbackListener onItemTouchCallbackListener) {
         this.onItemTouchCallbackListener = onItemTouchCallbackListener;
@@ -41,8 +39,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 设置是否可以被拖拽
-     *
-     * @param canDrag 是true，否false
      */
     public void setDragEnable(boolean canDrag) {
         isCanDrag = canDrag;
@@ -50,8 +46,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 设置是否可以被滑动
-     *
-     * @param canSwipe 是true，否false
      */
     public void setSwipeEnable(boolean canSwipe) {
         isCanSwipe = canSwipe;
@@ -59,8 +53,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 当Item被长按的时候是否可以被拖拽
-     *
-     * @return
      */
     @Override
     public boolean isLongPressDragEnabled() {
@@ -69,8 +61,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * Item是否可以被滑动(H：左右滑动，V：上下滑动)
-     *
-     * @return
      */
     @Override
     public boolean isItemViewSwipeEnabled() {
@@ -79,10 +69,6 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 当用户拖拽或者滑动Item的时候需要我们告诉系统滑动或者拖拽的方向
-     *
-     * @param recyclerView
-     * @param viewHolder
-     * @return
      */
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
@@ -96,10 +82,8 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
         } else if (layoutManager instanceof LinearLayoutManager) {// linearLayoutManager
             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
             int orientation = linearLayoutManager.getOrientation();
-
             int dragFlag = 0;
             int swipeFlag = 0;
-
             // 为了方便理解，相当于分为横着的ListView和竖着的ListView
             if (orientation == LinearLayoutManager.HORIZONTAL) {// 如果是横向的布局
                 swipeFlag = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
@@ -115,11 +99,9 @@ public class DefaultItemTouchHelpCallback extends ItemTouchHelper.Callback {
 
     /**
      * 当Item被拖拽的时候被回调
-     *
      * @param recyclerView     recyclerView
      * @param srcViewHolder    拖拽的ViewHolder
      * @param targetViewHolder 目的地的viewHolder
-     * @return
      */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder srcViewHolder, RecyclerView.ViewHolder targetViewHolder) {

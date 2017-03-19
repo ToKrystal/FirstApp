@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by codeest on 2016/8/2.
+ * 自定义application
  */
 public class App extends Application{
 
@@ -45,17 +45,15 @@ public class App extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
-
         //初始化屏幕宽高
         getScreenSize();
-
         //在子线程中初始化
         InitializeService.start(this);
     }
 
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
+        MultiDex.install(this);//多dex加载
     }
 
     public void addActivity(Activity act) {
@@ -87,12 +85,12 @@ public class App extends Application{
         WindowManager windowManager = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         Display display = windowManager.getDefaultDisplay();
-        display.getMetrics(dm);
+        display.getMetrics(dm);//dm赋值
         DIMEN_RATE = dm.density / 1.0F;
         DIMEN_DPI = dm.densityDpi;
         SCREEN_WIDTH = dm.widthPixels;
         SCREEN_HEIGHT = dm.heightPixels;
-        if(SCREEN_WIDTH > SCREEN_HEIGHT) {
+        if(SCREEN_WIDTH > SCREEN_HEIGHT) {//保证宽度比高度小
             int t = SCREEN_HEIGHT;
             SCREEN_HEIGHT = SCREEN_WIDTH;
             SCREEN_WIDTH = t;
@@ -100,7 +98,7 @@ public class App extends Application{
     }
 
     public static AppComponent getAppComponent(){
-        if (appComponent == null) {
+        if (appComponent == null) {//build appComponent--> application
             appComponent = DaggerAppComponent.builder()
                     .appModule(new AppModule(instance))
                     .httpModule(new HttpModule())

@@ -19,7 +19,7 @@ import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
- * Created by codeest on 2016/8/2.
+ *
  * MVP activity基类
  */
 public abstract class BaseActivity<T extends BasePresenter> extends SupportActivity implements BaseView{
@@ -93,6 +93,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     }
 
     protected abstract void initInject();
+
+    /**
+     * R.layout.id
+     * @return
+     */
     protected abstract int getLayout();
     protected abstract void initEventAndData();
 }

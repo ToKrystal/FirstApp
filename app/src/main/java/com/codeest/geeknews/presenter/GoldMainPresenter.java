@@ -13,13 +13,13 @@ import io.realm.RealmList;
 import rx.functions.Action1;
 
 /**
- * Created by codeest on 16/11/28.
+ *
  */
 
 public class GoldMainPresenter extends RxPresenter<GoldMainContract.View> implements GoldMainContract.Presenter{
 
     private RealmHelper mRealmHelper;
-    private RealmList<GoldManagerItemBean> mList;
+    private RealmList<GoldManagerItemBean> mList;//list->android isSelect
 
     @Inject
     public GoldMainPresenter(RealmHelper mRealHelper) {

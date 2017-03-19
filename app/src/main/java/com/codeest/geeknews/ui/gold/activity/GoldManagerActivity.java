@@ -20,7 +20,7 @@ import butterknife.BindView;
 import io.realm.RealmList;
 
 /**
- * Created by codeest on 16/11/27.
+ *设置展示列表显示显示哪些内容
  */
 
 public class GoldManagerActivity extends SimpleActivity {
@@ -28,11 +28,11 @@ public class GoldManagerActivity extends SimpleActivity {
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
     @BindView(R.id.rv_gold_manager_list)
-    RecyclerView rvGoldManagerList;
+    RecyclerView rvGoldManagerListRecycleView;
 
     RealmList<GoldManagerItemBean> mList;
     GoldManagerAdapter mAdapter;
-    DefaultItemTouchHelpCallback mCallback;
+    DefaultItemTouchHelpCallback mCallback;//滑动和拖拽Item回调
 
     @Override
     protected int getLayout() {
@@ -44,8 +44,8 @@ public class GoldManagerActivity extends SimpleActivity {
         setToolBar(toolBar, "首页特别展示");
         mList = ((GoldManagerBean) getIntent().getParcelableExtra(Constants.IT_GOLD_MANAGER)).getManagerList();
         mAdapter = new GoldManagerAdapter(mContext, mList);
-        rvGoldManagerList.setLayoutManager(new LinearLayoutManager(mContext));
-        rvGoldManagerList.setAdapter(mAdapter);
+        rvGoldManagerListRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
+        rvGoldManagerListRecycleView.setAdapter(mAdapter);
         mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {
             @Override
             public void onSwiped(int adapterPosition) {
@@ -61,10 +61,10 @@ public class GoldManagerActivity extends SimpleActivity {
                 return false;
             }
         });
-        mCallback.setDragEnable(true);
-        mCallback.setSwipeEnable(false);
+        mCallback.setDragEnable(true);//设置拖拽
+        mCallback.setSwipeEnable(false);//设置滑动
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
-        itemTouchHelper.attachToRecyclerView(rvGoldManagerList);
+        itemTouchHelper.attachToRecyclerView(rvGoldManagerListRecycleView);
     }
 
     @Override

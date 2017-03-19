@@ -19,7 +19,7 @@ import io.realm.RealmList;
 import static com.codeest.geeknews.ui.gold.fragment.GoldMainFragment.typeStr;
 
 /**
- * Created by codeest on 16/11/27.
+ *
  */
 
 public class GoldManagerAdapter extends RecyclerView.Adapter<GoldManagerAdapter.ViewHolder> {

@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by codeest on 16/11/27.
+ *
  */
 
 public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -75,7 +75,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        GoldListBean bean = mList.get(0);
+        GoldListBean bean = mList.get(0);//标题
         if (position > 0) {
             bean = mList.get(position -1);
         }
@@ -83,7 +83,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
                 ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((ContentViewHolder) holder).ivImg);
             } else {
-                ((ContentViewHolder) holder).ivImg.setImageResource(R.mipmap.ic_launcher);
+                ((ContentViewHolder) holder).ivImg.setImageResource(R.mipmap.ic_launcher);//设置默认图片
             }
             ((ContentViewHolder) holder).tvTitle.setText(bean.getTitle());
             ((ContentViewHolder) holder).tvInfo.setText(getItemInfoStr(bean.getCollectionCount(),

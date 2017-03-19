@@ -7,7 +7,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
- * Created by codeest on 16/11/27.
+ *recycle view All Data
  */
 
 public class GoldManagerBean extends RealmObject implements Parcelable {

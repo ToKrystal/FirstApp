@@ -27,7 +27,7 @@ import butterknife.BindView;
 public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements GoldContract.View {
 
     @BindView(R.id.rv_content)
-    RecyclerView rvGoldList;
+    RecyclerView rvGoldListRecycleView;
     @BindView(R.id.iv_progress)
     ProgressImageView ivProgress;
     @BindView(R.id.swipe_refresh)
@@ -38,6 +38,7 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
 
     private boolean isLoadingMore = false;
     private String mType;
+
 
     @Override
     protected void initInject() {
@@ -54,15 +55,15 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
         mType = getArguments().getString(Constants.IT_GOLD_TYPE);
         mDecoration = new GoldItemDecoration();
         mAdapter = new GoldListAdapter(mContext, new ArrayList<GoldListBean>(), getArguments().getString(Constants.IT_GOLD_TYPE_STR));
-        rvGoldList.setLayoutManager(new LinearLayoutManager(mContext));
-        rvGoldList.setAdapter(mAdapter);
-        rvGoldList.addItemDecoration(mDecoration);
-        rvGoldList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvGoldListRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
+        rvGoldListRecycleView.setAdapter(mAdapter);
+        rvGoldListRecycleView.addItemDecoration(mDecoration);
+        rvGoldListRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int lastVisibleItem = ((LinearLayoutManager) rvGoldList.getLayoutManager()).findLastVisibleItemPosition();
-                int totalItemCount = rvGoldList.getLayoutManager().getItemCount();
+                int lastVisibleItem = ((LinearLayoutManager) rvGoldListRecycleView.getLayoutManager()).findLastVisibleItemPosition();
+                int totalItemCount = rvGoldListRecycleView.getLayoutManager().getItemCount();
                 if (lastVisibleItem >= totalItemCount - 2 && dy > 0) {
                     if(!isLoadingMore){
                         isLoadingMore = true;
@@ -75,7 +76,7 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
             @Override
             public void onRefresh() {
                 if (!mAdapter.getHotFlag()) {
-                    rvGoldList.addItemDecoration(mDecoration);
+                    rvGoldListRecycleView.addItemDecoration(mDecoration);
                 }
                 mAdapter.setHotFlag(true);
                 mPresenter.getGoldData(mType);
@@ -84,7 +85,7 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
         mAdapter.setOnHotCloseListener(new GoldListAdapter.OnHotCloseListener() {
             @Override
             public void onClose() {
-                rvGoldList.removeItemDecoration(mDecoration);
+                rvGoldListRecycleView.removeItemDecoration(mDecoration);
             }
         });
         ivProgress.start();
@@ -116,6 +117,6 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
         } else {
             ivProgress.stop();
         }
-        SnackbarUtil.showShort(rvGoldList, msg);
+        SnackbarUtil.showShort(rvGoldListRecycleView, msg);
     }
 }

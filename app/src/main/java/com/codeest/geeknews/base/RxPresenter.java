@@ -7,28 +7,28 @@ import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by codeest on 2016/8/2.
+ *
  * 基于Rx的Presenter封装,控制订阅的生命周期
  */
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
-    protected CompositeSubscription mCompositeSubscription;
+    protected CompositeSubscription mCompositeSubscription;//一组，类似于订阅后的订单信息
 
-    protected void unSubscribe() {
+    protected void unSubscribe() {//解绑订阅
         if (mCompositeSubscription != null) {
             mCompositeSubscription.unsubscribe();
         }
     }
 
-    protected void addSubscrebe(Subscription subscription) {
+    protected void addSubscrebe(Subscription subscription) {//添加订阅
         if (mCompositeSubscription == null) {
             mCompositeSubscription = new CompositeSubscription();
         }
         mCompositeSubscription.add(subscription);
     }
 
-    protected <U> void addRxBusSubscribe(Class<U> eventType, Action1<U> act) {
+    protected <U> void addRxBusSubscribe(Class<U> eventType, Action1<U> act) {//RxBus
         if (mCompositeSubscription == null) {
             mCompositeSubscription = new CompositeSubscription();
         }

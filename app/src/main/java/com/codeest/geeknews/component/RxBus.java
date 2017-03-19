@@ -10,7 +10,7 @@ import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
 
 /**
- * Created by codeest on 2016/8/2.
+ *copy from internet
  */
 public class RxBus {
     // 主题
@@ -29,7 +29,7 @@ public class RxBus {
     }
 
 
-    // 提供了一个新的事件
+    //发送一个新的事件
     public void post(Object o) {
         bus.onNext(o);
     }

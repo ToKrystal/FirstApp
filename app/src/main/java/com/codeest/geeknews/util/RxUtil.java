@@ -26,8 +26,8 @@ public class RxUtil {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                return observable.subscribeOn(Schedulers.io())//io
+                        .observeOn(AndroidSchedulers.mainThread());//changeTo mainThread
             }
         };
     }

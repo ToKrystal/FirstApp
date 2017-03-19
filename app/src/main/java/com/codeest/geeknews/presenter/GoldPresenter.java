@@ -44,9 +44,9 @@ public class GoldPresenter extends RxPresenter<GoldContract.View> implements Gol
         mType = type;
         currentPage = 0;
         totalList.clear();
-        Observable<List<GoldListBean>> list = mRetrofitHelper.fetchGoldList(type, NUM_EACH_PAGE, currentPage++)
-                .compose(RxUtil.<GoldHttpResponse<List<GoldListBean>>>rxSchedulerHelper())
-                .compose(RxUtil.<List<GoldListBean>>handleGoldResult());
+        Observable<List<GoldListBean>> list = mRetrofitHelper.fetchGoldList(type, NUM_EACH_PAGE, currentPage++)//获取数据
+                .compose(RxUtil.<GoldHttpResponse<List<GoldListBean>>>rxSchedulerHelper())//io -> main
+                .compose(RxUtil.<List<GoldListBean>>handleGoldResult());//response-> bean
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -3);

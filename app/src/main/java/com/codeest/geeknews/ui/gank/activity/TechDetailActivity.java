@@ -29,7 +29,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import butterknife.BindView;
 
 /**
- * Created by codeest on 16/8/20.
+ * 详情页面
  */
 
 public class TechDetailActivity extends SimpleActivity {
@@ -60,6 +60,7 @@ public class TechDetailActivity extends SimpleActivity {
         type = intent.getExtras().getInt(Constants.IT_DETAIL_TYPE);
         title = intent.getExtras().getString(Constants.IT_DETAIL_TITLE);
         url = intent.getExtras().getString(Constants.IT_DETAIL_URL);
+        //url = "http://www.sina.com";
         imgUrl = intent.getExtras().getString(Constants.IT_DETAIL_IMG_URL);
         id = intent.getExtras().getString(Constants.IT_DETAIL_ID);
         setToolBar(toolBar,title);

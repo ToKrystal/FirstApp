@@ -120,6 +120,7 @@ public class RealmHelper {
 
     /**
      * 更新 掘金首页管理列表
+     * 先删除后添加
      * @param bean
      */
     public void updateGoldManagerList(GoldManagerBean bean) {

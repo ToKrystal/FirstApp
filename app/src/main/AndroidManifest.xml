@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+    //自己 application
     <application
         android:name="com.codeest.geeknews.app.App"
         android:allowBackup="true"

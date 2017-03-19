@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 
 /**
- * Created by codeest on 2017/2/23.
+ * 观察者
  */
 
 public abstract class CommonSubscriber<T> extends Subscriber<T> {

@@ -17,7 +17,7 @@ import com.tencent.smtt.sdk.QbSdk;
 import static com.codeest.geeknews.util.LogUtil.isDebug;
 
 /**
- * Created by codeest on 2017/2/12.
+ * 初始化service
  */
 
 public class InitializeService extends IntentService {

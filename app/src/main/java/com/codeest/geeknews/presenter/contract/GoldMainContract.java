@@ -20,6 +20,9 @@ public interface GoldMainContract {
         void jumpToManager(GoldManagerBean mBean);
     }
 
+    /**
+     * init tab data
+     */
     interface Presenter extends BasePresenter<View> {
 
         void initManagerList();
