@@ -92,8 +92,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         } else {
             showFragment = SharedPreferenceUtil.getCurrentItem();
             hideFragment = Constants.TYPE_ZHIHU;
+
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
             mNavigationView.getMenu().findItem(R.id.drawer_zhihu).setChecked(false);
+            //设置toolbar文字为Menu Item 文字
             mToolbar.setTitle(mNavigationView.getMenu().findItem(getCurrentItem(showFragment)).getTitle().toString());
             hideFragment = showFragment;
         }
@@ -156,6 +158,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     mLastMenuItem.setChecked(false);
                 }
                 mLastMenuItem = menuItem;
+                //保存正在展示的fragment标志
                 SharedPreferenceUtil.setCurrentItem(showFragment);
                 menuItem.setChecked(true);
                 mToolbar.setTitle(menuItem.getTitle());
