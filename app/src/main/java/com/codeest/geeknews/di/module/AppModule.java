@@ -33,6 +33,7 @@ public class AppModule {
         return application;
     }
 
+    //提供Retrofit
     @Provides
     @Singleton
     RetrofitHelper provideRetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService, WeChatApis wechatApiService,
@@ -41,6 +42,8 @@ public class AppModule {
                 myApiService, goldApiService, vtexApiService);
     }
 
+
+    //提供数据库
     @Provides
     @Singleton
     RealmHelper provideRealmHelper() {
