@@ -1,6 +1,7 @@
 package com.codeest.geeknews.ui.gold.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.codeest.geeknews.R;
-import com.codeest.geeknews.app.Constants;
 import com.codeest.geeknews.component.ImageLoader;
 import com.codeest.geeknews.model.bean.GoldListBean;
-import com.codeest.geeknews.ui.gank.activity.TechDetailActivity;
+import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.util.DateUtil;
 import com.codeest.geeknews.widget.SquareImageView;
 
@@ -20,6 +20,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.attr.id;
 
 /**
  *
@@ -34,6 +36,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private String mType;
     private boolean mHotFlag = true;
     private OnHotCloseListener onHotCloseListener;
+    private OnItemClickListener onItemClickListener;
 
     public enum ITEM_TYPE {
         ITEM_TITLE,     //标题
@@ -79,6 +82,15 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (position > 0) {
             bean = mList.get(position -1);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(id);
+                }
+            }
+        });
+
         if (holder instanceof ContentViewHolder) {
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
                 ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((ContentViewHolder) holder).ivImg);
@@ -185,16 +197,23 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @Override
         public void onClick(View view) {
-            String imgUrl = null;
-            if (mList.get(position).getScreenshot() != null && mList.get(position).getScreenshot().getUrl() != null)
-                imgUrl = mList.get(position).getScreenshot().getUrl();
-            TechDetailActivity.launch(new TechDetailActivity.Builder()
+          //  String imgUrl = null;
+          //  if (mList.get(position).getScreenshot() != null && mList.get(position).getScreenshot().getUrl() != null)
+               // imgUrl = mList.get(position).getScreenshot().getUrl();
+            /*TechDetailActivity.launch(new TechDetailActivity.Builder()
                     .setContext(mContext)
                     .setId(mList.get(position).getObjectId())
                     .setTitle(mList.get(position).getTitle())
                     .setUrl(mList.get(position).getUrl())
                     .setImgUrl(imgUrl)
-                    .setType(Constants.TYPE_GOLD));
+                    .setType(Constants.TYPE_GOLD));*/
+            Intent intent = new Intent();
+            intent.setClass(mContext, BookDetailActivity.class);
+            intent.putExtra("id",1);
+           // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
+           //,options.toBundle()
+            mContext.startActivity(intent);
+
         }
     }
 
@@ -228,4 +247,12 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void setOnHotCloseListener(OnHotCloseListener onHotCloseListener) {
         this.onHotCloseListener = onHotCloseListener;
     }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener ) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int id);
+    }
+
 }

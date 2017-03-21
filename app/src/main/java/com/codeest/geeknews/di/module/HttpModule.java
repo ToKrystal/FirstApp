@@ -2,12 +2,14 @@ package com.codeest.geeknews.di.module;
 
 import com.codeest.geeknews.BuildConfig;
 import com.codeest.geeknews.app.Constants;
+import com.codeest.geeknews.di.qualifier.BookUrl;
 import com.codeest.geeknews.di.qualifier.GankUrl;
 import com.codeest.geeknews.di.qualifier.GoldUrl;
 import com.codeest.geeknews.di.qualifier.MyUrl;
 import com.codeest.geeknews.di.qualifier.VtexUrl;
 import com.codeest.geeknews.di.qualifier.WechatUrl;
 import com.codeest.geeknews.di.qualifier.ZhihuUrl;
+import com.codeest.geeknews.model.http.api.BookApis;
 import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
@@ -88,6 +90,13 @@ public class HttpModule {
     @VtexUrl
     Retrofit provideVtexRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, VtexApis.HOST);
+    }
+
+    @Singleton
+    @Provides
+    @BookUrl
+    Retrofit provideBookRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, BookApis.HOST);
     }
 
     @Singleton
@@ -189,6 +198,13 @@ public class HttpModule {
     VtexApis provideVtexService(@VtexUrl Retrofit retrofit) {
         return retrofit.create(VtexApis.class);
     }
+
+    @Singleton
+    @Provides
+    BookApis provideBookService(@BookUrl Retrofit retrofit) {
+        return retrofit.create(BookApis.class);
+    }
+
 
     @Singleton
     @Provides

@@ -3,6 +3,7 @@ package com.codeest.geeknews.di.module;
 import com.codeest.geeknews.app.App;
 import com.codeest.geeknews.model.db.RealmHelper;
 import com.codeest.geeknews.model.http.RetrofitHelper;
+import com.codeest.geeknews.model.http.api.BookApis;
 import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
@@ -37,9 +38,9 @@ public class AppModule {
     @Provides
     @Singleton
     RetrofitHelper provideRetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService, WeChatApis wechatApiService,
-                                         MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService) {
+                                         MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService, BookApis bookApis) {
         return new RetrofitHelper(zhihuApiService, gankApiService, wechatApiService,
-                myApiService, goldApiService, vtexApiService);
+                myApiService, goldApiService, vtexApiService,bookApis);
     }
 
 

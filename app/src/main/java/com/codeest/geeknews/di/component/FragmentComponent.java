@@ -6,6 +6,7 @@ import com.codeest.geeknews.di.scope.FragmentScope;
 import com.codeest.geeknews.di.module.FragmentModule;
 import com.codeest.geeknews.ui.gank.fragment.GirlFragment;
 import com.codeest.geeknews.ui.gank.fragment.TechFragment;
+import com.codeest.geeknews.ui.gold.fragment.BookCommentFragment;
 import com.codeest.geeknews.ui.gold.fragment.GoldMainFragment;
 import com.codeest.geeknews.ui.gold.fragment.GoldPagerFragment;
 import com.codeest.geeknews.ui.main.fragment.LikeFragment;
@@ -55,4 +56,6 @@ public interface FragmentComponent {
     void inject(GoldPagerFragment goldPagerFragment);
 
     void inject(VtexPagerFragment vtexPagerFragment);
+
+    void inject(BookCommentFragment bookCommentFragment);
 }

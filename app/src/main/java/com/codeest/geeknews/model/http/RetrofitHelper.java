@@ -1,6 +1,9 @@
 package com.codeest.geeknews.model.http;
 
 import com.codeest.geeknews.app.Constants;
+import com.codeest.geeknews.model.bean.BookCommentBean;
+import com.codeest.geeknews.model.bean.BookDetailBean;
+import com.codeest.geeknews.model.bean.BookDetailExtraBean;
 import com.codeest.geeknews.model.bean.CommentBean;
 import com.codeest.geeknews.model.bean.DailyBeforeListBean;
 import com.codeest.geeknews.model.bean.DailyListBean;
@@ -20,6 +23,7 @@ import com.codeest.geeknews.model.bean.VersionBean;
 import com.codeest.geeknews.model.bean.WXItemBean;
 import com.codeest.geeknews.model.bean.WelcomeBean;
 import com.codeest.geeknews.model.bean.ZhihuDetailBean;
+import com.codeest.geeknews.model.http.api.BookApis;
 import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
@@ -41,6 +45,7 @@ import rx.Observable;
 public class RetrofitHelper {
 
     private ZhihuApis mZhihuApiService;
+    private BookApis mBookApiService;
     private GankApis mGankApiService;
     private WeChatApis mWechatApiService;
     private MyApis mMyApiService;
@@ -48,13 +53,14 @@ public class RetrofitHelper {
     private VtexApis mVtexApiService;
 
     public RetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService, WeChatApis wechatApiService,
-                          MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService) {
+                          MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService,BookApis bookApis) {
         this.mZhihuApiService = zhihuApiService;
         this.mGankApiService = gankApiService;
         this.mWechatApiService = wechatApiService;
         this.mMyApiService = myApiService;
         this.mGoldApiService = goldApiService;
         this.mVtexApiService = vtexApiService;
+        this.mBookApiService = bookApis;
     }
 
     public Observable<DailyListBean> fetchDailyListInfo() {
@@ -84,9 +90,15 @@ public class RetrofitHelper {
     public Observable<ZhihuDetailBean> fetchDetailInfo(int id) {
         return mZhihuApiService.getDetailInfo(id);
     }
+    public Observable<BookDetailBean> fetchBookDetailInfo(int id) {
+        return mBookApiService.getBookDetailInfo(id);
+    }
 
     public Observable<DetailExtraBean> fetchDetailExtraInfo(int id) {
         return mZhihuApiService.getDetailExtraInfo(id);
+    }
+    public Observable<BookDetailExtraBean> fetchBookDetailExtraInfo(int id) {
+        return mBookApiService.getBookDetailExtraInfo(id);
     }
 
     public Observable<WelcomeBean> fetchWelcomeInfo(String res) {
@@ -97,8 +109,15 @@ public class RetrofitHelper {
         return mZhihuApiService.getLongCommentInfo(id);
     }
 
+    public Observable<BookCommentBean> fetchBookLongCommentInfo(int id) {
+        return mBookApiService.getBookLongCommentInfo(id);
+    }
+
     public Observable<CommentBean> fetchShortCommentInfo(int id) {
         return mZhihuApiService.getShortCommentInfo(id);
+    }
+    public Observable<BookCommentBean> fetchBookShortCommentInfo(int id) {
+        return mBookApiService.getBookShortCommentInfo(id);
     }
 
     public Observable<HotListBean> fetchHotListInfo() {

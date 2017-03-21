@@ -143,14 +143,16 @@
             android:layout_gravity="top"
             android:background="#e8e8e8"/>
     </FrameLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/selector_like"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchor="@+id/nsv_scroller"
+        app:layout_anchorGravity="top|right"
+        app:pressedTranslationZ="12dp" />
 </android.support.design.widget.CoordinatorLayout>

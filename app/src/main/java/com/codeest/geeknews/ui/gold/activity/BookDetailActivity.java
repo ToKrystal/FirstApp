@@ -1,4 +1,4 @@
-package com.codeest.geeknews.ui.zhihu.activity;
+package com.codeest.geeknews.ui.gold.activity;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -13,10 +13,11 @@ import android.widget.TextView;
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.base.BaseActivity;
 import com.codeest.geeknews.component.ImageLoader;
-import com.codeest.geeknews.model.bean.DetailExtraBean;
-import com.codeest.geeknews.model.bean.ZhihuDetailBean;
-import com.codeest.geeknews.presenter.ZhihuDetailPresenter;
-import com.codeest.geeknews.presenter.contract.ZhihuDetailContract;
+import com.codeest.geeknews.model.bean.BookDetailBean;
+import com.codeest.geeknews.model.bean.BookDetailExtraBean;
+import com.codeest.geeknews.presenter.BookDetailPresenter;
+import com.codeest.geeknews.presenter.contract.BookDetailContract;
+import com.codeest.geeknews.ui.zhihu.activity.CommentActivity;
 import com.codeest.geeknews.util.ShareUtil;
 import com.codeest.geeknews.util.SnackbarUtil;
 import com.codeest.geeknews.widget.ProgressImageView;
@@ -30,7 +31,7 @@ import butterknife.OnClick;
  * Created by codeest on 16/8/13.
  */
 
-public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> implements ZhihuDetailContract.View {
+public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implements BookDetailContract.View {
 
     @BindView(R.id.detail_bar_image)
     ImageView detailBarImage;
@@ -75,7 +76,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_zhihu_detail;
+        return R.layout.activity_book_detail;
     }
 
     @Override
@@ -155,31 +156,31 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     }
 
     @Override
-    public void showContent(ZhihuDetailBean zhihuDetailBean) {
+    public void showContent(BookDetailBean bookDetailBean) {
         ivProgress.stop();
-        imgUrl = zhihuDetailBean.getImage();
-        shareUrl = zhihuDetailBean.getShare_url();
+        imgUrl = bookDetailBean.getImage();
+        shareUrl = bookDetailBean.getShare_url();
         if (isNotTransition) {
-            ImageLoader.load(mContext, zhihuDetailBean.getImage(), detailBarImage);
+            ImageLoader.load(mContext, bookDetailBean.getImage(), detailBarImage);
         } else {
             if (!isImageShow && isTransitionEnd) {
-                ImageLoader.load(mContext, zhihuDetailBean.getImage(), detailBarImage);
+                ImageLoader.load(mContext, bookDetailBean.getImage(), detailBarImage);
             }
         }
-        clpToolbar.setTitle(zhihuDetailBean.getTitle());
-        detailBarCopyright.setText(zhihuDetailBean.getImage_source());
+        clpToolbar.setTitle(bookDetailBean.getTitle());
+        detailBarCopyright.setText(bookDetailBean.getImage_source());
         //String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(),zhihuDetailBean.getCss(),zhihuDetailBean.getJs());
         //wvDetailContent.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
     }
 
     @Override
-    public void showExtraInfo(DetailExtraBean detailExtraBean) {
+    public void showExtraInfo(BookDetailExtraBean bookDetailExtraBean) {
         ivProgress.stop();
-        tvDetailBottomLike.setText(String.format("%d个赞",detailExtraBean.getPopularity()));
-        tvDetailBottomComment.setText(String.format("%d条评论",detailExtraBean.getComments()));
-        allNum = detailExtraBean.getComments();
-        shortNum = detailExtraBean.getShort_comments();
-        longNum = detailExtraBean.getLong_comments();
+        tvDetailBottomLike.setText(String.format("%d个赞",bookDetailExtraBean.getPopularity()));
+        tvDetailBottomComment.setText(String.format("%d条评论",bookDetailExtraBean.getComments()));
+        allNum = bookDetailExtraBean.getComments();
+        shortNum = bookDetailExtraBean.getShort_comments();
+        longNum = bookDetailExtraBean.getLong_comments();
     }
 
     @Override

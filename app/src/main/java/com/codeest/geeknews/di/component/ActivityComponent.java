@@ -2,8 +2,10 @@ package com.codeest.geeknews.di.component;
 
 import android.app.Activity;
 
-import com.codeest.geeknews.di.scope.ActivityScope;
 import com.codeest.geeknews.di.module.ActivityModule;
+import com.codeest.geeknews.di.scope.ActivityScope;
+import com.codeest.geeknews.ui.gold.activity.BookCommentActivity;
+import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.ui.main.activity.MainActivity;
 import com.codeest.geeknews.ui.main.activity.WelcomeActivity;
 import com.codeest.geeknews.ui.vtex.activity.NodeListActivity;
@@ -37,4 +39,8 @@ public interface ActivityComponent {
     void inject(RepliesActivity repliesActivity);
 
     void inject(NodeListActivity nodeListActivity);
+
+    void inject(BookDetailActivity bookDetailActivity);
+
+    void inject(BookCommentActivity bookCommentActivity);
 }

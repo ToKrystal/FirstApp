@@ -79,6 +79,15 @@
         <activity android:name=".ui.vtex.activity.RepliesActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        //book
+        <activity android:name=".ui.gold.activity.BookDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.gold.activity.BookCommentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".component.UpdateService"/>
 
