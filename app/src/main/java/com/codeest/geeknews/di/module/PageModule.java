@@ -6,7 +6,6 @@ import com.codeest.geeknews.ui.main.fragment.AboutFragment;
 import com.codeest.geeknews.ui.main.fragment.LikeFragment;
 import com.codeest.geeknews.ui.main.fragment.SettingFragment;
 import com.codeest.geeknews.ui.vtex.fragment.VtexMainFragment;
-import com.codeest.geeknews.ui.wechat.fragment.WechatMainFragment;
 import com.codeest.geeknews.ui.zhihu.fragment.ZhihuMainFragment;
 
 import javax.inject.Singleton;
@@ -33,11 +32,7 @@ public class PageModule {
         return new GankMainFragment();
     }
 
-    @Singleton
-    @Provides
-    WechatMainFragment provideWechatMain() {
-        return new WechatMainFragment();
-    }
+
 
     @Singleton
     @Provides

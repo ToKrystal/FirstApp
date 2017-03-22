@@ -29,7 +29,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by codeest on 16/12/19.
+ * 帖子详情
+ * 主要用该rec
  */
 
 public class RepliesActivity extends BaseActivity<RepliesPresenter> implements RepliesContract.View {

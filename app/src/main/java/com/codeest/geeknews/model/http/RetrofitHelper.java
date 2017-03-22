@@ -20,7 +20,6 @@ import com.codeest.geeknews.model.bean.SectionListBean;
 import com.codeest.geeknews.model.bean.ThemeChildListBean;
 import com.codeest.geeknews.model.bean.ThemeListBean;
 import com.codeest.geeknews.model.bean.VersionBean;
-import com.codeest.geeknews.model.bean.WXItemBean;
 import com.codeest.geeknews.model.bean.WelcomeBean;
 import com.codeest.geeknews.model.bean.ZhihuDetailBean;
 import com.codeest.geeknews.model.http.api.BookApis;
@@ -28,12 +27,10 @@ import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
 import com.codeest.geeknews.model.http.api.VtexApis;
-import com.codeest.geeknews.model.http.api.WeChatApis;
 import com.codeest.geeknews.model.http.api.ZhihuApis;
 import com.codeest.geeknews.model.http.response.GankHttpResponse;
 import com.codeest.geeknews.model.http.response.GoldHttpResponse;
 import com.codeest.geeknews.model.http.response.MyHttpResponse;
-import com.codeest.geeknews.model.http.response.WXHttpResponse;
 
 import java.util.List;
 
@@ -47,16 +44,14 @@ public class RetrofitHelper {
     private ZhihuApis mZhihuApiService;
     private BookApis mBookApiService;
     private GankApis mGankApiService;
-    private WeChatApis mWechatApiService;
     private MyApis mMyApiService;
     private GoldApis mGoldApiService;
     private VtexApis mVtexApiService;
 
-    public RetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService, WeChatApis wechatApiService,
+    public RetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService,
                           MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService,BookApis bookApis) {
         this.mZhihuApiService = zhihuApiService;
         this.mGankApiService = gankApiService;
-        this.mWechatApiService = wechatApiService;
         this.mMyApiService = myApiService;
         this.mGoldApiService = goldApiService;
         this.mVtexApiService = vtexApiService;
@@ -140,13 +135,7 @@ public class RetrofitHelper {
         return mGankApiService.getSearchList(query,type,num,page);
     }
 
-    public Observable<WXHttpResponse<List<WXItemBean>>> fetchWechatListInfo(int num, int page) {
-        return mWechatApiService.getWXHot(Constants.KEY_API, num, page);
-    }
 
-    public Observable<WXHttpResponse<List<WXItemBean>>> fetchWechatSearchListInfo(int num, int page, String word) {
-        return mWechatApiService.getWXHotSearch(Constants.KEY_API, num, page, word);
-    }
 
     public Observable<MyHttpResponse<VersionBean>> fetchVersionInfo() {
         return mMyApiService.getVersionInfo();

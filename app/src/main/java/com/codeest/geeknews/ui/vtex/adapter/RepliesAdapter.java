@@ -66,7 +66,7 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TopViewHolder) {
             TopViewHolder topHolder = ((TopViewHolder) holder);
-            if (mTopBean == null) {
+            if (mTopBean == null) {//楼主
                 return;
             }
             ImageLoader.load(mContext, VtexPresenter.parseImg(mTopBean.getMember().getavatar_normal()), topHolder.ivRepliesTopFace);
@@ -74,15 +74,15 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             topHolder.tvRepliesTopName.setText(mTopBean.getMember().getUsername());
             topHolder.tvRepliesTopTitle.setText(mTopBean.getTitle());
             topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(mTopBean.getCreated()), mTopBean.getReplies()));
-        } else {
+        } else {//回复
             ViewHolder contentHolder = ((ViewHolder) holder);
             RepliesListBean bean = mList.get(position - 1);
             if (bean == null)
                 return;
-            ImageLoader.load(mContext, VtexPresenter.parseImg(bean.getMember().getavatar_normal()), contentHolder.ivRepliesFace);
-            contentHolder.tvRepliesName.setText(bean.getMember().getUsername());
-            contentHolder.tvRepliesTips.setText(String.format("%d楼 %s", position, DateUtil.formatTime2String(bean.getCreated())));
-            contentHolder.tvRepliesContent.setHtml(bean.getContent_rendered(), new HtmlHttpImageGetter(contentHolder.tvRepliesContent));
+            ImageLoader.load(mContext, VtexPresenter.parseImg(bean.getMember().getavatar_normal()), contentHolder.ivRepliesFace);//评论人的头像
+            contentHolder.tvRepliesName.setText(bean.getMember().getUsername());//评论人的名字
+            contentHolder.tvRepliesTips.setText(String.format("%d楼 %s", position, DateUtil.formatTime2String(bean.getCreated())));//楼和时间
+            contentHolder.tvRepliesContent.setHtml(bean.getContent_rendered(), new HtmlHttpImageGetter(contentHolder.tvRepliesContent));//评论内容
         }
     }
 

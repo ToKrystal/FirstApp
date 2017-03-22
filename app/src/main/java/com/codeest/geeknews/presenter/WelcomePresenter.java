@@ -51,7 +51,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
     }
 
     private void startCountDown() {
-        Subscription rxSubscription = Observable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)
+        Subscription rxSubscription = Observable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)//类似于handler 延迟发送一次
                 .compose(RxUtil.<Long>rxSchedulerHelper())
                 .subscribe(new Action1<Long>() {
                     @Override

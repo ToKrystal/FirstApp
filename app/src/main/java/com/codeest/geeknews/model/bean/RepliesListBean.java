@@ -1,7 +1,7 @@
 package com.codeest.geeknews.model.bean;
 
 /**
- * Created by codeest on 16/12/22.
+ *评论内容
  */
 
 public class RepliesListBean {

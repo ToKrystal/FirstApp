@@ -8,7 +8,6 @@ import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
 import com.codeest.geeknews.model.http.api.VtexApis;
-import com.codeest.geeknews.model.http.api.WeChatApis;
 import com.codeest.geeknews.model.http.api.ZhihuApis;
 
 import javax.inject.Singleton;
@@ -37,9 +36,9 @@ public class AppModule {
     //提供Retrofit
     @Provides
     @Singleton
-    RetrofitHelper provideRetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService, WeChatApis wechatApiService,
+    RetrofitHelper provideRetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService,
                                          MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService, BookApis bookApis) {
-        return new RetrofitHelper(zhihuApiService, gankApiService, wechatApiService,
+        return new RetrofitHelper(zhihuApiService, gankApiService,
                 myApiService, goldApiService, vtexApiService,bookApis);
     }
 

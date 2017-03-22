@@ -12,7 +12,6 @@ import com.codeest.geeknews.ui.gold.fragment.GoldPagerFragment;
 import com.codeest.geeknews.ui.main.fragment.LikeFragment;
 import com.codeest.geeknews.ui.main.fragment.SettingFragment;
 import com.codeest.geeknews.ui.vtex.fragment.VtexPagerFragment;
-import com.codeest.geeknews.ui.wechat.fragment.WechatMainFragment;
 import com.codeest.geeknews.ui.zhihu.fragment.CommentFragment;
 import com.codeest.geeknews.ui.zhihu.fragment.DailyFragment;
 import com.codeest.geeknews.ui.zhihu.fragment.HotFragment;
@@ -46,8 +45,6 @@ public interface FragmentComponent {
     void inject(GirlFragment girlFragment);
 
     void inject(LikeFragment likeFragment);
-
-    void inject(WechatMainFragment wechatMainFragment);
 
     void inject(SettingFragment settingFragment);
 

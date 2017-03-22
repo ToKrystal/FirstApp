@@ -7,14 +7,12 @@ import com.codeest.geeknews.di.qualifier.GankUrl;
 import com.codeest.geeknews.di.qualifier.GoldUrl;
 import com.codeest.geeknews.di.qualifier.MyUrl;
 import com.codeest.geeknews.di.qualifier.VtexUrl;
-import com.codeest.geeknews.di.qualifier.WechatUrl;
 import com.codeest.geeknews.di.qualifier.ZhihuUrl;
 import com.codeest.geeknews.model.http.api.BookApis;
 import com.codeest.geeknews.model.http.api.GankApis;
 import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
 import com.codeest.geeknews.model.http.api.VtexApis;
-import com.codeest.geeknews.model.http.api.WeChatApis;
 import com.codeest.geeknews.model.http.api.ZhihuApis;
 import com.codeest.geeknews.util.SystemUtil;
 
@@ -64,12 +62,6 @@ public class HttpModule {
         return createRetrofit(builder, client, ZhihuApis.HOST);
     }
 
-    @Singleton
-    @Provides
-    @WechatUrl
-    Retrofit provideWechatRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, WeChatApis.HOST);
-    }
 
     @Singleton
     @Provides
@@ -181,11 +173,6 @@ public class HttpModule {
         return retrofit.create(GankApis.class);
     }
 
-    @Singleton
-    @Provides
-    WeChatApis provideWechatService(@WechatUrl Retrofit retrofit) {
-        return retrofit.create(WeChatApis.class);
-    }
 
     @Singleton
     @Provides
