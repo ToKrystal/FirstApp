@@ -1,18 +1,17 @@
 package com.codeest.geeknews.ui.gold.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.component.ImageLoader;
 import com.codeest.geeknews.model.bean.GoldListBean;
-import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.util.DateUtil;
 import com.codeest.geeknews.widget.SquareImageView;
 
@@ -20,8 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.R.attr.id;
 
 /**
  *
@@ -78,18 +75,20 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int contentPosition;
+        contentPosition = position;
         GoldListBean bean = mList.get(0);//标题
         if (position > 0) {
             bean = mList.get(position -1);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(id);
                 }
             }
-        });
+        });*/
 
         if (holder instanceof ContentViewHolder) {
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
@@ -103,6 +102,19 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     bean.getUser().getUsername(),
                     DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt()))));
             holder.itemView.setOnClickListener(new MyOnClickListener(--position));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onItemClickListener != null) {
+                        ImageView iv = (ImageView) view.findViewById(R.id.iv_gold_item_img);
+                        onItemClickListener.onItemClick(contentPosition,iv);
+                    }
+                }
+            });
+
+
+
         } else if (holder instanceof HotViewHolder) {
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
                 ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((HotViewHolder) holder).ivImg);
@@ -114,6 +126,18 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((HotViewHolder) holder).tvAuthor.setText(String.valueOf(bean.getUser().getUsername()));
             ((HotViewHolder) holder).tvTime.setText(DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt())));
             holder.itemView.setOnClickListener(new MyOnClickListener(--position));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onItemClickListener != null) {
+                        ImageView iv = (ImageView) view.findViewById(R.id.iv_gold_item_img);
+                        onItemClickListener.onItemClick(contentPosition,iv);
+                    }
+                }
+            });
+
+
         } else {
             ((TitleViewHolder) holder).tvTitle.setText(String.format("%s 热门", mType));
             ((TitleViewHolder) holder).btnClose.setOnClickListener(new View.OnClickListener() {
@@ -207,12 +231,12 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .setUrl(mList.get(position).getUrl())
                     .setImgUrl(imgUrl)
                     .setType(Constants.TYPE_GOLD));*/
-            Intent intent = new Intent();
+           /* Intent intent = new Intent();
             intent.setClass(mContext, BookDetailActivity.class);
             intent.putExtra("id",1);
            // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
            //,options.toBundle()
-            mContext.startActivity(intent);
+            mContext.startActivity(intent);*/
 
         }
     }
@@ -252,7 +276,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int id);
+        void onItemClick(int id,View view);
     }
 
 }

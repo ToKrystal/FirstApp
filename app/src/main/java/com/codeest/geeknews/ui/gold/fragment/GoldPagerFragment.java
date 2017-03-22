@@ -1,8 +1,11 @@
 package com.codeest.geeknews.ui.gold.fragment;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.app.Constants;
@@ -10,6 +13,7 @@ import com.codeest.geeknews.base.BaseFragment;
 import com.codeest.geeknews.model.bean.GoldListBean;
 import com.codeest.geeknews.presenter.GoldPresenter;
 import com.codeest.geeknews.presenter.contract.GoldContract;
+import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.ui.gold.adapter.GoldListAdapter;
 import com.codeest.geeknews.util.SnackbarUtil;
 import com.codeest.geeknews.widget.GoldItemDecoration;
@@ -55,6 +59,21 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
         mType = getArguments().getString(Constants.IT_GOLD_TYPE);
         mDecoration = new GoldItemDecoration();
         mAdapter = new GoldListAdapter(mContext, new ArrayList<GoldListBean>(), getArguments().getString(Constants.IT_GOLD_TYPE_STR));
+
+
+        mAdapter.setOnItemClickListener(new GoldListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(int position,View shareView) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, BookDetailActivity.class);
+                intent.putExtra("id",9305940);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
+                mContext.startActivity(intent,options.toBundle());
+            }
+        });
+
+
+
         rvGoldListRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
         rvGoldListRecycleView.setAdapter(mAdapter);
         rvGoldListRecycleView.addItemDecoration(mDecoration);

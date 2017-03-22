@@ -3,6 +3,8 @@ package com.codeest.geeknews.ui.gold.activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
 import android.view.KeyEvent;
@@ -15,14 +17,21 @@ import com.codeest.geeknews.base.BaseActivity;
 import com.codeest.geeknews.component.ImageLoader;
 import com.codeest.geeknews.model.bean.BookDetailBean;
 import com.codeest.geeknews.model.bean.BookDetailExtraBean;
+import com.codeest.geeknews.model.bean.NodeListBean;
+import com.codeest.geeknews.model.bean.RepliesListBean;
 import com.codeest.geeknews.presenter.BookDetailPresenter;
 import com.codeest.geeknews.presenter.contract.BookDetailContract;
+import com.codeest.geeknews.ui.vtex.adapter.RepliesAdapter;
 import com.codeest.geeknews.ui.zhihu.activity.CommentActivity;
 import com.codeest.geeknews.util.ShareUtil;
 import com.codeest.geeknews.util.SnackbarUtil;
+import com.codeest.geeknews.widget.CommonItemDecoration;
 import com.codeest.geeknews.widget.ProgressImageView;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -57,6 +66,8 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     FrameLayout llDetailBottom;
     @BindView(R.id.fab_like)
     FloatingActionButton fabLike;
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
 
     int id = 0;
     int allNum = 0;
@@ -68,6 +79,9 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     boolean isImageShow = false;
     boolean isTransitionEnd = false;
     boolean isNotTransition = false;
+    private RepliesAdapter mAdapter;
+    private NodeListBean mTopBean;
+    private String topicId;
 
     @Override
     protected void initInject() {
@@ -88,7 +102,26 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         mPresenter.queryLikeData(id);
         mPresenter.getDetailData(id);
         mPresenter.getExtraData(id);
+
+       // topicId = getIntent().getExtras().getString(Constants.IT_VTEX_TOPIC_ID);
+        //mTopBean = getIntent().getParcelableExtra(Constants.IT_VTEX_REPLIES_TOP);
+        mTopBean = initBean();
+
+        mAdapter = new RepliesAdapter(mContext, new ArrayList<RepliesListBean>(), mTopBean);
+        CommonItemDecoration mDecoration = new CommonItemDecoration(2, CommonItemDecoration.UNIT_PX);
+        rvContent.addItemDecoration(mDecoration);
+        rvContent.setLayoutManager(new LinearLayoutManager(mContext));
+        rvContent.setAdapter(mAdapter);
+
+
+
         ivProgress.start();
+
+        mPresenter.getContent("349335");
+        if (mTopBean == null) {
+            mPresenter.getTopInfo(topicId);
+        }
+
         /*WebSettings settings = wvDetailContent.getSettings();
         if (SharedPreferenceUtil.getNoImageState()) {
             settings.setBlockNetworkImage(true);
@@ -153,6 +186,24 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
             public void onTransitionResume(Transition transition) {
             }
         });
+    }
+
+    private NodeListBean initBean() {
+        NodeListBean bean = new NodeListBean();
+        bean.setId("349335");
+        bean.setTitle("各位自建博客使用多说的博主注意了");
+        bean.setContent_rendered("<p>今日收到邮件，多说由于公司业务调整，将在今年 6 月 1 日关闭了。大家快导出评论数据，做好迁移工作吧。</p>\\n");
+        bean.setReplies(51);
+        NodeListBean.MemberBean me = new NodeListBean.MemberBean();
+        me.setUsername("vvard3n");
+        me.setavatar_normal("//v2ex.assets.uxengine.net/avatar/778f/dc47/63946_normal.png?m=1423041587");
+        bean.setMember(me);
+        NodeListBean.NodeBean s = new NodeListBean.NodeBean();
+        s.setTitle("程序员");
+        bean.setNode(s);
+        bean.setLast_modified(1490148627);
+        bean.setCreated(1490148557);
+        return  bean;
     }
 
     @Override
@@ -228,6 +279,21 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
             mPresenter.insertLikeData();
         }
     }
+
+    @Override
+    public void showContent(List<RepliesListBean> mList) {
+
+        mAdapter.setContentData(mList);
+    }
+
+    @Override
+    public void showTopInfo(NodeListBean mTopInfo) {
+        mTopBean = mTopInfo;
+        mAdapter.setTopData(mTopInfo);
+    }
+
+
+
 
     @Override
     public void onBackPressedSupport() {
