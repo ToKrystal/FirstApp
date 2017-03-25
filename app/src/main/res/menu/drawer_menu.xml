@@ -8,11 +8,7 @@
                 android:checkable="true"
                 android:checked="true"
                 android:title="@string/zhihu"/>
-            <item
-                android:id="@+id/drawer_wechat"
-                android:icon="@mipmap/ic_drawer_wechat"
-                android:checkable="true"
-                android:title="@string/wechat"/>
+
             <item
                 android:id="@+id/drawer_gank"
                 android:icon="@mipmap/ic_drawer_gank"
@@ -28,6 +24,13 @@
                 android:icon="@mipmap/ic_drawer_vtex"
                 android:checkable="true"
                 android:title="@string/vtex"/>
+
+            <item
+                android:id="@+id/drawer_userInfo"
+                android:icon="@mipmap/ic_drawer_vtex"
+                android:checkable="true"
+                android:title="@string/userInfo"/>
+
         </menu>
     </item>
     <item android:title="@string/drawer_group_options">
@@ -48,6 +51,7 @@
                 android:icon="@mipmap/ic_drawer_about"
                 android:checkable="true"
                 android:title="@string/drawer_about"/>
+
         </menu>
     </item>
 </menu>

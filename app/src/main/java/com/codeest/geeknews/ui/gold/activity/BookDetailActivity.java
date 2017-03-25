@@ -1,17 +1,21 @@
 package com.codeest.geeknews.ui.gold.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.transition.Transition;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.base.BaseActivity;
 import com.codeest.geeknews.component.ImageLoader;
@@ -22,7 +26,6 @@ import com.codeest.geeknews.model.bean.RepliesListBean;
 import com.codeest.geeknews.presenter.BookDetailPresenter;
 import com.codeest.geeknews.presenter.contract.BookDetailContract;
 import com.codeest.geeknews.ui.vtex.adapter.RepliesAdapter;
-import com.codeest.geeknews.ui.zhihu.activity.CommentActivity;
 import com.codeest.geeknews.util.ShareUtil;
 import com.codeest.geeknews.util.SnackbarUtil;
 import com.codeest.geeknews.widget.CommonItemDecoration;
@@ -82,6 +85,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     private RepliesAdapter mAdapter;
     private NodeListBean mTopBean;
     private String topicId;
+    private MaterialDialog.Builder mInputDialog;
 
     @Override
     protected void initInject() {
@@ -186,6 +190,20 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
             public void onTransitionResume(Transition transition) {
             }
         });
+
+        initDialog();
+    }
+
+    private void initDialog() {
+
+        mInputDialog = new MaterialDialog.Builder(this);
+        mInputDialog.negativeText(getString(R.string.dialog_btn_cancel));
+        mInputDialog.positiveText(getString(R.string.dialog_btn_confirm));
+        mInputDialog.positiveColorRes(R.color.colorPrimary);
+        mInputDialog.negativeColorRes(R.color.colorPrimary);
+        mInputDialog.titleColorRes(R.color.text_common);
+        mInputDialog.inputType(InputType.TYPE_CLASS_TEXT);
+        mInputDialog.widgetColorRes(R.color.colorPrimary);
     }
 
     private NodeListBean initBean() {
@@ -255,14 +273,34 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
     @OnClick(R.id.tv_detail_bottom_comment)
     void gotoComment() {
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         intent.setClass(this,CommentActivity.class);
         intent.putExtra("id",id);
         intent.putExtra("allNum",allNum);
         intent.putExtra("shortNum",shortNum);
         intent.putExtra("longNum",longNum);
-        startActivity(intent);
-    }
+        startActivity(intent);*/
+        mInputDialog.title("评论");
+        mInputDialog.input("","",commentCallback);
+        mInputDialog.show();
+
+
+
+        }
+
+    MaterialDialog.InputCallback commentCallback = new MaterialDialog.InputCallback() {
+        @Override
+        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+            if (!TextUtils.isEmpty(input)) {
+                //  mUserEntity.setCity(input.toString());
+                //  mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
+            }
+        }
+    };
+
+
+
+
 
     @OnClick(R.id.tv_detail_bottom_share)
     void shareUrl() {

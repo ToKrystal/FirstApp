@@ -1,5 +1,6 @@
 package com.codeest.geeknews.di.module;
 
+import com.codeest.geeknews.ui.userinfo.fragment.UserInfoFragment;
 import com.codeest.geeknews.ui.gank.fragment.GankMainFragment;
 import com.codeest.geeknews.ui.gold.fragment.GoldMainFragment;
 import com.codeest.geeknews.ui.main.fragment.AboutFragment;
@@ -38,6 +39,12 @@ public class PageModule {
     @Provides
     GoldMainFragment provideGoldMain() {
         return new GoldMainFragment();
+    }
+
+    @Singleton
+    @Provides
+    UserInfoFragment provideUserInfo() {
+        return new UserInfoFragment();
     }
 
     @Singleton

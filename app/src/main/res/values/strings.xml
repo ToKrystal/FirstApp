@@ -3,11 +3,13 @@
     <string name="app_intro">A pure reading App for you</string>
 
     //main drawer
+    <string name="logout">注销</string>
     <string name="zhihu">zzz</string>
     <string name="wechat">www</string>
     <string name="gank">精选阅读</string>
     <string name="gold">日常</string>
     <string name="vtex">V</string>
+    <string name="userInfo">个人信息</string>
     <string name="drawer_about">关于</string>
     <string name="drawer_collection">收藏</string>
     <string name="drawer_setting">设置</string>
@@ -20,6 +22,28 @@
     <string name="detail_bottom_like">点赞</string>
     <string name="detail_bottom_commit">评论</string>
     <string name="comment_expand">收起</string>
+
+    <string name="dialog_clean_cache">确定清除缓存?</string>
+    <string name="dialog_clean_negative_text">容我想想</string>
+    <string name="dialog_clean_positive_text">狠心清除</string>
+
+    <string name="dialog_exit_login">确定退出登录？</string>
+    <string name="dialog_exit_negative_text">容我想想</string>
+    <string name="dialog_exit_positive_text">狠心退出</string>
+
+    <string name="dialog_edit_name">修改昵称</string>
+    <string name="dialog_edit_signature">修改签名</string>
+    <string name="dialog_edit_intro">修改个人简介</string>
+    <string name="dialog_edit_address">修改居住地</string>
+    <string name="dialog_edit_github">修改 GitHub 账号</string>
+    <string name="dialog_edit_blog">修改个人博客</string>
+    <string name="dialog_edit_twitter">修改 Twitter 账号</string>
+    <string name="dialog_modify_loading">正在修改...</string>
+
+    <string name="dialog_btn_confirm">确定</string>
+    <string name="dialog_btn_cancel">取消</string>
+
+
 
     <string name="action_copy">复制链接到剪贴板</string>
     <string name="action_save">保存到本地</string>

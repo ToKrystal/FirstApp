@@ -8,6 +8,7 @@ import com.codeest.geeknews.ui.gold.activity.BookCommentActivity;
 import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.ui.main.activity.MainActivity;
 import com.codeest.geeknews.ui.main.activity.WelcomeActivity;
+import com.codeest.geeknews.ui.userinfo.activity.UserEditActivity;
 import com.codeest.geeknews.ui.vtex.activity.NodeListActivity;
 import com.codeest.geeknews.ui.vtex.activity.RepliesActivity;
 import com.codeest.geeknews.ui.zhihu.activity.SectionActivity;
@@ -43,4 +44,6 @@ public interface ActivityComponent {
     void inject(BookDetailActivity bookDetailActivity);
 
     void inject(BookCommentActivity bookCommentActivity);
+
+    void inject(UserEditActivity userEditActivity);
 }

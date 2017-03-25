@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.app.App;
@@ -22,6 +23,7 @@ import com.codeest.geeknews.component.UpdateService;
 import com.codeest.geeknews.model.event.SearchEvent;
 import com.codeest.geeknews.presenter.MainPresenter;
 import com.codeest.geeknews.presenter.contract.MainContract;
+import com.codeest.geeknews.ui.userinfo.fragment.UserInfoFragment;
 import com.codeest.geeknews.ui.gank.fragment.GankMainFragment;
 import com.codeest.geeknews.ui.gold.fragment.GoldMainFragment;
 import com.codeest.geeknews.ui.main.fragment.AboutFragment;
@@ -36,6 +38,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -52,6 +55,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     NavigationView mNavigationView;
     @BindView(R.id.view_search)
     MaterialSearchView mSearchView;
+    @BindView(R.id.btn_logout)
+    View btnLogout;
+
 
     ZhihuMainFragment mZhihuFragment;
     GankMainFragment mGankFragment;
@@ -60,6 +66,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     LikeFragment mLikeFragment;
     SettingFragment mSettingFragment;
     AboutFragment mAboutFragment;
+    UserInfoFragment userInfoFragment;
 
     MenuItem mLastMenuItem;
     MenuItem mSearchMenuItem;
@@ -109,11 +116,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mLikeFragment = new LikeFragment();
         mSettingFragment = new SettingFragment();
         mAboutFragment = new AboutFragment();
+        userInfoFragment = new UserInfoFragment();
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
-        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mGoldFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment);
+        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mGoldFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {//点击导航事件
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -144,6 +152,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         break;
                     case R.id.drawer_about:
                         showFragment = Constants.TYPE_ABOUT;
+                        mSearchMenuItem.setVisible(false);
+                        break;
+                    case  R.id.drawer_userInfo:
+                        showFragment = Constants.TYPE_USER_INFO;
                         mSearchMenuItem.setVisible(false);
                         break;
                 }
@@ -244,6 +256,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return mSettingFragment;
             case Constants.TYPE_ABOUT:
                 return mAboutFragment;
+            case Constants.TYPE_USER_INFO:
+                return userInfoFragment;
         }
         return mZhihuFragment;
     }
@@ -266,6 +280,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_setting;
             case Constants.TYPE_ABOUT:
                 return R.id.drawer_about;
+            case Constants.TYPE_USER_INFO:
+                return R.id.drawer_userInfo;
         }
         return R.id.drawer_zhihu;
     }
@@ -284,6 +300,33 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         });
         builder.show();
     }
+
+    /**
+     * 注销按钮
+     */
+    @OnClick(R.id.btn_logout)
+    protected void onBtnLogoutClick() {
+
+
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+
+        builder.setMessage("确定要注销吗？");
+        builder.setNegativeButton("取消", null);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+
+
+
+
+
+    }
+
+
 
     @Override
     public void startDownloadService() {
