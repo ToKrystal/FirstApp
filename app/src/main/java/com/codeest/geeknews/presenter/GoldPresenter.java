@@ -26,6 +26,7 @@ public class GoldPresenter extends RxPresenter<GoldContract.View> implements Gol
 
     private static final int NUM_EACH_PAGE = 20;
     private static final int NUM_HOT_LIMIT = 3;
+    private static int START = 0;
 
     private RetrofitHelper mRetrofitHelper;
     private List<GoldListBean> totalList = new ArrayList<>();
@@ -44,10 +45,9 @@ public class GoldPresenter extends RxPresenter<GoldContract.View> implements Gol
         mType = type;
         currentPage = 0;
         totalList.clear();
-        Observable<List<GoldListBean>> list = mRetrofitHelper.fetchGoldList(type, NUM_EACH_PAGE, currentPage++)//获取数据
+        Observable<List<GoldListBean>> list = mRetrofitHelper.fetchGoldList(type, START, START+=NUM_EACH_PAGE)//获取数据
                 .compose(RxUtil.<GoldHttpResponse<List<GoldListBean>>>rxSchedulerHelper())//io -> main
                 .compose(RxUtil.<List<GoldListBean>>handleGoldResult());//response-> bean
-
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -3);
 
@@ -66,6 +66,7 @@ public class GoldPresenter extends RxPresenter<GoldContract.View> implements Gol
                         } else {
                             isHotList = true;
                             totalList.addAll(goldListBean);
+
                             mView.showContent(totalList);
                         }
                     }

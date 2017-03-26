@@ -15,6 +15,7 @@ import com.codeest.geeknews.presenter.GoldPresenter;
 import com.codeest.geeknews.presenter.contract.GoldContract;
 import com.codeest.geeknews.ui.gold.activity.BookDetailActivity;
 import com.codeest.geeknews.ui.gold.adapter.GoldListAdapter;
+import com.codeest.geeknews.util.LogUtil;
 import com.codeest.geeknews.util.SnackbarUtil;
 import com.codeest.geeknews.widget.GoldItemDecoration;
 import com.codeest.geeknews.widget.ProgressImageView;
@@ -42,6 +43,7 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
 
     private boolean isLoadingMore = false;
     private String mType;
+    private static int bookId = 0;
 
 
     @Override
@@ -118,12 +120,55 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
         } else {
             ivProgress.stop();
         }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
+        for(GoldListBean bean : goldListBean){
+            String strId = String.valueOf(bookId);
+                stringBuilder.append("('");
+                stringBuilder.append(strId+"','");
+                stringBuilder.append("type"+"','");
+                stringBuilder.append(bean.getCreatedAt()+"','");
+                stringBuilder.append(bean.getTitle()+"',");
+                stringBuilder.append(bean.getCollectionCount()+",");
+                stringBuilder.append(bean.getCommentsCount()+",'");
+                stringBuilder.append(bean.getUrl()+"','");
+                stringBuilder.append(bean.getUser().getUsername()+"','");
+                stringBuilder.append(bean.getScreenshot()== null ? "')":bean.getScreenshot().getUrl()     +"')");
+                stringBuilder.append(",");
+            bookId++;
+
+            }
+        LogUtil.i(stringBuilder.toString());
+
         mAdapter.updateData(goldListBean);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMoreContent(List<GoldListBean> goldMoreListBean, int start, int end) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
+        for(GoldListBean bean : goldMoreListBean){
+            String strId = String.valueOf(bookId);
+            stringBuilder.append("('");
+            stringBuilder.append(strId+"','");
+            stringBuilder.append("type"+"','");
+            stringBuilder.append(bean.getCreatedAt()+"','");
+            stringBuilder.append(bean.getTitle()+"',");
+            stringBuilder.append(bean.getCollectionCount()+",");
+            stringBuilder.append(bean.getCommentsCount()+",'");
+            stringBuilder.append(bean.getUrl()+"','");
+            stringBuilder.append(bean.getUser().getUsername()+"','");
+            stringBuilder.append(bean.getScreenshot()== null ? "')":bean.getScreenshot().getUrl()     +"')");
+            stringBuilder.append(",");
+            bookId++;
+
+        }
+        LogUtil.i(stringBuilder.toString());
+
+
+
+
         mAdapter.updateData(goldMoreListBean);
         mAdapter.notifyItemRangeInserted(start, end);
         isLoadingMore = false;

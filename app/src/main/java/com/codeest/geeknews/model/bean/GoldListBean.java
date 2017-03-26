@@ -1,7 +1,7 @@
 package com.codeest.geeknews.model.bean;
 
 /**
- * Created by codeest on 16/11/27.
+ * list
  */
 
 public class GoldListBean {
@@ -32,6 +32,11 @@ public class GoldListBean {
         public void setUsername(String username) {
             this.username = username;
         }
+
+        @Override
+        public String toString() {
+            return " "+username+" ";
+        }
     }
 
     public static class GoldListScreenshotBean {
@@ -43,6 +48,11 @@ public class GoldListBean {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return " "+url+" ";
         }
     }
 
@@ -108,5 +118,10 @@ public class GoldListBean {
 
     public void setUser(GoldListUserBean user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return " " +objectId +" " + createdAt +" " + title +" " + collectionCount +" " + commentsCount +" " + url  +" " + user +" " + screenshot +" " ;
     }
 }

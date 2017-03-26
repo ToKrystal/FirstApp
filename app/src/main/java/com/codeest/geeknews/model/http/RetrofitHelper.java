@@ -1,6 +1,5 @@
 package com.codeest.geeknews.model.http;
 
-import com.codeest.geeknews.app.Constants;
 import com.codeest.geeknews.model.bean.BookCommentBean;
 import com.codeest.geeknews.model.bean.BookDetailBean;
 import com.codeest.geeknews.model.bean.BookDetailExtraBean;
@@ -141,15 +140,40 @@ public class RetrofitHelper {
         return mMyApiService.getVersionInfo();
     }
 
-    public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldList(String type, int num, int page) {
-        return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID, Constants.LEANCLOUD_SIGN,
-                "{\"category\":\"" + type + "\"}", "-createdAt", "user,user.installation", num, page * num);
+    /*public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldList(String type, int num, int page) {
+        return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
+                Constants.LEANCLOUD_SIGN,
+                "{\"category\":\"" + type + "\"}",
+                "-createdAt",
+                "user,user.installation",
+                num,
+                page * num);
+    }*/
+    public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldList(String type, int start, int number) {
+        return mGoldApiService.getGoldList(type,start,number);
+       /* return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
+                Constants.LEANCLOUD_SIGN,
+                "{\"category\":\"" + type + "\"}",
+                "-createdAt",
+                "user,user.installation",
+                number,
+                start * number);*/
     }
 
-    public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
+    /*public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
         return mGoldApiService.getGoldHot(Constants.LEANCLOUD_ID, Constants.LEANCLOUD_SIGN,
                 "{\"category\":\"" + type + "\",\"createdAt\":{\"$gt\":{\"__type\":\"Date\",\"iso\":\"" + dataTime + "T00:00:00.000Z\"}},\"objectId\":{\"$nin\":[\"58362f160ce463005890753e\",\"583659fcc59e0d005775cc8c\",\"5836b7358ac2470065d3df62\"]}}",
                 "-hotIndex", "user,user.installation", limit);
+    }*/
+    public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
+       return mGoldApiService.getGoldList("android",0,3);
+        /*return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
+                Constants.LEANCLOUD_SIGN,
+                "{\"category\":\"" + type + "\"}",
+                "-createdAt",
+                "user,user.installation",
+                3,
+                3 * 4);*/
     }
 
     public Observable<NodeBean> fetchNodeInfo(String name) {

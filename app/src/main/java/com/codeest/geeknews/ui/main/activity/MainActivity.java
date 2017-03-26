@@ -268,8 +268,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_zhihu;
             case Constants.TYPE_GANK:
                 return R.id.drawer_gank;
-            case Constants.TYPE_WECHAT:
-                return R.id.drawer_wechat;
             case Constants.TYPE_GOLD:
                 return R.id.drawer_gold;
             case Constants.TYPE_VTEX:
