@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
         loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mGoldFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {//点击导航事件
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {

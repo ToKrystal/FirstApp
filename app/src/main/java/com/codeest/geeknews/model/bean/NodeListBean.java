@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by codeest on 16/12/22.
+ * 主题信息
  */
 
 public class NodeListBean implements Parcelable{
