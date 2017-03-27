@@ -63,6 +63,10 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
         addSubscrebe(rxSubscription);
     }
 
+    /**
+     * 获取评论
+     * @param topic_id
+     */
     @Override
     public void getContent(String topic_id) {
         Subscription rxSubscription = mRetrofitHelper.fetchRepliesList(topic_id)
@@ -76,6 +80,10 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
         addSubscrebe(rxSubscription);
     }
 
+    /**
+     * 获取主题信息
+     * @param topic_id
+     */
     @Override
     public void getTopInfo(String topic_id) {
         Subscription rxSubscription = mRetrofitHelper.fetchTopicInfo(topic_id)

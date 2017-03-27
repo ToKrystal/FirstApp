@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * 主题信息
+ * 主题信息 从Page传进detail
  */
 
 public class NodeListBean implements Parcelable{

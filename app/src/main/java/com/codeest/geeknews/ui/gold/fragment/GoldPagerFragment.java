@@ -68,7 +68,9 @@ public class GoldPagerFragment extends BaseFragment<GoldPresenter> implements Go
             public void onItemClick(int position,View shareView) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, BookDetailActivity.class);
+                //详细内容的ID
                 intent.putExtra("id",9305940);
+                //TODO 传进该主题内容 intent
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());
             }

@@ -19,7 +19,7 @@ public class RepliesListBean {
 
     private int thanks;
     private String content_rendered;
-    private MemberBean member;
+    private MemberBean member;//
     private int created;
 
     public int getThanks() {
