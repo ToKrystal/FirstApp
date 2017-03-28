@@ -23,6 +23,7 @@ import com.codeest.geeknews.component.UpdateService;
 import com.codeest.geeknews.model.event.SearchEvent;
 import com.codeest.geeknews.presenter.MainPresenter;
 import com.codeest.geeknews.presenter.contract.MainContract;
+import com.codeest.geeknews.ui.gold.fragment.BookMainFragment;
 import com.codeest.geeknews.ui.userinfo.fragment.UserInfoFragment;
 import com.codeest.geeknews.ui.gank.fragment.GankMainFragment;
 import com.codeest.geeknews.ui.gold.fragment.GoldMainFragment;
@@ -61,12 +62,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     ZhihuMainFragment mZhihuFragment;
     GankMainFragment mGankFragment;
-    GoldMainFragment mGoldFragment;
+   // GoldMainFragment mGoldFragment;
     VtexMainFragment mVtexFragment;
     LikeFragment mLikeFragment;
     SettingFragment mSettingFragment;
     AboutFragment mAboutFragment;
     UserInfoFragment userInfoFragment;
+    BookMainFragment mBookMainFragment;
 
     MenuItem mLastMenuItem;
     MenuItem mSearchMenuItem;
@@ -111,7 +113,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         setToolBar(mToolbar,"发现阅读");
         mZhihuFragment = new ZhihuMainFragment();
         mGankFragment = new GankMainFragment();
-        mGoldFragment = new GoldMainFragment();
+       // mGoldFragment = new GoldMainFragment();
+        mBookMainFragment = new BookMainFragment();
         mVtexFragment = new VtexMainFragment();
         mLikeFragment = new LikeFragment();
         mSettingFragment = new SettingFragment();
@@ -121,7 +124,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
-        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mGoldFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
+        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {//点击导航事件
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -134,7 +137,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         showFragment = Constants.TYPE_GANK;
                         mSearchMenuItem.setVisible(true);
                         break;
-                    case R.id.drawer_gold:
+                    /*case R.id.drawer_gold:
+                        showFragment = Constants.TYPE_GOLD;
+                        mSearchMenuItem.setVisible(false);
+                        break;*/
+                    case R.id.drawer_book:
                         showFragment = Constants.TYPE_GOLD;
                         mSearchMenuItem.setVisible(false);
                         break;
@@ -247,7 +254,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case Constants.TYPE_GANK:
                 return mGankFragment;
             case Constants.TYPE_GOLD:
-                return mGoldFragment;
+               // return mGoldFragment;
+                return mBookMainFragment;
             case Constants.TYPE_VTEX:
                 return mVtexFragment;
             case Constants.TYPE_LIKE:
@@ -266,10 +274,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         switch (item) {
             case Constants.TYPE_ZHIHU:
                 return R.id.drawer_zhihu;
+
             case Constants.TYPE_GANK:
                 return R.id.drawer_gank;
+
             case Constants.TYPE_GOLD:
-                return R.id.drawer_gold;
+                return R.id.drawer_book;
+
             case Constants.TYPE_VTEX:
                 return R.id.drawer_vtex;
             case Constants.TYPE_LIKE:

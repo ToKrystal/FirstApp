@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import com.codeest.geeknews.di.scope.FragmentScope;
 import com.codeest.geeknews.di.module.FragmentModule;
+import com.codeest.geeknews.ui.gold.fragment.BookMainFragment;
+import com.codeest.geeknews.ui.gold.fragment.BookPagerFragment;
 import com.codeest.geeknews.ui.userinfo.fragment.UserInfoFragment;
 import com.codeest.geeknews.ui.gank.fragment.GirlFragment;
 import com.codeest.geeknews.ui.gank.fragment.TechFragment;
@@ -58,6 +60,10 @@ public interface FragmentComponent {
     void inject(BookCommentFragment bookCommentFragment);
 
     void inject(UserInfoFragment userInfoFragment);
+
+    void inject(BookPagerFragment bookPagerFragment);
+
+    void inject(BookMainFragment bookMainFragment);
 
 
 }

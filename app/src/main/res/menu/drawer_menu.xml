@@ -15,7 +15,7 @@
                 android:checkable="true"
                 android:title="@string/gank"/>
             <item
-                android:id="@+id/drawer_gold"
+                android:id="@+id/drawer_book"
                 android:icon="@mipmap/ic_drawer_gold"
                 android:checkable="true"
                 android:title="@string/gold"/>

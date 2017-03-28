@@ -5,6 +5,7 @@ import android.content.Context;
 import com.codeest.geeknews.model.bean.GoldManagerBean;
 import com.codeest.geeknews.model.bean.ReadStateBean;
 import com.codeest.geeknews.model.bean.RealmLikeBean;
+import com.codeest.geeknews.model.bean.BookManagerBean;
 
 import java.util.List;
 
@@ -132,6 +133,20 @@ public class RealmHelper {
         mRealm.copyToRealm(bean);
         mRealm.commitTransaction();
     }
+    /**
+     * 更新 掘金首页管理列表
+     * 先删除后添加
+     * @param bean
+     */
+    public void updateBookManagerList(BookManagerBean bean) {
+        BookManagerBean data = mRealm.where(BookManagerBean.class).findFirst();
+        mRealm.beginTransaction();
+        if (data != null) {
+            data.deleteFromRealm();
+        }
+        mRealm.copyToRealm(bean);
+        mRealm.commitTransaction();
+    }
 
     /**
      * 获取 掘金首页管理列表
@@ -139,6 +154,16 @@ public class RealmHelper {
      */
     public GoldManagerBean getGoldManagerList() {
         GoldManagerBean bean = mRealm.where(GoldManagerBean.class).findFirst();
+        if (bean == null)
+            return null;
+        return mRealm.copyFromRealm(bean);
+    }
+    /**
+     * 获取 掘金首页管理列表
+     * @return
+     */
+    public BookManagerBean getBookManagerList() {
+        BookManagerBean bean = mRealm.where(BookManagerBean.class).findFirst();
         if (bean == null)
             return null;
         return mRealm.copyFromRealm(bean);

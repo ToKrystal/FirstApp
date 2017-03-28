@@ -3,12 +3,17 @@ package com.codeest.geeknews.model.http.api;
 import com.codeest.geeknews.model.bean.BookCommentBean;
 import com.codeest.geeknews.model.bean.BookDetailBean;
 import com.codeest.geeknews.model.bean.BookDetailExtraBean;
+import com.codeest.geeknews.model.bean.BookListBean;
+import com.codeest.geeknews.model.bean.GoldListBean;
 import com.codeest.geeknews.model.bean.NodeListBean;
 import com.codeest.geeknews.model.bean.RepliesListBean;
+import com.codeest.geeknews.model.http.response.BookHttpResponse;
+import com.codeest.geeknews.model.http.response.GoldHttpResponse;
 
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -18,8 +23,10 @@ import rx.Observable;
  */
 
 public interface BookApis {
-    String HOST = "http://news-at.zhihu.com/api/4/";
+   // String HOST = "http://news-at.zhihu.com/api/4/";
     String CONTENTHOST = "https://www.v2ex.com/";
+    String HOST = "http://169.254.242.129:8080/SpringMVC/bookapi/";
+    //String HOST = "https://api.leancloud.cn/";
 
     /**
      * 详情
@@ -57,4 +64,19 @@ public interface BookApis {
      */
     @GET("/api/replies/show.json")
     Observable<List<RepliesListBean>> getRepliesList(@Query("topic_id") String id);
+
+
+    @GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")
+    Observable<BookHttpResponse<List<BookListBean>>> getBookList(@Path("type") String type, @Path("start")int start, @Path("number")int number);
+
+    /**
+     * 热门推荐
+     */
+    @GET("1.1/classes/Entry")
+    Observable<BookHttpResponse<List<BookListBean>>> getBookHot(@Header("X-LC-Id") String id,
+                                                                @Header("X-LC-Sign") String sign,
+                                                                @Query("where") String where,
+                                                                @Query("order") String order,
+                                                                @Query("include") String include,
+                                                                @Query("limit") int limit);
 }

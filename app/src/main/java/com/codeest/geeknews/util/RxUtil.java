@@ -4,6 +4,7 @@ import com.codeest.geeknews.model.http.exception.ApiException;
 import com.codeest.geeknews.model.http.response.GankHttpResponse;
 import com.codeest.geeknews.model.http.response.GoldHttpResponse;
 import com.codeest.geeknews.model.http.response.MyHttpResponse;
+import com.codeest.geeknews.model.http.response.BookHttpResponse;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -92,6 +93,24 @@ public class RxUtil {
                     public Observable<T> call(GoldHttpResponse<T> tGoldHttpResponse) {
                         if(tGoldHttpResponse.getResults() != null) {
                             return createData(tGoldHttpResponse.getResults());
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    public static <T> Observable.Transformer<BookHttpResponse<T>, T> handleBookResult() {   //compose判断结果
+        return new Observable.Transformer<BookHttpResponse<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<BookHttpResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<BookHttpResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(BookHttpResponse<T> tBookHttpResponse) {
+                        if(tBookHttpResponse.getResults() != null) {
+                            return createData(tBookHttpResponse.getResults());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
                         }

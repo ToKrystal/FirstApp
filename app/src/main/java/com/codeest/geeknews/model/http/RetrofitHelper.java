@@ -3,6 +3,7 @@ package com.codeest.geeknews.model.http;
 import com.codeest.geeknews.model.bean.BookCommentBean;
 import com.codeest.geeknews.model.bean.BookDetailBean;
 import com.codeest.geeknews.model.bean.BookDetailExtraBean;
+import com.codeest.geeknews.model.bean.BookListBean;
 import com.codeest.geeknews.model.bean.CommentBean;
 import com.codeest.geeknews.model.bean.DailyBeforeListBean;
 import com.codeest.geeknews.model.bean.DailyListBean;
@@ -27,6 +28,7 @@ import com.codeest.geeknews.model.http.api.GoldApis;
 import com.codeest.geeknews.model.http.api.MyApis;
 import com.codeest.geeknews.model.http.api.VtexApis;
 import com.codeest.geeknews.model.http.api.ZhihuApis;
+import com.codeest.geeknews.model.http.response.BookHttpResponse;
 import com.codeest.geeknews.model.http.response.GankHttpResponse;
 import com.codeest.geeknews.model.http.response.GoldHttpResponse;
 import com.codeest.geeknews.model.http.response.MyHttpResponse;
@@ -159,6 +161,16 @@ public class RetrofitHelper {
                 number,
                 start * number);*/
     }
+    public Observable<BookHttpResponse<List<BookListBean>>> fetchBookList(String type, int start, int number) {
+        return mBookApiService.getBookList(type,start,number);
+       /* return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
+                Constants.LEANCLOUD_SIGN,
+                "{\"category\":\"" + type + "\"}",
+                "-createdAt",
+                "user,user.installation",
+                number,
+                start * number);*/
+    }
 
     /*public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
         return mGoldApiService.getGoldHot(Constants.LEANCLOUD_ID, Constants.LEANCLOUD_SIGN,
@@ -167,6 +179,17 @@ public class RetrofitHelper {
     }*/
     public Observable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
        return mGoldApiService.getGoldList("android",0,3);
+        /*return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
+                Constants.LEANCLOUD_SIGN,
+                "{\"category\":\"" + type + "\"}",
+                "-createdAt",
+                "user,user.installation",
+                3,
+                3 * 4);*/
+    }
+
+    public Observable<BookHttpResponse<List<BookListBean>>> fetchBookHotList(String type, String dataTime, int limit) {
+        return mBookApiService.getBookList("android",0,3);
         /*return mGoldApiService.getGoldList(Constants.LEANCLOUD_ID,
                 Constants.LEANCLOUD_SIGN,
                 "{\"category\":\"" + type + "\"}",
