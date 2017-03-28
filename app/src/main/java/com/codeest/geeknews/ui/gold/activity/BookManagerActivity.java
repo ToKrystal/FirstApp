@@ -11,10 +11,7 @@ import com.codeest.geeknews.base.SimpleActivity;
 import com.codeest.geeknews.component.RxBus;
 import com.codeest.geeknews.model.bean.BookManagerBean;
 import com.codeest.geeknews.model.bean.BookManagerItemBean;
-import com.codeest.geeknews.model.bean.GoldManagerBean;
-import com.codeest.geeknews.model.bean.GoldManagerItemBean;
 import com.codeest.geeknews.ui.gold.adapter.BookManagerAdapter;
-import com.codeest.geeknews.ui.gold.adapter.GoldManagerAdapter;
 import com.codeest.geeknews.widget.DefaultItemTouchHelpCallback;
 
 import java.util.Collections;

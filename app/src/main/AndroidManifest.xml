@@ -65,7 +65,8 @@
             android:screenOrientation="portrait"/>
 
         //掘金
-        <activity android:name=".ui.gold.activity.GoldManagerActivity"
+
+        <activity android:name=".ui.gold.activity.BookManagerActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 

@@ -4,7 +4,6 @@ import com.codeest.geeknews.model.bean.BookCommentBean;
 import com.codeest.geeknews.model.bean.BookDetailBean;
 import com.codeest.geeknews.model.bean.BookDetailExtraBean;
 import com.codeest.geeknews.model.bean.BookListBean;
-import com.codeest.geeknews.model.bean.GoldListBean;
 import com.codeest.geeknews.model.bean.NodeListBean;
 import com.codeest.geeknews.model.bean.RepliesListBean;
 import com.codeest.geeknews.model.http.response.BookHttpResponse;

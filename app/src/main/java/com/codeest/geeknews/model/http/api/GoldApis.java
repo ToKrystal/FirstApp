@@ -1,6 +1,5 @@
 package com.codeest.geeknews.model.http.api;
 
-import com.codeest.geeknews.model.bean.GoldListBean;
 import com.codeest.geeknews.model.http.response.GoldHttpResponse;
 
 import java.util.List;
@@ -42,18 +41,18 @@ public interface GoldApis {
                                                             @Query("limit") int limit);*/
 
 
-    @GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")
+    /*@GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")
     Observable<GoldHttpResponse<List<GoldListBean>>> getGoldList(@Path("type") String type, @Path("start")int start, @Path("number")int number);
 
-    /**
+    *//**
      * 热门推荐
-     */
+     *//*
     @GET("1.1/classes/Entry")
     Observable<GoldHttpResponse<List<GoldListBean>>> getGoldHot(@Header("X-LC-Id") String id,
                                                                 @Header("X-LC-Sign") String sign,
                                                                 @Query("where") String where,
                                                                 @Query("order") String order,
                                                                 @Query("include") String include,
-                                                                @Query("limit") int limit);
+                                                                @Query("limit") int limit);*/
 
 }

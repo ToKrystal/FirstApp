@@ -38,7 +38,7 @@ public class BookManagerBean extends RealmObject implements Parcelable {
 
     protected BookManagerBean(Parcel in) {
         this.managerList = new RealmList<>();
-        in.readList(this.managerList, GoldManagerItemBean.class.getClassLoader());
+        in.readList(this.managerList, BookManagerItemBean.class.getClassLoader());
     }
 
     public BookManagerBean(RealmList<BookManagerItemBean> mList) {

@@ -11,13 +11,11 @@ import android.widget.TextView;
 
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.model.bean.BookManagerItemBean;
-import com.codeest.geeknews.model.bean.GoldManagerItemBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
-
-import static com.codeest.geeknews.ui.gold.fragment.GoldMainFragment.typeStr;
+import static com.codeest.geeknews.ui.gold.fragment.BookMainFragment.typeStr;
 
 /**
  *

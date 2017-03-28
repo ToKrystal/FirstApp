@@ -45,7 +45,7 @@ public class BookMainPresenter extends RxPresenter<BookMainContract.View> implem
             mRealmHelper.updateBookManagerList(new BookManagerBean(mList));
             mView.updateTab(mList);
         } else {
-            if (mRealmHelper.getGoldManagerList() == null) {
+            if (mRealmHelper.getBookManagerList() == null) {
                 initList();
                 mRealmHelper.updateBookManagerList(new BookManagerBean(mList));
             } else {
