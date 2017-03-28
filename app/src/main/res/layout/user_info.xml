@@ -78,7 +78,7 @@
 
                     </RelativeLayout>
 
-                    <com.codeest.geeknews.widget.CircleImageView
+                    <com.chao.bookviki.widget.CircleImageView
                         android:id="@+id/user_avatar_civ"
                         android:layout_width="64dp"
                         android:layout_height="64dp"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codeest.geeknews">
+    package="com.chao.bookviki">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -11,7 +11,7 @@
 
     //自己 application
     <application
-        android:name="com.codeest.geeknews.app.App"
+        android:name="com.chao.bookviki.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme">
 
         //主类
-        <activity android:name=".ui.main.activity.WelcomeActivity"
+        <activity android:name="com.chao.bookviki.ui.main.activity.WelcomeActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -29,65 +29,65 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.codeest.geeknews.ui.main.activity.MainActivity"
+        <activity android:name="com.chao.bookviki.ui.main.activity.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/MainTheme"
             android:screenOrientation="portrait">
         </activity>
 
         //知乎
-        <activity android:name=".ui.zhihu.activity.CalendarActivity"
+        <activity android:name="com.chao.bookviki.ui.zhihu.activity.CalendarActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.zhihu.activity.CommentActivity"
+        <activity android:name="com.chao.bookviki.ui.zhihu.activity.CommentActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.zhihu.activity.ThemeActivity"
+        <activity android:name="com.chao.bookviki.ui.zhihu.activity.ThemeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.zhihu.activity.SectionActivity"
+        <activity android:name="com.chao.bookviki.ui.zhihu.activity.SectionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
         //Gank
-        <activity android:name=".ui.gank.activity.TechDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.gank.activity.TechDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.gank.activity.GirlDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.gank.activity.GirlDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
         //掘金
 
-        <activity android:name=".ui.gold.activity.BookManagerActivity"
+        <activity android:name="com.chao.bookviki.ui.gold.activity.BookManagerActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.vtex.activity.RepliesActivity"
+        <activity android:name="com.chao.bookviki.ui.vtex.activity.RepliesActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
         //book
-        <activity android:name=".ui.gold.activity.BookDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.gold.activity.BookDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.gold.activity.BookCommentActivity"
+        <activity android:name="com.chao.bookviki.ui.gold.activity.BookCommentActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.userinfo.activity.UserEditActivity"
+        <activity android:name="com.chao.bookviki.ui.userinfo.activity.UserEditActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
-        <service android:name=".component.UpdateService"/>
+        <service android:name="com.chao.bookviki.component.UpdateService"/>
 
     </application>
 

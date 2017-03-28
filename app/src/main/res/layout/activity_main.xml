@@ -55,7 +55,7 @@
                     android:padding="16dp"
                     android:orientation="vertical">
 
-                    <com.codeest.geeknews.widget.CircleImageView
+                    <com.chao.bookviki.widget.CircleImageView
                         android:id="@+id/img_avatar"
                         android:layout_width="72dp"
                         android:layout_height="72dp"
