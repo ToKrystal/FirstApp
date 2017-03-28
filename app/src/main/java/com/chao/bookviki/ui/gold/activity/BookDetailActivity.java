@@ -122,7 +122,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         ivProgress.start();
 
         //获取该主题的评论
-        mPresenter.getContent("349335");
+        mPresenter.getContent("4");
         if (mTopBean == null) {
             mPresenter.getTopInfo(topicId);
         }

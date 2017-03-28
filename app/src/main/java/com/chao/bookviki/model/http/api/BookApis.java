@@ -60,8 +60,8 @@ public interface BookApis {
      * 获取主题回复
      * @return
      */
-    @GET("/api/replies/show.json")
-    Observable<List<RepliesListBean>> getRepliesList(@Query("topic_id") String id);
+    @GET("/BookSpringMVC/bookapi/4/queryId/{queryId}")
+    Observable<List<RepliesListBean>> getRepliesList(@Path("queryId") String queryId);
 
 
     @GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")

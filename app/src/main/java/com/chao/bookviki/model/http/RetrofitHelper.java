@@ -209,7 +209,10 @@ public class RetrofitHelper {
         return mVtexApiService.getTopicInfo(id);
     }
 
-    public Observable<List<RepliesListBean>> fetchRepliesList(String id){
+   /* public Observable<List<RepliesListBean>> fetchRepliesList(String id){
         return mVtexApiService.getRepliesList(id);
+    }*/
+    public Observable<List<RepliesListBean>> fetchRepliesList(String id){
+        return mBookApiService.getRepliesList(id);
     }
 }
