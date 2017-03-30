@@ -22,11 +22,13 @@ public interface BookDetailContract {
 
         void setLikeButtonState(boolean isLiked);
 
-        void showContent(List<RepliesListBean> mList);
+        //展示评论
+        void showReplay(List<RepliesListBean> mList);
 
         void showTopInfo(NodeListBean mTopInfo);
 
     }
+
 
     interface  Presenter extends BasePresenter<View> {
 

@@ -121,37 +121,13 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
         ivProgress.start();
 
+        imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
         //获取该主题的评论
         mPresenter.getContent("4");
         if (mTopBean == null) {
             mPresenter.getTopInfo(topicId);
         }
 
-        /*WebSettings settings = wvDetailContent.getSettings();
-        if (SharedPreferenceUtil.getNoImageState()) {
-            settings.setBlockNetworkImage(true);
-        }
-        if (SharedPreferenceUtil.getAutoCacheState()) {
-            settings.setAppCacheEnabled(true);
-            settings.setDomStorageEnabled(true);
-            settings.setDatabaseEnabled(true);
-            if (SystemUtil.isNetworkConnected()) {
-                settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-            } else {
-                settings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-            }
-        }*/
-        /*settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        wvDetailContent.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });*/
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -320,7 +296,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     }
 
     @Override
-    public void showContent(List<RepliesListBean> mList) {
+    public void showReplay(List<RepliesListBean> mList) {
 
         mAdapter.setContentData(mList);
     }

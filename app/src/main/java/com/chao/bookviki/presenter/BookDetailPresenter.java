@@ -74,7 +74,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                 .subscribe(new CommonSubscriber<List<RepliesListBean>>(mView) {
                     @Override
                     public void onNext(List<RepliesListBean> repliesListBeen) {
-                        mView.showContent(repliesListBeen);
+                        mView.showReplay(repliesListBeen);
                     }
                 });
         addSubscrebe(rxSubscription);

@@ -55,8 +55,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     NavigationView mNavigationView;
     @BindView(R.id.view_search)
     MaterialSearchView mSearchView;
-    @BindView(R.id.btn_logout)
     View btnLogout;
+
 
 
     ZhihuMainFragment mZhihuFragment;
@@ -124,6 +124,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
         loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
+        btnLogout =  mNavigationView.getHeaderView(0).findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBtnLogoutClick();
+            }
+        });
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {//点击导航事件
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -312,12 +319,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     /**
      * 注销按钮
      */
-    @OnClick(R.id.btn_logout)
-    protected void onBtnLogoutClick() {
-
-
+   void onBtnLogoutClick() {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-
         builder.setMessage("确定要注销吗？");
         builder.setNegativeButton("取消", null);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -327,10 +330,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             }
         });
         builder.show();
-
-
-
-
 
     }
 
