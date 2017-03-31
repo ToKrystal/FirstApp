@@ -28,7 +28,8 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
 
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;
-    private BookDetailBean mData;
+   // private BookDetailBean mData;
+    private NodeListBean mData;
 
     @Inject
     public BookDetailPresenter(RetrofitHelper mRetrofitHelper,RealmHelper mRealmHelper) {
@@ -43,7 +44,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                 .subscribe(new CommonSubscriber<BookDetailBean>(mView) {
                     @Override
                     public void onNext(BookDetailBean bookDetailBean) {
-                        mData = bookDetailBean;
+                     //   mData = bookDetailBean;
                         mView.showContent(bookDetailBean);
                     }
                 });
@@ -103,6 +104,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                 .subscribe(new CommonSubscriber<NodeListBean>(mView) {
                     @Override
                     public void onNext(NodeListBean nodeListBean) {
+                        mData = nodeListBean;
                         mView.showTopInfo(nodeListBean);
                     }
                 });
@@ -115,9 +117,9 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     public void insertLikeData() {
         if (mData != null) {
             RealmLikeBean bean = new RealmLikeBean();
-            bean.setId(String.valueOf(1 ));
+            bean.setId(mData.getId());
             bean.setImage("");
-            bean.setTitle("");
+            bean.setTitle(mData.getTitle());
             bean.setType(Constants.TYPE_BOOK);
             bean.setTime(System.currentTimeMillis());
             mRealmHelper.insertLikeBean(bean);
@@ -129,7 +131,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     @Override
     public void deleteLikeData() {
         if (mData != null) {
-            mRealmHelper.deleteLikeBean(String.valueOf(1));
+            mRealmHelper.deleteLikeBean(String.valueOf(mData.getId()));
         } else {
             mView.showError("操作失败");
         }

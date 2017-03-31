@@ -296,12 +296,14 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         }
     }
 
+    //展示评论
     @Override
     public void showReplay(List<RepliesListBean> mList) {
 
         mAdapter.setContentData(mList);
     }
 
+    //展示主题信息
     @Override
     public void showTopInfo(NodeListBean mTopInfo) {
         mTopBean = mTopInfo;

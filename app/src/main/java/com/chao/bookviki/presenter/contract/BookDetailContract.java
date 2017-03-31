@@ -45,6 +45,8 @@ public interface BookDetailContract {
         void getContent(String topic_id);
 
         void getTopInfo(String topic_id);
+
+        void replay(String content);
     }
 
 }

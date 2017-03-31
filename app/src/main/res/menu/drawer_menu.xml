@@ -4,7 +4,7 @@
         <menu>
             <item
                 android:id="@+id/drawer_zhihu"
-                android:icon="@mipmap/ic_drawer_zhihu"
+                android:icon="@mipmap/ic_daily_share"
                 android:checkable="true"
                 android:checked="true"
                 android:title="@string/zhihu"/>

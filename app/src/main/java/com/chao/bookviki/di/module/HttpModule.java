@@ -200,6 +200,7 @@ public class HttpModule {
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
+        //if (client.cookieJar() == CookieJar.NO_COOKIES) return;
         return builder
                 .baseUrl(url)
                 .client(client)
