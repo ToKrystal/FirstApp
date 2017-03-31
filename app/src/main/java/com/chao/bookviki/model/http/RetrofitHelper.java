@@ -1,22 +1,18 @@
 package com.chao.bookviki.model.http;
 
-import com.chao.bookviki.model.bean.DailyListBean;
-import com.chao.bookviki.model.bean.RepliesListBean;
-import com.chao.bookviki.model.bean.SectionListBean;
-import com.chao.bookviki.model.http.api.VtexApis;
-import com.chao.bookviki.model.bean.BookCommentBean;
-import com.chao.bookviki.model.bean.BookDetailBean;
-import com.chao.bookviki.model.bean.BookDetailExtraBean;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.CommentBean;
 import com.chao.bookviki.model.bean.DailyBeforeListBean;
+import com.chao.bookviki.model.bean.DailyListBean;
 import com.chao.bookviki.model.bean.DetailExtraBean;
 import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.GankSearchItemBean;
 import com.chao.bookviki.model.bean.HotListBean;
 import com.chao.bookviki.model.bean.NodeBean;
 import com.chao.bookviki.model.bean.NodeListBean;
+import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.bean.SectionChildListBean;
+import com.chao.bookviki.model.bean.SectionListBean;
 import com.chao.bookviki.model.bean.ThemeChildListBean;
 import com.chao.bookviki.model.bean.ThemeListBean;
 import com.chao.bookviki.model.bean.VersionBean;
@@ -26,6 +22,7 @@ import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.GoldApis;
 import com.chao.bookviki.model.http.api.MyApis;
+import com.chao.bookviki.model.http.api.VtexApis;
 import com.chao.bookviki.model.http.api.ZhihuApis;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.GankHttpResponse;
@@ -84,16 +81,16 @@ public class RetrofitHelper {
     public Observable<ZhihuDetailBean> fetchDetailInfo(int id) {
         return mZhihuApiService.getDetailInfo(id);
     }
-    public Observable<BookDetailBean> fetchBookDetailInfo(int id) {
+   /* public Observable<BookDetailBean> fetchBookDetailInfo(int id) {
         return mBookApiService.getBookDetailInfo(id);
-    }
+    }*/
 
     public Observable<DetailExtraBean> fetchDetailExtraInfo(int id) {
         return mZhihuApiService.getDetailExtraInfo(id);
     }
-    public Observable<BookDetailExtraBean> fetchBookDetailExtraInfo(int id) {
+   /* public Observable<BookDetailExtraBean> fetchBookDetailExtraInfo(int id) {
         return mBookApiService.getBookDetailExtraInfo(id);
-    }
+    }*/
 
     public Observable<WelcomeBean> fetchWelcomeInfo(String res) {
         return mZhihuApiService.getWelcomeInfo(res);
@@ -103,16 +100,16 @@ public class RetrofitHelper {
         return mZhihuApiService.getLongCommentInfo(id);
     }
 
-    public Observable<BookCommentBean> fetchBookLongCommentInfo(int id) {
+    /*public Observable<BookCommentBean> fetchBookLongCommentInfo(int id) {
         return mBookApiService.getBookLongCommentInfo(id);
-    }
+    }*/
 
     public Observable<CommentBean> fetchShortCommentInfo(int id) {
         return mZhihuApiService.getShortCommentInfo(id);
     }
-    public Observable<BookCommentBean> fetchBookShortCommentInfo(int id) {
+   /* public Observable<BookCommentBean> fetchBookShortCommentInfo(int id) {
         return mBookApiService.getBookShortCommentInfo(id);
-    }
+    }*/
 
     public Observable<HotListBean> fetchHotListInfo() {
         return mZhihuApiService.getHotList();

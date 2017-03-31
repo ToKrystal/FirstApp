@@ -1,10 +1,13 @@
 package com.chao.bookviki.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
- * Created by Administrator on 2017/3/28.
+ * 主题信息
  */
 
-public class BookListBean {
+public class BookListBean implements Parcelable {
     private String objectId;
 
     private String createdAt;
@@ -21,9 +24,57 @@ public class BookListBean {
 
     private GoldListScreenshotBean screenshot;
 
-    public static class GoldListUserBean {
+    public BookListBean(){}
+    protected BookListBean(Parcel in){
+        this.objectId = in.readString();
+        this.createdAt = in.readString();
+        this.title = in.readString();
+        this.collectionCount = in.readInt();
+        this.commentsCount = in.readInt();
+        this.url = in.readString();
+        this.user = in.readParcelable(getClass().getClassLoader());
+        this.screenshot = in.readParcelable(getClass().getClassLoader());
+
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.objectId);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.title);
+        dest.writeInt(this.collectionCount);
+        dest.writeInt(this.commentsCount);
+        dest.writeParcelable(this.user, flags);
+        dest.writeParcelable(this.screenshot, flags);
+    }
+
+    public static final Creator<BookListBean> CREATOR = new Creator<BookListBean>() {
+        @Override
+        public BookListBean createFromParcel(Parcel source) {
+            return new BookListBean(source);
+        }
+
+        @Override
+        public BookListBean[] newArray(int size) {
+            return new BookListBean[size];
+        }
+    };
+
+
+    public static class GoldListUserBean implements Parcelable{
+        public GoldListUserBean(){}
         private String username;
 
+
+        protected GoldListUserBean(Parcel in) {
+            this.username = in.readString();
+        }
         public String getUsername() {
             return username;
         }
@@ -36,9 +87,36 @@ public class BookListBean {
         public String toString() {
             return " "+username+" ";
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.username);
+
+        }
+
+        public static final Creator<GoldListUserBean> CREATOR = new Creator<GoldListUserBean>() {
+            @Override
+            public GoldListUserBean createFromParcel(Parcel source) {
+                return new GoldListUserBean(source);
+            }
+
+            @Override
+            public GoldListUserBean[] newArray(int size) {
+                return new GoldListUserBean[size];
+            }
+        };
     }
 
-    public static class GoldListScreenshotBean {
+    public static class GoldListScreenshotBean implements Parcelable{
+        public GoldListScreenshotBean(){}
+        protected GoldListScreenshotBean(Parcel in) {
+            this.url = in.readString();
+        }
         private String url;
 
         public String getUrl() {
@@ -53,6 +131,27 @@ public class BookListBean {
         public String toString() {
             return " "+url+" ";
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.url);
+        }
+        public static final Creator<GoldListScreenshotBean> CREATOR = new Creator<GoldListScreenshotBean>() {
+            @Override
+            public GoldListScreenshotBean createFromParcel(Parcel source) {
+                return new GoldListScreenshotBean(source);
+            }
+
+            @Override
+            public GoldListScreenshotBean[] newArray(int size) {
+                return new GoldListScreenshotBean[size];
+            }
+        };
     }
 
     public String getObjectId() {

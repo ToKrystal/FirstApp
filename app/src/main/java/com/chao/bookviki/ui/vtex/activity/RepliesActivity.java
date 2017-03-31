@@ -7,12 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RealmLikeBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.http.api.VtexApis;
+import com.chao.bookviki.presenter.RepliesPresenter;
 import com.chao.bookviki.presenter.contract.RepliesContract;
 import com.chao.bookviki.ui.vtex.adapter.RepliesAdapter;
 import com.chao.bookviki.util.ShareUtil;
@@ -20,10 +22,7 @@ import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.util.SystemUtil;
 import com.chao.bookviki.widget.CommonItemDecoration;
 import com.chao.bookviki.widget.ProgressImageView;
-import com.chao.bookviki.R;
-import com.chao.bookviki.presenter.RepliesPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -65,7 +64,7 @@ public class RepliesActivity extends BaseActivity<RepliesPresenter> implements R
         setToolBar(toolBar, "帖子详情");
         topicId = getIntent().getExtras().getString(Constants.IT_VTEX_TOPIC_ID);
         mTopBean = getIntent().getParcelableExtra(Constants.IT_VTEX_REPLIES_TOP);
-        mAdapter = new RepliesAdapter(mContext, new ArrayList<RepliesListBean>(), mTopBean);
+       // mAdapter = new RepliesAdapter(mContext, new ArrayList<RepliesListBean>(), mTopBean);
         CommonItemDecoration mDecoration = new CommonItemDecoration(2, CommonItemDecoration.UNIT_PX);
         rvContent.addItemDecoration(mDecoration);
         rvContent.setLayoutManager(new LinearLayoutManager(mContext));
@@ -106,7 +105,7 @@ public class RepliesActivity extends BaseActivity<RepliesPresenter> implements R
     @Override
     public void showTopInfo(NodeListBean mTopInfo) {
         mTopBean = mTopInfo;
-        mAdapter.setTopData(mTopInfo);
+      //  mAdapter.setTopData(mTopInfo);
     }
 
     @Override

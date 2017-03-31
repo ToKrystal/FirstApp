@@ -1,11 +1,11 @@
 package com.chao.bookviki.presenter.contract;
 
+import com.chao.bookviki.base.BasePresenter;
 import com.chao.bookviki.base.BaseView;
 import com.chao.bookviki.model.bean.BookDetailBean;
 import com.chao.bookviki.model.bean.BookDetailExtraBean;
+import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
-import com.chao.bookviki.base.BasePresenter;
-import com.chao.bookviki.model.bean.NodeListBean;
 
 import java.util.List;
 
@@ -25,16 +25,16 @@ public interface BookDetailContract {
         //展示评论
         void showReplay(List<RepliesListBean> mList);
 
-        void showTopInfo(NodeListBean mTopInfo);
+        void showTopInfo(BookListBean mTopInfo);
 
     }
 
 
     interface  Presenter extends BasePresenter<View> {
 
-        void getDetailData(int id);
+     //   void getDetailData(int id);
 
-        void getExtraData(int id);
+    //    void getExtraData(int id);
 
         void insertLikeData();
 
@@ -44,7 +44,7 @@ public interface BookDetailContract {
 
         void getContent(String topic_id);
 
-        void getTopInfo(String topic_id);
+       // void getTopInfo(String topic_id);
 
         void replay(String content);
     }

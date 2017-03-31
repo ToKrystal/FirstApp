@@ -1,6 +1,7 @@
 package com.chao.bookviki.ui.gold.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
@@ -16,19 +17,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.chao.bookviki.util.SnackbarUtil;
-import com.chao.bookviki.widget.CommonItemDecoration;
 import com.chao.bookviki.R;
 import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.BookDetailBean;
 import com.chao.bookviki.model.bean.BookDetailExtraBean;
+import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.presenter.BookDetailPresenter;
 import com.chao.bookviki.presenter.contract.BookDetailContract;
 import com.chao.bookviki.ui.vtex.adapter.RepliesAdapter;
 import com.chao.bookviki.util.ShareUtil;
+import com.chao.bookviki.util.SnackbarUtil;
+import com.chao.bookviki.widget.CommonItemDecoration;
 import com.chao.bookviki.widget.ProgressImageView;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
@@ -83,7 +85,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     boolean isTransitionEnd = false;
     boolean isNotTransition = false;
     private RepliesAdapter mAdapter;
-    private NodeListBean mTopBean;
+    private BookListBean mTopBean;
     private String topicId;
     private MaterialDialog.Builder mInputDialog;
 
@@ -101,15 +103,21 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     protected void initEventAndData() {
         setToolBar(viewToolbar,"");
         Intent intent = getIntent();
-        id = intent.getExtras().getInt("id");
-        isNotTransition = intent.getBooleanExtra("isNotTransition",false);
-        mPresenter.queryLikeData(id);
-        mPresenter.getDetailData(id);
-        mPresenter.getExtraData(id);
+       /* mTopBean = getIntent().getParcelableExtra("beanInfo");
+        id = Integer.parseInt(mTopBean.getObjectId());
+        mPresenter.queryLikeData(id);*/
+
+        Bundle bundle = intent.getExtras();
+     //   bundle.setClassLoader(BookListBean.class.getClassLoader());
+        mTopBean = bundle.getParcelable("beanInfo");
+        //isNotTransition = intent.getBooleanExtra("isNotTransition",false);
+
+        //mPresenter.getDetailData(id);
+       // mPresenter.getExtraData(id);
 
        // topicId = getIntent().getExtras().getString(Constants.IT_VTEX_TOPIC_ID);
-        //mTopBean = getIntent().getParcelableExtra(Constants.IT_VTEX_REPLIES_TOP);
-        mTopBean = initBean();
+
+        //mTopBean = initBean();
 
         mAdapter = new RepliesAdapter(mContext, new ArrayList<RepliesListBean>(), mTopBean);
         CommonItemDecoration mDecoration = new CommonItemDecoration(2, CommonItemDecoration.UNIT_PX);
@@ -122,12 +130,12 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         ivProgress.start();
 
        // imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
-        imgUrl = intent.getExtras().getString("url");
+       // imgUrl = intent.getExtras().getString("url");
         //获取该主题的评论
         mPresenter.getContent("4");
-        if (mTopBean == null) {
+        /*if (mTopBean == null) {
             mPresenter.getTopInfo(topicId);
-        }
+        }*/
 
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -305,7 +313,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
     //展示主题信息
     @Override
-    public void showTopInfo(NodeListBean mTopInfo) {
+    public void showTopInfo(BookListBean mTopInfo) {
         mTopBean = mTopInfo;
         mAdapter.setTopData(mTopInfo);
     }

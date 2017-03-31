@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.chao.bookviki.model.bean.RepliesListBean;
-import com.chao.bookviki.presenter.VtexPresenter;
 import com.chao.bookviki.R;
 import com.chao.bookviki.component.ImageLoader;
-import com.chao.bookviki.model.bean.NodeListBean;
+import com.chao.bookviki.model.bean.BookListBean;
+import com.chao.bookviki.model.bean.RepliesListBean;
+import com.chao.bookviki.presenter.VtexPresenter;
 import com.chao.bookviki.util.DateUtil;
 import com.chao.bookviki.widget.SquareImageView;
 
@@ -32,9 +32,9 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context mContext;
     private LayoutInflater inflater;
     private List<RepliesListBean> mList;
-    private NodeListBean mTopBean;
+    private BookListBean mTopBean;
 
-    public RepliesAdapter(Context context, List<RepliesListBean> mList, NodeListBean mTopBean) {
+    public RepliesAdapter(Context context, List<RepliesListBean> mList, BookListBean mTopBean) {
         this.mContext = context;
         this.mList = mList;
         this.mTopBean = mTopBean;
@@ -69,11 +69,11 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mTopBean == null) {//楼主
                 return;
             }
-            ImageLoader.load(mContext, VtexPresenter.parseImg(mTopBean.getMember().getavatar_normal()), topHolder.ivRepliesTopFace);
-            topHolder.tvRepliesTopContent.setHtml(mTopBean.getContent_rendered(), new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
-            topHolder.tvRepliesTopName.setText(mTopBean.getMember().getUsername());
+            ImageLoader.load(mContext, VtexPresenter.parseImg(mTopBean.getUrl()), topHolder.ivRepliesTopFace);
+            topHolder.tvRepliesTopContent.setHtml(mTopBean.getUrl(), new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
+            topHolder.tvRepliesTopName.setText(mTopBean.getUser().getUsername());
             topHolder.tvRepliesTopTitle.setText(mTopBean.getTitle());
-            topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(mTopBean.getCreated()), mTopBean.getReplies()));
+            topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(Long.valueOf(mTopBean.getCreatedAt())), mTopBean.getCommentsCount()));
         } else {//回复
             ViewHolder contentHolder = ((ViewHolder) holder);
             RepliesListBean bean = mList.get(position - 1);
@@ -127,7 +127,7 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void setTopData(NodeListBean mTopBean) {
+    public void setTopData(BookListBean mTopBean) {
         this.mTopBean = mTopBean;
         notifyItemChanged(0);
     }

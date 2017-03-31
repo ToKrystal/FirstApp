@@ -1,18 +1,13 @@
 package com.chao.bookviki.model.http.api;
 
-import com.chao.bookviki.model.bean.BookDetailBean;
-import com.chao.bookviki.model.bean.BookDetailExtraBean;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
-import com.chao.bookviki.model.bean.BookCommentBean;
-import com.chao.bookviki.model.bean.NodeListBean;
 
 import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -30,23 +25,23 @@ public interface BookApis {
     /**
      * 详情
      */
-    @GET("news/{id}")
-    Observable<BookDetailBean> getBookDetailInfo(@Path("id") int id);
+ //   @GET("news/{id}")
+  //  Observable<BookDetailBean> getBookDetailInfo(@Path("id") int id);
 
-    @GET("story-extra/{id}")
-    Observable<BookDetailExtraBean> getBookDetailExtraInfo(@Path("id") int id);
+   // @GET("story-extra/{id}")
+   // Observable<BookDetailExtraBean> getBookDetailExtraInfo(@Path("id") int id);
 
     /**
      * 日报的短评论
      */
-    @GET("story/{id}/short-comments")
-    Observable<BookCommentBean> getBookShortCommentInfo(@Path("id") int id);
+   // @GET("story/{id}/short-comments")
+  //  Observable<BookCommentBean> getBookShortCommentInfo(@Path("id") int id);
 
     /**
      * 日报的长评论
      */
-    @GET("story/{id}/long-comments")
-    Observable<BookCommentBean> getBookLongCommentInfo(@Path("id") int id);
+  //  @GET("story/{id}/long-comments")
+ //   Observable<BookCommentBean> getBookLongCommentInfo(@Path("id") int id);
 
 
 
@@ -54,8 +49,8 @@ public interface BookApis {
      * 获取主题信息
      * @return
      */
-    @GET("/api/topics/show.json")
-    Observable<List<NodeListBean>> getTopicInfo(@Query("id") String id);
+  //  @GET("/api/topics/show.json")
+   // Observable<List<NodeListBean>> getTopicInfo(@Query("id") String id);
 
     /**
      * 获取主题回复

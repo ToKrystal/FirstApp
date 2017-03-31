@@ -2,23 +2,24 @@ package com.chao.bookviki.ui.gold.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
-import com.chao.bookviki.util.LogUtil;
-import com.chao.bookviki.util.SnackbarUtil;
-import com.chao.bookviki.widget.BookItemDecoration;
-import com.chao.bookviki.widget.ProgressImageView;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseFragment;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.presenter.BookPresenter;
 import com.chao.bookviki.presenter.contract.BookContract;
+import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.ui.gold.adapter.BookListAdapter;
+import com.chao.bookviki.util.LogUtil;
+import com.chao.bookviki.util.SnackbarUtil;
+import com.chao.bookviki.widget.BookItemDecoration;
+import com.chao.bookviki.widget.ProgressImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,13 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
                 Intent intent = new Intent();
                 intent.setClass(mContext, BookDetailActivity.class);
                 //详细内容的ID
-                intent.putExtra("id",bean.getObjectId());
-                intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
+                //intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("beanInfo",bean);
+              //  bundle.setClassLoader(BookListBean.class.getClassLoader());
+                intent.putExtras(bundle);
+               // intent.setExtrasClassLoader(BookListBean.class.getClassLoader());
+               // intent.putExtra("beanInfo",bean);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());
             }

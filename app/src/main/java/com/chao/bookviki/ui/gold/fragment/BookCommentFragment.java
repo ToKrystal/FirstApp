@@ -45,7 +45,7 @@ public class BookCommentFragment extends BaseFragment<BookCommentPresenter> impl
     @Override
     protected void initEventAndData() {
         Bundle bundle = getArguments();
-        mPresenter.getCommentData(bundle.getInt("id"),bundle.getInt("kind"));
+       // mPresenter.getCommentData(bundle.getInt("id"),bundle.getInt("kind"));
         ivProgress.start();
         rvCommentList.setVisibility(View.INVISIBLE);
         mList = new ArrayList<>();
@@ -54,14 +54,14 @@ public class BookCommentFragment extends BaseFragment<BookCommentPresenter> impl
         rvCommentList.setAdapter(mAdapter);
     }
 
-    @Override
+   /* @Override
     public void showContent(BookCommentBean bookCommentBean) {
         ivProgress.stop();
         rvCommentList.setVisibility(View.VISIBLE);
         mList.clear();
         mList.addAll(bookCommentBean.getComments());
         mAdapter.notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public void showError(String msg) {

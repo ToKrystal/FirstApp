@@ -3,13 +3,8 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.presenter.contract.BookCommentContract;
-import com.chao.bookviki.util.RxUtil;
-import com.chao.bookviki.widget.CommonSubscriber;
-import com.chao.bookviki.model.bean.BookCommentBean;
 
 import javax.inject.Inject;
-
-import rx.Subscription;
 
 /**
  * Created by codeest on 16/8/18.
@@ -29,7 +24,7 @@ public class BookCommentPresenter extends RxPresenter<BookCommentContract.View> 
     }
 
 
-    @Override
+    /*@Override
     public void getCommentData(int id, int commentKind) {
         if(commentKind == SHORT_COMMENT) {
             Subscription rxSubscription = mRetrofitHelper.fetchBookShortCommentInfo(id)
@@ -52,5 +47,5 @@ public class BookCommentPresenter extends RxPresenter<BookCommentContract.View> 
                     });
             addSubscrebe(rxSubscription);
         }
-    }
+    }*/
 }

@@ -1,17 +1,15 @@
 package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.app.Constants;
-import com.chao.bookviki.model.bean.RepliesListBean;
-import com.chao.bookviki.model.http.RetrofitHelper;
-import com.chao.bookviki.widget.CommonSubscriber;
 import com.chao.bookviki.base.RxPresenter;
-import com.chao.bookviki.model.bean.BookDetailBean;
-import com.chao.bookviki.model.bean.BookDetailExtraBean;
 import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RealmLikeBean;
+import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.db.RealmHelper;
+import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.presenter.contract.BookDetailContract;
 import com.chao.bookviki.util.RxUtil;
+import com.chao.bookviki.widget.CommonSubscriber;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
         this.mRealmHelper = mRealmHelper;
     }
 
-    @Override
+    /*@Override
     public void getDetailData(int id) {
         Subscription rxSubscription =  mRetrofitHelper.fetchBookDetailInfo(id)
                 .compose(RxUtil.<BookDetailBean>rxSchedulerHelper())
@@ -49,9 +47,9 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                     }
                 });
         addSubscrebe(rxSubscription);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void getExtraData(int id) {
         Subscription rxSubscription =  mRetrofitHelper.fetchBookDetailExtraInfo(id)
                 .compose(RxUtil.<BookDetailExtraBean>rxSchedulerHelper())
@@ -62,7 +60,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                     }
                 });
         addSubscrebe(rxSubscription);
-    }
+    }*/
 
     /**
      * 获取评论
@@ -85,7 +83,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
      * 获取主题信息
      * @param topic_id
      */
-    @Override
+   /* @Override
     public void getTopInfo(String topic_id) {
         Subscription rxSubscription = mRetrofitHelper.fetchTopicInfo(topic_id)
                 .compose(RxUtil.<List<NodeListBean>>rxSchedulerHelper())
@@ -109,8 +107,12 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                     }
                 });
         addSubscrebe(rxSubscription);
-    }
+    }*/
 
+    @Override
+    public void replay(String content) {
+
+    }
 
 
     @Override
