@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.component.RxBus;
@@ -105,6 +107,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mToolbar.setTitle(mNavigationView.getMenu().findItem(getCurrentItem(showFragment)).getTitle().toString());
             hideFragment = showFragment;
         }
+        //push
+        PushManager.startWork(mContext, PushConstants.LOGIN_TYPE_API_KEY,"uMiiz4aXzctDkVvRhxusLbdD");
     }
 
     @Override
