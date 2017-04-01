@@ -70,13 +70,13 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
                 Intent intent = new Intent();
                 intent.setClass(mContext, BookDetailActivity.class);
                 //详细内容的ID
-                //intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("beanInfo",bean);
+                intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
+               // Bundle bundle = new Bundle();
+               // bundle.putParcelable("beanInfo",bean);
               //  bundle.setClassLoader(BookListBean.class.getClassLoader());
-                intent.putExtras(bundle);
+                //intent.putExtras(bundle);
                // intent.setExtrasClassLoader(BookListBean.class.getClassLoader());
-               // intent.putExtra("beanInfo",bean);
+                intent.putExtra("beanInfo",bean);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());
             }

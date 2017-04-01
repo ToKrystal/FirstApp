@@ -32,8 +32,8 @@ public class BookListBean implements Parcelable {
         this.collectionCount = in.readInt();
         this.commentsCount = in.readInt();
         this.url = in.readString();
-        this.user = in.readParcelable(getClass().getClassLoader());
-        this.screenshot = in.readParcelable(getClass().getClassLoader());
+        this.user = in.readParcelable(GoldListUserBean.class.getClassLoader());
+        this.screenshot = in.readParcelable(GoldListScreenshotBean.class.getClassLoader());
 
 
     }
@@ -50,6 +50,7 @@ public class BookListBean implements Parcelable {
         dest.writeString(this.title);
         dest.writeInt(this.collectionCount);
         dest.writeInt(this.commentsCount);
+        dest.writeString(this.url);
         dest.writeParcelable(this.user, flags);
         dest.writeParcelable(this.screenshot, flags);
     }

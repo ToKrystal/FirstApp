@@ -1,6 +1,10 @@
 package com.chao.bookviki.di.module;
 
+import android.app.Application;
+
+import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
+import com.chao.bookviki.di.component.AppComponent;
 import com.chao.bookviki.di.qualifier.GankUrl;
 import com.chao.bookviki.di.qualifier.GoldUrl;
 import com.chao.bookviki.di.qualifier.VtexUrl;
@@ -9,17 +13,26 @@ import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.GoldApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.VtexApis;
+import com.chao.bookviki.util.PersistentCookieStore;
 import com.chao.bookviki.util.SystemUtil;
 import com.chao.bookviki.BuildConfig;
 import com.chao.bookviki.di.qualifier.BookUrl;
 import com.chao.bookviki.di.qualifier.MyUrl;
 import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.ZhihuApis;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -41,6 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class HttpModule {
+
 
     @Singleton
     @Provides
@@ -148,6 +162,11 @@ public class HttpModule {
 //        }
 //        设置统一的请求头部参数
 //        builder.addInterceptor(apikey);
+        /*CookieHandler cookieHandler = new CookieManager(new PersistentCookieStore(context),
+                CookiePolicy.ACCEPT_ALL);*/
+
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
         //设置缓存
         builder.addNetworkInterceptor(cacheInterceptor);
         builder.addInterceptor(cacheInterceptor);
@@ -158,6 +177,7 @@ public class HttpModule {
         builder.writeTimeout(20, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
+        builder.cookieJar(cookieJar);
         return builder.build();
     }
 

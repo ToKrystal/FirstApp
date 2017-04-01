@@ -60,8 +60,20 @@ public interface BookApis {
     Observable<List<RepliesListBean>> getRepliesList(@Path("queryId") String queryId);
 
 
+ /**
+  * 获取主题列表
+  * @return
+  */
     @GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")
     Observable<BookHttpResponse<List<BookListBean>>> getBookList(@Path("type") String type, @Path("start")int start, @Path("number")int number);
+
+
+ /**
+  * 获取单个主题
+  * @return
+  */
+ @GET("/BookSpringMVC/bookapi/5/query/{query}")
+ Observable<BookHttpResponse<List<BookListBean>>> getSingleBookList(@Path("query") String query);
 
     /**
      * 热门推荐
