@@ -65,12 +65,12 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
 
         mAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener(){
             @Override
-            public void onItemClick(int position,View shareView) {
+            public void onItemClick(int position,View shareView,BookListBean bean) {
                 Intent intent = new Intent();
                 intent.setClass(mContext, BookDetailActivity.class);
                 //详细内容的ID
-                intent.putExtra("id",9305940);
-                //TODO 传进该主题内容 intent
+                intent.putExtra("id",bean.getObjectId());
+                intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());
             }

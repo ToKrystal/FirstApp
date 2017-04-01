@@ -121,7 +121,8 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
         ivProgress.start();
 
-        imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
+       // imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
+        imgUrl = intent.getExtras().getString("url");
         //获取该主题的评论
         mPresenter.getContent("4");
         if (mTopBean == null) {

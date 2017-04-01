@@ -1,6 +1,8 @@
 package com.chao.bookviki.ui.gold.adapter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.R;
+import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.util.DateUtil;
 import com.chao.bookviki.widget.SquareImageView;
 
@@ -81,6 +84,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (position > 0) {
             bean = mList.get(position -1);
         }
+        final BookListBean finalBean = bean;
        /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,24 +95,24 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });*/
 
         if (holder instanceof ContentViewHolder) {
-            if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
-                ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((ContentViewHolder) holder).ivImg);
+            if (finalBean.getScreenshot() != null && finalBean.getScreenshot().getUrl() != null) {
+                ImageLoader.load(mContext, finalBean.getScreenshot().getUrl(), ((ContentViewHolder) holder).ivImg);
             } else {
                 ((ContentViewHolder) holder).ivImg.setImageResource(R.mipmap.ic_launcher);//设置默认图片
             }
             ((ContentViewHolder) holder).tvTitle.setText(bean.getTitle());
-            ((ContentViewHolder) holder).tvInfo.setText(getItemInfoStr(bean.getCollectionCount(),
-                    bean.getCommentsCount(),
-                    bean.getUser().getUsername(),
-                    DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt()))));
-            holder.itemView.setOnClickListener(new MyOnClickListener(--position));
+            ((ContentViewHolder) holder).tvInfo.setText(getItemInfoStr(finalBean.getCollectionCount(),
+                    finalBean.getCommentsCount(),
+                    finalBean.getUser().getUsername(),
+                    DateUtil.formatDate2String(DateUtil.subStandardTime(finalBean.getCreatedAt()))));
+           // holder.itemView.setOnClickListener(new MyOnClickListener(--position,bean));
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(onItemClickListener != null) {
                         ImageView iv = (ImageView) view.findViewById(R.id.iv_gold_item_img);
-                        onItemClickListener.onItemClick(contentPosition,iv);
+                        onItemClickListener.onItemClick(contentPosition,iv,finalBean);
                     }
                 }
             });
@@ -116,23 +120,23 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
         } else if (holder instanceof HotViewHolder) {
-            if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
-                ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((HotViewHolder) holder).ivImg);
+            if (finalBean.getScreenshot() != null && finalBean.getScreenshot().getUrl() != null) {
+                ImageLoader.load(mContext, finalBean.getScreenshot().getUrl(), ((HotViewHolder) holder).ivImg);
             } else {
                 ((HotViewHolder) holder).ivImg.setImageResource(R.mipmap.ic_launcher);
             }
-            ((HotViewHolder) holder).tvTitle.setText(bean.getTitle());
-            ((HotViewHolder) holder).tvLike.setText(String.valueOf(bean.getCollectionCount()));
-            ((HotViewHolder) holder).tvAuthor.setText(String.valueOf(bean.getUser().getUsername()));
-            ((HotViewHolder) holder).tvTime.setText(DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt())));
-            holder.itemView.setOnClickListener(new MyOnClickListener(--position));
+            ((HotViewHolder) holder).tvTitle.setText(finalBean.getTitle());
+            ((HotViewHolder) holder).tvLike.setText(String.valueOf(finalBean.getCollectionCount()));
+            ((HotViewHolder) holder).tvAuthor.setText(String.valueOf(finalBean.getUser().getUsername()));
+            ((HotViewHolder) holder).tvTime.setText(DateUtil.formatDate2String(DateUtil.subStandardTime(finalBean.getCreatedAt())));
+           // holder.itemView.setOnClickListener(new MyOnClickListener(--position,bean));
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(onItemClickListener != null) {
                         ImageView iv = (ImageView) view.findViewById(R.id.iv_gold_item_img);
-                        onItemClickListener.onItemClick(contentPosition,iv);
+                        onItemClickListener.onItemClick(contentPosition,iv,finalBean);
                     }
                 }
             });
@@ -211,12 +215,14 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private class MyOnClickListener implements View.OnClickListener {
 
         private int position;
+        private BookListBean bean;
 
-        public MyOnClickListener(int position) {
+        public MyOnClickListener(int position, BookListBean bean) {
             this.position = position;
             if (position < 0) {
                 this.position = 0;
             }
+            this.bean= bean;
         }
 
         @Override
@@ -237,6 +243,13 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
            //,options.toBundle()
             mContext.startActivity(intent);*/
+           /* Intent intent = new Intent();
+            intent.setClass(mContext, BookDetailActivity.class);
+            //详细内容的ID
+            intent.putExtra("id",bean.getObjectId());
+            //TODO 传进该主题内容 intent
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
+            mContext.startActivity(intent,options.toBundle());*/
 
         }
     }
@@ -276,7 +289,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int id,View view);
+        void onItemClick(int id,View view,BookListBean bean);
     }
 
 }
