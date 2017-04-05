@@ -1,13 +1,19 @@
 package com.chao.bookviki.model.http.api;
 
 import com.chao.bookviki.model.bean.BookListBean;
+import com.chao.bookviki.model.bean.CreateAccountBean;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 
 import java.util.List;
 
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -19,7 +25,7 @@ import rx.Observable;
 public interface BookApis {
    // String HOST = "http://news-at.zhihu.com/api/4/";
     String CONTENTHOST = "https://www.v2ex.com/";
-    String HOST = "http://169.254.242.129:8080/SpringMVC/bookapi/";
+    String HOST = "http://169.254.55.217:8080/SpringMVC/bookapi/";
     //String HOST = "https://api.leancloud.cn/";
 
     /**
@@ -86,7 +92,18 @@ public interface BookApis {
                                                                 @Query("include") String include,
                                                                 @Query("limit") int limit);
 
- //@POST("ajax.mobileSword")
+
+
+    //表单
+    @FormUrlEncoded
+    @POST("/BookSpringMVC/bookapi/6")
+    Observable<BookHttpResponse<LoginBean>> postLogin(@Field("email")String email, @Field("password")String pass);
+
+   // @FormUrlEncoded
+    @POST("/BookSpringMVC/bookapi/7")
+    Observable<BookHttpResponse<LoginBean>> postCreateAccount(@Body CreateAccountBean bean);
+
+    //@POST("ajax.mobileSword")
  //Observable<String> login(@QueryMap HashMap<String,String> paramsMap);
 
 }

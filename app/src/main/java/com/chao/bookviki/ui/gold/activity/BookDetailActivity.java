@@ -103,11 +103,14 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     protected void initEventAndData() {
         setToolBar(viewToolbar,"");
         Intent intent = getIntent();
-        mTopBean = intent.getParcelableExtra("beanInfo");
+       /* mTopBean = getIntent().getParcelableExtra("beanInfo");
         id = Integer.parseInt(mTopBean.getObjectId());
-        mPresenter.queryLikeData(id);
+        mPresenter.queryLikeData(id);*/
 
-        isNotTransition = intent.getBooleanExtra("isNotTransition",false);
+        Bundle bundle = intent.getExtras();
+     //   bundle.setClassLoader(BookListBean.class.getClassLoader());
+        mTopBean = bundle.getParcelable("beanInfo");
+        //isNotTransition = intent.getBooleanExtra("isNotTransition",false);
 
         //mPresenter.getDetailData(id);
        // mPresenter.getExtraData(id);
@@ -127,11 +130,11 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         ivProgress.start();
 
        // imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
-        imgUrl = intent.getExtras().getString("url");
+       // imgUrl = intent.getExtras().getString("url");
         //获取该主题的评论
-        mPresenter.getContent(String.valueOf(id));
-       /* if (mTopBean == null) {
-            mPresenter.tTopInfo(topicId);
+        mPresenter.getContent(mTopBean.getObjectId());
+        /*if (mTopBean == null) {
+            mPresenter.getTopInfo(topicId);
         }*/
 
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {

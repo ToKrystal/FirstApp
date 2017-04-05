@@ -38,6 +38,8 @@ public class Constants {
 
     public static final int TYPE_USER_INFO = 114;
 
+    public static final int TYPE_LOGIN = 115;
+
     //================= KEY ====================
 
 //    public static final String KEY_API = "f95283476506aa756559dd28a56f0c0b"; //需要APIKEY请去 http://apistore.baidu.com/ 申请,复用会减少访问可用次数
@@ -74,6 +76,8 @@ public class Constants {
     public static final String SP_VERSION_POINT = "version_point";
 
     public static final String SP_MANAGER_POINT = "manager_point";
+
+    public static final String BAI_TUI_BIND = "baidutuisongbind_state";
 
     //================= INTENT ====================
     public static final String IT_GANK_TYPE = "type";

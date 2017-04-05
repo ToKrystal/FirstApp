@@ -16,7 +16,6 @@ import com.chao.bookviki.presenter.BookPresenter;
 import com.chao.bookviki.presenter.contract.BookContract;
 import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.ui.gold.adapter.BookListAdapter;
-import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.BookItemDecoration;
 import com.chao.bookviki.widget.ProgressImageView;
@@ -70,13 +69,13 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
                 Intent intent = new Intent();
                 intent.setClass(mContext, BookDetailActivity.class);
                 //详细内容的ID
-                intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
-               // Bundle bundle = new Bundle();
-               // bundle.putParcelable("beanInfo",bean);
+                //intent.putExtra("url","https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg");
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("beanInfo",bean);
               //  bundle.setClassLoader(BookListBean.class.getClassLoader());
-                //intent.putExtras(bundle);
+                intent.putExtras(bundle);
                // intent.setExtrasClassLoader(BookListBean.class.getClassLoader());
-                intent.putExtra("beanInfo",bean);
+               // intent.putExtra("beanInfo",bean);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());
             }
@@ -128,7 +127,7 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
         } else {
             ivProgress.stop();
         }
-        StringBuilder stringBuilder = new StringBuilder();
+        /*StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
         for(BookListBean bean : goldListBean){
             String strId = String.valueOf(bookId);
@@ -146,7 +145,7 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
             bookId++;
 
         }
-        LogUtil.i(stringBuilder.toString());
+        LogUtil.i(stringBuilder.toString());*/
 
         mAdapter.updateData(goldListBean);
         mAdapter.notifyDataSetChanged();
@@ -154,7 +153,7 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
 
     @Override
     public void showMoreContent(List<BookListBean> goldMoreListBean, int start, int end) {
-        StringBuilder stringBuilder = new StringBuilder();
+        /*StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
         for(BookListBean bean : goldMoreListBean){
             String strId = String.valueOf(bookId);
@@ -172,7 +171,7 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
             bookId++;
 
         }
-        LogUtil.i(stringBuilder.toString());
+        LogUtil.i(stringBuilder.toString());*/
 
 
 

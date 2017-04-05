@@ -9,11 +9,14 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.chao.bookviki.component.InitializeService;
+import com.chao.bookviki.di.component.AppComponent;
 import com.chao.bookviki.di.component.DaggerAppComponent;
 import com.chao.bookviki.di.module.AppModule;
 import com.chao.bookviki.di.module.HttpModule;
-import com.chao.bookviki.di.component.AppComponent;
+import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,8 +52,18 @@ public class App extends Application{
         getScreenSize();
         //在子线程中初始化
         InitializeService.start(this);
+        autoBindBaiduYunTuiSong();
     }
 
+
+    protected  void autoBindBaiduYunTuiSong(){
+        if (!SharedPreferenceUtil.getBaiYunBindState())
+        {
+            PushManager.startWork(instance, PushConstants.LOGIN_TYPE_API_KEY,"uMiiz4aXzctDkVvRhxusLbdD");
+            SharedPreferenceUtil.setBaiYunBindState(true);
+        }
+
+    };
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);//多dex加载
@@ -70,6 +83,11 @@ public class App extends Application{
     }
 
     public void exitApp() {
+        if (SharedPreferenceUtil.getBaiYunBindState())
+        {
+            PushManager.stopWork(instance);
+            SharedPreferenceUtil.setBaiYunBindState(false);
+        }
         if (allActivities != null) {
             synchronized (allActivities) {
                 for (Activity act : allActivities) {

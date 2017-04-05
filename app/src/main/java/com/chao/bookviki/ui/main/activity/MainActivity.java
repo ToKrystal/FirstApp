@@ -13,32 +13,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.chao.bookviki.R;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
+import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.component.RxBus;
+import com.chao.bookviki.component.UpdateService;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.event.SearchEvent;
+import com.chao.bookviki.presenter.MainPresenter;
 import com.chao.bookviki.presenter.contract.MainContract;
+import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
 import com.chao.bookviki.ui.main.fragment.AboutFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
+import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.userinfo.fragment.UserInfoFragment;
 import com.chao.bookviki.ui.vtex.fragment.VtexMainFragment;
 import com.chao.bookviki.ui.zhihu.fragment.ZhihuMainFragment;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.util.SystemUtil;
-import com.chao.bookviki.R;
-import com.chao.bookviki.base.BaseActivity;
-import com.chao.bookviki.component.UpdateService;
-import com.chao.bookviki.presenter.MainPresenter;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -56,6 +58,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.view_search)
     MaterialSearchView mSearchView;
     View btnLogout;
+    View img_avatar;
+    TextView tv_login_name;
 
 
 
@@ -125,6 +129,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
         loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         btnLogout =  mNavigationView.getHeaderView(0).findViewById(R.id.btn_logout);
+        img_avatar = mNavigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        tv_login_name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_login_name);
+        img_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onImgAvatarClick();
+            }
+        });
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +225,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 e.printStackTrace();
             }
         }
+        showLoginOk();
     }
 
     @Override
@@ -297,6 +310,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_about;
             case Constants.TYPE_USER_INFO:
                 return R.id.drawer_userInfo;
+
         }
         return R.id.drawer_zhihu;
     }
@@ -333,11 +347,38 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     }
 
+    /**
+     * 头像点击
+     */
+    void onImgAvatarClick() {
+        //保存正在展示的fragment标志
+       /* showFragment = Constants.TYPE_LOGIN;
+        mSearchMenuItem.setVisible(false);
+        SharedPreferenceUtil.setCurrentItem(Constants.TYPE_LOGIN);
+        mDrawerLayout.closeDrawers();
+        showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
+        hideFragment = showFragment;*/
+        Intent intent = new Intent(this, LoginActivity.class);
+        //intent.putExtra(Constants.IT_GOLD_MANAGER, mBean);
+        mContext.startActivity(intent);
+    }
+
 
 
     @Override
     public void startDownloadService() {
         startService(new Intent(mContext, UpdateService.class));
+    }
+
+    public void showLoginOk() {
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra("loginOk",false)){
+            SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
+            Bundle bundle = intent.getExtras();
+            LoginBean bean = bundle.getParcelable("beanInfo");
+            tv_login_name.setText(bean.name);
+
+        }
     }
 
     public void checkPermissions() {

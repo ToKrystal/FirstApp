@@ -16,6 +16,7 @@ public interface MainContract {
 
         void startDownloadService();
 
+
     }
 
     interface  Presenter extends BasePresenter<View> {

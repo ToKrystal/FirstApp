@@ -109,7 +109,7 @@ public class RxUtil {
                 return httpResponseObservable.flatMap(new Func1<BookHttpResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(BookHttpResponse<T> tBookHttpResponse) {
-                        if(tBookHttpResponse.getResults() != null) {
+                        if(tBookHttpResponse.getResults() != null && tBookHttpResponse.getStatus() == 200) {
                             return createData(tBookHttpResponse.getResults());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
