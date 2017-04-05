@@ -6,6 +6,8 @@ package com.chao.bookviki.model.http.response;
 
 public class BookHttpResponse<T> {
     private T results;
+    private int status;
+    private String msg;
 
     public T getResults() {
         return results;
@@ -13,5 +15,21 @@ public class BookHttpResponse<T> {
 
     public void setResults(T results) {
         this.results = results;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

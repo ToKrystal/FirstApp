@@ -19,6 +19,7 @@ public class SharedPreferenceUtil {
     private static final boolean DEFAULT_LIKE_POINT = false;
     private static final boolean DEFAULT_VERSION_POINT = false;
     private static final boolean DEFAULT_MANAGER_POINT = false;
+    private static final boolean DEFAULT_BIND_YUN = false;
 
     private static final int DEFAULT_CURRENT_ITEM = Constants.TYPE_GOLD;
 
@@ -34,6 +35,10 @@ public class SharedPreferenceUtil {
 
     public static void setNightModeState(boolean state) {
         getAppSp().edit().putBoolean(Constants.SP_NIGHT_MODE, state).apply();
+    }
+
+    public static void setBaiYunBindState(boolean state) {
+        getAppSp().edit().putBoolean(Constants.BAI_TUI_BIND, state).apply();
     }
 
     public static boolean getNoImageState() {
@@ -66,6 +71,9 @@ public class SharedPreferenceUtil {
 
     public static void setLikePoint(boolean isFirst) {
         getAppSp().edit().putBoolean(Constants.SP_LIKE_POINT, isFirst).apply();
+    }
+    public static boolean getBaiYunBindState() {
+        return getAppSp().getBoolean(Constants.BAI_TUI_BIND, DEFAULT_BIND_YUN);
     }
 
     public static boolean getVersionPoint() {

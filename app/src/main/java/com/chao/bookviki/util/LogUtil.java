@@ -9,7 +9,7 @@ import com.chao.bookviki.BuildConfig;
 public class LogUtil {
 
     public static boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "com.codeest.bookviki";
+    private static final String TAG = "com.chao.bookviki";
 
     public static void e(String tag,Object o) {
         if(isDebug) {

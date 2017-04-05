@@ -8,6 +8,8 @@ import com.chao.bookviki.ui.gold.activity.BookCommentActivity;
 import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.ui.main.activity.MainActivity;
 import com.chao.bookviki.ui.main.activity.WelcomeActivity;
+import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
+import com.chao.bookviki.ui.userinfo.activity.CreateAccountActivity;
 import com.chao.bookviki.ui.userinfo.activity.UserEditActivity;
 import com.chao.bookviki.ui.vtex.activity.NodeListActivity;
 import com.chao.bookviki.ui.vtex.activity.RepliesActivity;
@@ -46,4 +48,8 @@ public interface ActivityComponent {
     void inject(BookCommentActivity bookCommentActivity);
 
     void inject(UserEditActivity userEditActivity);
+
+    void inject(LoginActivity loginActivity);
+
+    void inject(CreateAccountActivity createAccountActivity);
 }

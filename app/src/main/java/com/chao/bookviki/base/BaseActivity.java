@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.di.component.ActivityComponent;
-import com.chao.bookviki.di.module.ActivityModule;
 import com.chao.bookviki.di.component.DaggerActivityComponent;
+import com.chao.bookviki.di.module.ActivityModule;
 
 import javax.inject.Inject;
 
@@ -39,8 +39,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         if (mPresenter != null)
             mPresenter.attachView(this);
         App.getInstance().addActivity(this);
+
         initEventAndData();
     }
+
+
 
     @Override
     protected void onResume() {
@@ -78,6 +81,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
             mPresenter.detachView();
         mUnBinder.unbind();
         App.getInstance().removeActivity(this);
+
     }
 
     @Override

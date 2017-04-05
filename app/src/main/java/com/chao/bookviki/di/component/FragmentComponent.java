@@ -60,4 +60,5 @@ public interface FragmentComponent {
     void inject(BookMainFragment bookMainFragment);
 
 
+
 }

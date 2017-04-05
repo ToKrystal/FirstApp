@@ -73,7 +73,7 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             topHolder.tvRepliesTopContent.setHtml(mTopBean.getUrl(), new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
             topHolder.tvRepliesTopName.setText(mTopBean.getUser().getUsername());
             topHolder.tvRepliesTopTitle.setText(mTopBean.getTitle());
-            topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(Long.valueOf(mTopBean.getCreatedAt())), mTopBean.getCommentsCount()));
+            topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(Long.valueOf("1423253523525")), mTopBean.getCommentsCount()));
         } else {//回复
             ViewHolder contentHolder = ((ViewHolder) holder);
             RepliesListBean bean = mList.get(position - 1);

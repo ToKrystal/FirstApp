@@ -2,12 +2,14 @@ package com.chao.bookviki.model.http;
 
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.CommentBean;
+import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.DailyBeforeListBean;
 import com.chao.bookviki.model.bean.DailyListBean;
 import com.chao.bookviki.model.bean.DetailExtraBean;
 import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.GankSearchItemBean;
 import com.chao.bookviki.model.bean.HotListBean;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.NodeBean;
 import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
@@ -211,5 +213,12 @@ public class RetrofitHelper {
     }*/
     public Observable<List<RepliesListBean>> fetchRepliesList(String id){
         return mBookApiService.getRepliesList(id);
+    }
+    public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass){
+        return mBookApiService.postLogin(email,pass);
+    }
+
+    public Observable<BookHttpResponse<LoginBean>> postCreateAccount(CreateAccountBean bean) {
+        return  mBookApiService.postCreateAccount(bean);
     }
 }
