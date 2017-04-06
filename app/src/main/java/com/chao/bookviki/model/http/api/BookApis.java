@@ -112,7 +112,7 @@ public interface BookApis {
      */
     @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/8")
-    Observable<BookHttpResponse<String>> postReplay(@Field("email")String id, @Field("content")String content);
+    Observable<BookHttpResponse<String>> postReplay(@Field("objectId")String id, @Field("content")String content);
 
     //@POST("ajax.mobileSword")
  //Observable<String> login(@QueryMap HashMap<String,String> paramsMap);

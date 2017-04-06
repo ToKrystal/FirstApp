@@ -27,6 +27,7 @@ import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.presenter.BookDetailPresenter;
 import com.chao.bookviki.presenter.contract.BookDetailContract;
+import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.vtex.adapter.RepliesAdapter;
 import com.chao.bookviki.util.ShareUtil;
 import com.chao.bookviki.util.SnackbarUtil;
@@ -323,7 +324,14 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     //TODO 换种方式 adapter replayBean
     @Override
     public void showReplaySucc() {
-        mPresenter.getContent(mTopBean.getObjectId());
+        SnackbarUtil.showShort(getWindow().getDecorView(),"发表评论成功");
+        //mPresenter.getContent(mTopBean.getObjectId());
+    }
+
+    @Override
+    public void jump2LoginPage() {
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        mContext.startActivity(intent);
     }
 
 

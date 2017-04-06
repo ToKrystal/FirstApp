@@ -29,6 +29,10 @@ public interface BookDetailContract {
 
         void showReplaySucc();
 
+        void jump2LoginPage();
+
+
+
     }
 
 
@@ -49,6 +53,7 @@ public interface BookDetailContract {
        // void getTopInfo(String topic_id);
 
         void replay(String id,String content);
+
     }
 
 }

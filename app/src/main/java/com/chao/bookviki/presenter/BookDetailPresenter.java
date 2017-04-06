@@ -17,7 +17,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Subscription;
-import rx.functions.Func1;
 
 /**
  * Created by Jessica on 2017/3/21.
@@ -29,6 +28,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     private RealmHelper mRealmHelper;
    // private BookDetailBean mData;
     private NodeListBean mData;
+
 
     @Inject
     public BookDetailPresenter(RetrofitHelper mRetrofitHelper,RealmHelper mRealmHelper) {
@@ -120,16 +120,19 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                     public void onNext(String str) {
                         //mData = bean;
                     //    mView.jump2CreateSucc(bean);
+                        mView.showReplaySucc();
+
 
                     }
                     @Override
                     public void onError(Throwable e) {
-                        mView.showError("");
+                        mView.jump2LoginPage();
                     }
                 });
         addSubscrebe(rxSubscription);
 
     }
+
 
 
     @Override
