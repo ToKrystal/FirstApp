@@ -103,6 +103,17 @@ public interface BookApis {
     @POST("/BookSpringMVC/bookapi/7")
     Observable<BookHttpResponse<LoginBean>> postCreateAccount(@Body CreateAccountBean bean);
 
+    /**
+     * 评论
+     * TODO 服务器判断sessionId 决定能否评论
+     * @param id 主题ID
+     * @param content 内容
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/BookSpringMVC/bookapi/8")
+    Observable<BookHttpResponse<String>> postReplay(@Field("email")String id, @Field("content")String content);
+
     //@POST("ajax.mobileSword")
  //Observable<String> login(@QueryMap HashMap<String,String> paramsMap);
 

@@ -214,6 +214,9 @@ public class RetrofitHelper {
     public Observable<List<RepliesListBean>> fetchRepliesList(String id){
         return mBookApiService.getRepliesList(id);
     }
+    public Observable<BookHttpResponse<String>> postReplay(String id, String content){
+        return mBookApiService.postReplay(id,content);
+    }
     public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass){
         return mBookApiService.postLogin(email,pass);
     }

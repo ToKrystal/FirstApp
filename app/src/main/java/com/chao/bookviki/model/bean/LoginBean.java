@@ -3,14 +3,20 @@ package com.chao.bookviki.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Jessica on 2017/4/4.
  */
 
-public class LoginBean  implements Parcelable {
+public class LoginBean  extends RealmObject implements Parcelable {
+    @PrimaryKey
     public String name;
     public String icon_url;
 
+
+    public LoginBean(){}
 
     @Override
     public int describeContents() {

@@ -7,6 +7,7 @@ import com.chao.bookviki.model.bean.RealmLikeBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.RetrofitHelper;
+import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.presenter.contract.BookDetailContract;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
@@ -81,7 +82,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
 
     /**
      * 获取主题信息
-     * @param topic_id
+     *
      */
    /* @Override
     public void getTopInfo(String topic_id) {
@@ -110,7 +111,23 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     }*/
 
     @Override
-    public void replay(String content) {
+    public void replay(String id,String content) {
+        Subscription rxSubscription = mRetrofitHelper.postReplay(id,content)
+                .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
+                .compose(RxUtil.<String>handleBookResult())
+                .subscribe(new CommonSubscriber<String>(mView) {
+                    @Override
+                    public void onNext(String str) {
+                        //mData = bean;
+                    //    mView.jump2CreateSucc(bean);
+
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showError("");
+                    }
+                });
+        addSubscrebe(rxSubscription);
 
     }
 

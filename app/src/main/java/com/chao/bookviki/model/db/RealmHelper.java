@@ -3,6 +3,7 @@ package com.chao.bookviki.model.db;
 import android.content.Context;
 
 import com.chao.bookviki.model.bean.BookManagerBean;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.ReadStateBean;
 import com.chao.bookviki.model.bean.RealmLikeBean;
 
@@ -67,6 +68,42 @@ public class RealmHelper {
         mRealm.commitTransaction();
     }
 
+    /**
+     * 增加登录信息
+     * @param bean
+     */
+    public void insertLoginBean(LoginBean bean){
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(bean);
+        mRealm.commitTransaction();
+    }
+
+    /**
+     * 删除登录信息
+     * @param name
+     */
+    public void deleteLoginBean(String name){
+        LoginBean data = mRealm.where(LoginBean.class).equalTo("name",name).findFirst();
+        mRealm.beginTransaction();
+        if (data != null){
+            data.deleteFromRealm();
+        }
+        mRealm.commitTransaction();
+    }
+
+    /**
+     * 查询登录信息
+     * @param name
+     */
+    public boolean queryLoginName(String name){
+        RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
+        for(LoginBean item : results) {
+            if(item.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * 删除 收藏记录
      * @param id

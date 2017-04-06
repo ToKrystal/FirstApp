@@ -3,6 +3,7 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.presenter.contract.CreateAccountContract;
@@ -19,10 +20,14 @@ import rx.Subscription;
 
 public class CreateAccountPresenter extends RxPresenter<CreateAccountContract.View> implements CreateAccountContract.Presenter {
     private RetrofitHelper mRetrofitHelper;
+    private LoginBean mData;
+    private RealmHelper mRealmHelper;
     @Inject
-    public CreateAccountPresenter(RetrofitHelper mRetrofitHelper) {
+    public CreateAccountPresenter(RetrofitHelper mRetrofitHelper,RealmHelper realmHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        this.mRealmHelper = realmHelper;
     }
+
 
 
     @Override
@@ -34,7 +39,9 @@ public class CreateAccountPresenter extends RxPresenter<CreateAccountContract.Vi
                 .subscribe(new CommonSubscriber<LoginBean>(mView) {
                     @Override
                     public void onNext(LoginBean bean) {
+                        mData = bean;
                         mView.jump2CreateSucc(bean);
+
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -43,5 +50,14 @@ public class CreateAccountPresenter extends RxPresenter<CreateAccountContract.Vi
                 });
         addSubscrebe(rxSubscription);
 
+    }
+
+    @Override
+    public void insertLoginBean() {
+        if (mData != null){
+            mRealmHelper.insertLoginBean(mData);
+        }else {
+            mView.showError("操作失败");
+        }
     }
 }

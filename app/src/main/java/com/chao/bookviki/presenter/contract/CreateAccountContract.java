@@ -20,6 +20,7 @@ public interface CreateAccountContract {
     interface Presenter extends BasePresenter<View> {
 
         void postCreateAccount(CreateAccountBean bean);
+        void insertLoginBean();
 
     }
 }

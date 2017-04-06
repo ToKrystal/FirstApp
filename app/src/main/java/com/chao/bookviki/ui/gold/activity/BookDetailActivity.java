@@ -86,7 +86,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     boolean isNotTransition = false;
     private RepliesAdapter mAdapter;
     private BookListBean mTopBean;
-    private String topicId;
+ //   private String topicId;
     private MaterialDialog.Builder mInputDialog;
 
     @Override
@@ -110,6 +110,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         Bundle bundle = intent.getExtras();
      //   bundle.setClassLoader(BookListBean.class.getClassLoader());
         mTopBean = bundle.getParcelable("beanInfo");
+       // topicId = mTopBean.getObjectId();
         //isNotTransition = intent.getBooleanExtra("isNotTransition",false);
 
         //mPresenter.getDetailData(id);
@@ -278,6 +279,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         @Override
         public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
             if (!TextUtils.isEmpty(input)) {
+                mPresenter.replay(mTopBean.getObjectId(),input.toString());
                 //  mUserEntity.setCity(input.toString());
                 //  mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
@@ -318,7 +320,11 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         mAdapter.setTopData(mTopInfo);
     }
 
-
+    //TODO 换种方式 adapter replayBean
+    @Override
+    public void showReplaySucc() {
+        mPresenter.getContent(mTopBean.getObjectId());
+    }
 
 
     @Override

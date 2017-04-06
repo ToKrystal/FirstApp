@@ -27,6 +27,8 @@ public interface BookDetailContract {
 
         void showTopInfo(BookListBean mTopInfo);
 
+        void showReplaySucc();
+
     }
 
 
@@ -46,7 +48,7 @@ public interface BookDetailContract {
 
        // void getTopInfo(String topic_id);
 
-        void replay(String content);
+        void replay(String id,String content);
     }
 
 }

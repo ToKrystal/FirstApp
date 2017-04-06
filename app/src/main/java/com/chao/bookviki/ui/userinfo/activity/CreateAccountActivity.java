@@ -52,6 +52,7 @@ public class CreateAccountActivity extends BaseActivity<CreateAccountPresenter> 
         if (progressDialog.isShowing()){
             progressDialog.dismiss();
         }
+        mPresenter.insertLoginBean();
         Intent intent = new Intent();
         intent.setClass(this,MainActivity.class);
         intent.putExtra("loginOk",true);

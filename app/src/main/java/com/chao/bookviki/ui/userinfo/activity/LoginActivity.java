@@ -53,6 +53,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         if (progressDialog.isShowing()){
             progressDialog.dismiss();
         }
+        mPresenter.insertLoginData();
         Intent intent = new Intent();
         intent.setClass(this,MainActivity.class);
         intent.putExtra("loginOk",true);

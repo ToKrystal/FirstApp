@@ -20,6 +20,7 @@ public interface LoginContract {
 
         //   void getCommentData(int id,int commentKind);
         void postLogin(String name,String pass);
+        void insertLoginData();
 
     }
 }

@@ -2,6 +2,7 @@ package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.presenter.contract.LoginContract;
@@ -18,9 +19,12 @@ import rx.Subscription;
 
 public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter{
     private RetrofitHelper mRetrofitHelper;
+    private RealmHelper mRealmHelper;
+    private LoginBean mData;
     @Inject
-    public LoginPresenter(RetrofitHelper mRetrofitHelper) {
+    public LoginPresenter(RetrofitHelper mRetrofitHelper,RealmHelper realmHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        this.mRealmHelper = realmHelper;
     }
 
 
@@ -33,6 +37,7 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
                 .subscribe(new CommonSubscriber<LoginBean>(mView) {
                     @Override
                     public void onNext(LoginBean loginBeen) {
+                        mData = loginBeen;
                         mView.jump2LoginSucc(loginBeen);
                     }
 
@@ -42,6 +47,18 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
                     }
                 });
         addSubscrebe(rxSubscription);
+
+    }
+
+    @Override
+    public void insertLoginData() {
+        if (mData != null){
+            mRealmHelper.insertLoginBean(mData);
+
+        }
+        else {
+            mView.showError("操作失败");
+        }
 
     }
 }
