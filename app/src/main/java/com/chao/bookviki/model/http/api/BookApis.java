@@ -2,6 +2,7 @@ package com.chao.bookviki.model.http.api;
 
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.CreateAccountBean;
+import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
@@ -113,6 +114,17 @@ public interface BookApis {
     @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/8")
     Observable<BookHttpResponse<String>> postReplay(@Field("objectId")String id, @Field("content")String content);
+
+
+    /**
+     * 关注
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/BookSpringMVC/bookapi/9")
+    Observable<BookHttpResponse<FollowBean>> postFollow(@Field("typeId")String typeId);
+
+
 
     //@POST("ajax.mobileSword")
  //Observable<String> login(@QueryMap HashMap<String,String> paramsMap);

@@ -6,6 +6,7 @@ import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.DailyBeforeListBean;
 import com.chao.bookviki.model.bean.DailyListBean;
 import com.chao.bookviki.model.bean.DetailExtraBean;
+import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.GankSearchItemBean;
 import com.chao.bookviki.model.bean.HotListBean;
@@ -219,6 +220,9 @@ public class RetrofitHelper {
     }
     public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass,String channelId){
         return mBookApiService.postLogin(email,pass,channelId);
+    }
+    public Observable<BookHttpResponse<FollowBean>> postFollow(String typeId){
+        return mBookApiService.postFollow(typeId);
     }
 
     public Observable<BookHttpResponse<LoginBean>> postCreateAccount(CreateAccountBean bean) {

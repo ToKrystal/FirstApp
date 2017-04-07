@@ -194,9 +194,9 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         mInputDialog.widgetColorRes(R.color.colorPrimary);
     }
 
-    private NodeListBean initBean() {
-        NodeListBean bean = new NodeListBean();
-        bean.setId("349335");
+    private BookListBean initBean() {
+        BookListBean bean = new BookListBean();
+       /* bean.setId("349335");
         bean.setTitle("各位自建博客使用多说的博主注意了");
         bean.setContent_rendered("<p>今日收到邮件，多说由于公司业务调整，将在今年 6 月 1 日关闭了。大家快导出评论数据，做好迁移工作吧。</p>\\n");
         bean.setReplies(51);
@@ -208,7 +208,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         s.setTitle("程序员");
         bean.setNode(s);
         bean.setLast_modified(1490148627);
-        bean.setCreated(1490148557);
+        bean.setCreated(1490148557);*/
         return  bean;
     }
 

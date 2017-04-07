@@ -1,6 +1,7 @@
 package com.chao.bookviki.ui.main.activity;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.presenter.MainPresenter;
 import com.chao.bookviki.presenter.contract.MainContract;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
+import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
 import com.chao.bookviki.ui.main.fragment.AboutFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
@@ -393,6 +395,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void jump2PushSucc(MyPushBean bean) {
+        Intent notifyIntent =
+                new Intent(this, BookDetailActivity.class);
+        PendingIntent notifyPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        notifyIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+
+
         //获取NotificationManager实例
         NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //实例化NotificationCompat.Builde并设置相关属性
@@ -402,7 +416,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 //设置通知标题
                 .setContentTitle("最简单的Notification")
                 //设置通知内容
-                .setContentText(bean.ojectId);
+                .setContentText(bean.ojectId).setContentIntent(notifyPendingIntent);
         //设置通知时间，默认为系统发出通知的时间，通常不用设置
         //.setWhen(System.currentTimeMillis());
         //通过builder.build()方法生成Notification对象,并发送通知,id=1

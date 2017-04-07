@@ -101,19 +101,21 @@ public class PushTestReceiver extends PushMessageReceiver {
 
         // 自定义内容获取方式，mykey和myvalue对应透传消息推送时自定义内容中设置的键和值
         //{"objectId":2222}
-        if (!TextUtils.isEmpty(customContentString)) {
-            JSONObject customJson = null;
-            try {
-                customJson = new JSONObject(customContentString);
-                String objectId = null;
-                if (!customJson.isNull("objectId")) {
-                    objectId = customJson.getString("objectId");
-                    RxBus.getDefault().post(new MyPushBean(objectId));
-                }
+        JSONObject customJson = null;
+        try {
+            customJson = new JSONObject(message);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+        if(!customJson.isNull("objectId")){
+            String  objectId = null;
+            objectId = customJson.getString("objectId");
+            RxBus.getDefault().post(new MyPushBean(objectId));
+        }
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
-            }
+
         }
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
