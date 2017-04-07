@@ -24,5 +24,7 @@ public interface MainContract {
         void checkVersion(String currentVersion);
 
         void checkPermissions(RxPermissions rxPermissions);
+
+        void doLogout();
     }
 }

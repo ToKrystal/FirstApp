@@ -39,6 +39,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -55,6 +56,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class HttpModule {
 
+   // public static ClearableCookieJar mCookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+
+    @Singleton
+    @Provides
+    ClearableCookieJar provideClearableCookieJar() {
+        return new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+    }
 
     @Singleton
     @Provides
@@ -114,7 +122,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    OkHttpClient provideClient(OkHttpClient.Builder builder) {
+    OkHttpClient provideClient(OkHttpClient.Builder builder,ClearableCookieJar mcookieJar) {
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
@@ -165,8 +173,8 @@ public class HttpModule {
         /*CookieHandler cookieHandler = new CookieManager(new PersistentCookieStore(context),
                 CookiePolicy.ACCEPT_ALL);*/
 
-        ClearableCookieJar cookieJar =
-                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+        //ClearableCookieJar cookieJar = mcookieJar;
+                //new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
         //设置缓存
         builder.addNetworkInterceptor(cacheInterceptor);
         builder.addInterceptor(cacheInterceptor);
@@ -177,7 +185,7 @@ public class HttpModule {
         builder.writeTimeout(20, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
-        builder.cookieJar(cookieJar);
+        builder.cookieJar(mcookieJar);
         return builder.build();
     }
 

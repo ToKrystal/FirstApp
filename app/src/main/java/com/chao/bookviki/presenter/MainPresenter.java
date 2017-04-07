@@ -2,8 +2,10 @@ package com.chao.bookviki.presenter;
 
 import android.Manifest;
 
+import com.chao.bookviki.app.App;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.event.NightModeEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.MyHttpResponse;
@@ -11,6 +13,7 @@ import com.chao.bookviki.presenter.contract.MainContract;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 import com.chao.bookviki.model.bean.VersionBean;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import javax.inject.Inject;
@@ -31,6 +34,20 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     public MainPresenter(RetrofitHelper mRetrofitHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
         registerEvent();
+        registerLoginEvent();
+    }
+
+    private void registerLoginEvent() {
+        Subscription rxSubscription = RxBus.getDefault().toObservable(LoginBean.class)
+                .compose(RxUtil.<LoginBean>rxSchedulerHelper())
+                .subscribe(new CommonSubscriber<LoginBean>(mView, "登录显示异常ヽ(≧Д≦)ノ") {
+                    @Override
+                    public void onNext(LoginBean bean) {
+                       // mView.useNightMode(aBoolean);
+                        mView.showLogInOutInfo(bean);
+                    }
+                });
+        addSubscrebe(rxSubscription);
     }
 
     void registerEvent() {
@@ -99,5 +116,11 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                     }
                 });
         addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void doLogout() {
+        ClearableCookieJar cookieJar = App.getAppComponent().clearableCookieJar();
+        cookieJar.clear();
     }
 }

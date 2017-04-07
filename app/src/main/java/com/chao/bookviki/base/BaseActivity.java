@@ -11,6 +11,7 @@ import com.chao.bookviki.app.App;
 import com.chao.bookviki.di.component.ActivityComponent;
 import com.chao.bookviki.di.component.DaggerActivityComponent;
 import com.chao.bookviki.di.module.ActivityModule;
+import com.chao.bookviki.model.bean.LoginBean;
 
 import javax.inject.Inject;
 
@@ -94,6 +95,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
                     AppCompatDelegate.MODE_NIGHT_NO);
         }
         recreate();
+    }
+
+    @Override
+    public void showLogInOutInfo(LoginBean bean) {
+
     }
 
     protected abstract void initInject();

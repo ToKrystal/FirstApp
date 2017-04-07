@@ -12,6 +12,7 @@ import com.chao.bookviki.di.module.FragmentModule;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.di.component.DaggerFragmentComponent;
 import com.chao.bookviki.di.component.FragmentComponent;
+import com.chao.bookviki.model.bean.LoginBean;
 
 import javax.inject.Inject;
 
@@ -99,6 +100,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     @Override
     public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void showLogInOutInfo(LoginBean bean) {
 
     }
 
