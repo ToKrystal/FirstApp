@@ -93,16 +93,13 @@ public class RealmHelper {
 
     /**
      * 查询登录信息
-     * @param name
      */
-    public boolean queryLoginName(String name){
+    public boolean queryIfLogin(){
         RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
-        for(LoginBean item : results) {
-            if(item.name.equals(name)) {
-                return true;
-            }
+        if(results.isEmpty()){
+            return false;
         }
-        return false;
+        return true;
     }
     /**
      * 删除 收藏记录

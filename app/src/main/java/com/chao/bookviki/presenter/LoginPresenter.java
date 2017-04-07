@@ -1,6 +1,7 @@
 package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.base.RxPresenter;
+import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.RetrofitHelper;
@@ -20,7 +21,7 @@ import rx.Subscription;
 public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter{
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;
-    private LoginBean mData;
+   // private LoginBean mData;
     @Inject
     public LoginPresenter(RetrofitHelper mRetrofitHelper,RealmHelper realmHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
@@ -37,8 +38,10 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
                 .subscribe(new CommonSubscriber<LoginBean>(mView) {
                     @Override
                     public void onNext(LoginBean loginBeen) {
-                        mData = loginBeen;
+                      //  mData = loginBeen;
+                        RxBus.getDefault().post(loginBeen);
                         mView.jump2LoginSucc(loginBeen);
+
                     }
 
                     @Override
@@ -51,10 +54,9 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
     }
 
     @Override
-    public void insertLoginData() {
-        if (mData != null){
-            mRealmHelper.insertLoginBean(mData);
-
+    public void insertLoginData(LoginBean bean) {
+        if (bean != null){
+            mRealmHelper.insertLoginBean(bean);
         }
         else {
             mView.showError("操作失败");

@@ -2,7 +2,6 @@ package com.chao.bookviki.ui.userinfo.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.presenter.LoginPresenter;
 import com.chao.bookviki.presenter.contract.LoginContract;
-import com.chao.bookviki.ui.main.activity.MainActivity;
 import com.chao.bookviki.util.SnackbarUtil;
 
 import butterknife.BindView;
@@ -53,14 +51,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         if (progressDialog.isShowing()){
             progressDialog.dismiss();
         }
-        mPresenter.insertLoginData();
-        Intent intent = new Intent();
-        intent.setClass(this,MainActivity.class);
-        intent.putExtra("loginOk",true);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("beanInfo",bean);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        mPresenter.insertLoginData(bean);
+        //Intent intent = new Intent();
+      //  intent.setClass(this,MainActivity.class);
+       // startActivity(intent);
+
         finish();
         //overridePendingTransition(android.R.anim., android.R.anim.fade_out);
 

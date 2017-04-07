@@ -5,14 +5,16 @@ import android.Manifest;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
+import com.chao.bookviki.model.bean.LogOutBean;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.bean.VersionBean;
+import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.event.NightModeEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.MyHttpResponse;
 import com.chao.bookviki.presenter.contract.MainContract;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
-import com.chao.bookviki.model.bean.VersionBean;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -29,22 +31,36 @@ import rx.functions.Func1;
 public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
     private RetrofitHelper mRetrofitHelper;
+    private RealmHelper mRealmHelper;
 
     @Inject
-    public MainPresenter(RetrofitHelper mRetrofitHelper) {
+    public MainPresenter(RetrofitHelper mRetrofitHelper,RealmHelper realmHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        this.mRealmHelper =  realmHelper;
         registerEvent();
         registerLoginEvent();
+        registerLogOutEvent();
     }
 
-    private void registerLoginEvent() {
+    void registerLoginEvent() {
         Subscription rxSubscription = RxBus.getDefault().toObservable(LoginBean.class)
-                .compose(RxUtil.<LoginBean>rxSchedulerHelper())
                 .subscribe(new CommonSubscriber<LoginBean>(mView, "登录显示异常ヽ(≧Д≦)ノ") {
                     @Override
                     public void onNext(LoginBean bean) {
                        // mView.useNightMode(aBoolean);
-                        mView.showLogInOutInfo(bean);
+                        mView.showLogInInfo(bean);
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    void registerLogOutEvent() {
+        Subscription rxSubscription = RxBus.getDefault().toObservable(LogOutBean.class)
+                .subscribe(new CommonSubscriber<LogOutBean>(mView, "注销异常ヽ(≧Д≦)ノ") {
+                    @Override
+                    public void onNext(LogOutBean bean) {
+                        // mView.useNightMode(aBoolean);
+                        mView.showLogOutInfo();
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -122,5 +138,11 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     public void doLogout() {
         ClearableCookieJar cookieJar = App.getAppComponent().clearableCookieJar();
         cookieJar.clear();
+    }
+
+    @Override
+    public void deleteLoginBean(LoginBean bean) {
+        mRealmHelper.deleteLoginBean(bean.name);
+
     }
 }

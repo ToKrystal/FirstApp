@@ -12,6 +12,8 @@ public interface BaseView {
 
     void useNightMode(boolean isNight);
 
-    void showLogInOutInfo(LoginBean bean);
+    void showLogInInfo(LoginBean bean);
+
+    void showLogOutInfo();
 
 }

@@ -15,6 +15,10 @@ public class LoginBean  extends RealmObject implements Parcelable {
     public String name;
     public String icon_url;
 
+    public LoginBean(String name, String icon_url) {
+        this.name = name;
+        this.icon_url = icon_url;
+    }
 
     public LoginBean(){}
 
@@ -44,5 +48,21 @@ public class LoginBean  extends RealmObject implements Parcelable {
 
         this.name = in.readString();
         this.icon_url = in.readString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIcon_url() {
+        return icon_url;
+    }
+
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
     }
 }

@@ -104,7 +104,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     }
 
     @Override
-    public void showLogInOutInfo(LoginBean bean) {
+    public void showLogInInfo(LoginBean bean) {
+
+    }
+
+    @Override
+    public void showLogOutInfo() {
 
     }
 

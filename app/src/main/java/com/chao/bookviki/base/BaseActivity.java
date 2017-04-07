@@ -98,7 +98,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     }
 
     @Override
-    public void showLogInOutInfo(LoginBean bean) {
+    public void showLogInInfo(LoginBean bean) {
+
+    }
+
+    @Override
+    public void showLogOutInfo() {
 
     }
 

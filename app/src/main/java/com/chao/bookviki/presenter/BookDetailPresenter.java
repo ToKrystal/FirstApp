@@ -112,24 +112,23 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
 
     @Override
     public void replay(String id,String content) {
-        Subscription rxSubscription = mRetrofitHelper.postReplay(id,content)
-                .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
-                .compose(RxUtil.<String>handleBookResult())
-                .subscribe(new CommonSubscriber<String>(mView) {
-                    @Override
-                    public void onNext(String str) {
-                        //mData = bean;
-                    //    mView.jump2CreateSucc(bean);
-                        mView.showReplaySucc();
+        if(mRealmHelper.queryIfLogin()){
+            Subscription rxSubscription = mRetrofitHelper.postReplay(id,content)
+                    .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
+                    .compose(RxUtil.<String>handleBookResult())
+                    .subscribe(new CommonSubscriber<String>(mView) {
+                        @Override
+                        public void onNext(String str) {
+                            //mData = bean;
+                            //    mView.jump2CreateSucc(bean);
+                            mView.showReplaySucc();
+                        }
+                    });
+            addSubscrebe(rxSubscription);
+        }else {
+            mView.jump2LoginPage();
+        }
 
-
-                    }
-                    @Override
-                    public void onError(Throwable e) {
-                        mView.jump2LoginPage();
-                    }
-                });
-        addSubscrebe(rxSubscription);
 
     }
 

@@ -21,6 +21,7 @@ import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.component.UpdateService;
+import com.chao.bookviki.model.bean.LogOutBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.presenter.MainPresenter;
@@ -61,7 +62,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     View img_avatar;
     TextView tv_login_name;
 
-
+    private LoginBean mLoginBean;
 
     ZhihuMainFragment mZhihuFragment;
     GankMainFragment mGankFragment;
@@ -225,7 +226,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 e.printStackTrace();
             }
         }
-        showLoginOk();
+        //showLoginOk();
     }
 
     @Override
@@ -274,6 +275,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return mGankFragment;
             case Constants.TYPE_GOLD:
                 // return mGoldFragment;
+
                 return mBookMainFragment;
             case Constants.TYPE_VTEX:
                 return mVtexFragment;
@@ -341,11 +343,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mPresenter.doLogout();
-
+               if (mLoginBean != null){
+                   mPresenter.deleteLoginBean(mLoginBean);
+                   mLoginBean = null;
+                  RxBus.getDefault().post(new LogOutBean());
+               }
             }
         });
         builder.show();
-
     }
 
     /**
@@ -371,15 +376,36 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         startService(new Intent(mContext, UpdateService.class));
     }
 
-    public void showLoginOk() {
+    /*public void showLoginOk() {
         Intent intent = getIntent();
         if(intent.getBooleanExtra("loginOk",false)){
             SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
             Bundle bundle = intent.getExtras();
             LoginBean bean = bundle.getParcelable("beanInfo");
+            mLoginBean = bean;
+            //userName = bean.name;
             tv_login_name.setText(bean.name);
 
         }
+    }*/
+
+    @Override
+    public void showLogInInfo(LoginBean bean) {
+      //  super.showLogInOutInfo(bean);
+        mLoginBean = bean;
+        if(mLoginBean != null){
+            mDrawerLayout.closeDrawers();
+            SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
+            tv_login_name.setText(bean.name);
+
+        }
+    }
+
+    @Override
+    public void showLogOutInfo() {
+        mDrawerLayout.closeDrawers();
+        SnackbarUtil.showShort(getWindow().getDecorView(),"注销成功");
+        tv_login_name.setText("火星人");
     }
 
     public void checkPermissions() {
