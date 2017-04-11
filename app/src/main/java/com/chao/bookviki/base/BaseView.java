@@ -16,4 +16,7 @@ public interface BaseView {
 
     void showLogOutInfo();
 
+    void showDefaultUserInfo();
+
+
 }

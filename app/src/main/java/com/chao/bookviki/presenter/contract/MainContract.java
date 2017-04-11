@@ -29,5 +29,7 @@ public interface MainContract {
         void doLogout();
 
         void deleteLoginBean(LoginBean bean);
+
+        void queryLoginState();
     }
 }

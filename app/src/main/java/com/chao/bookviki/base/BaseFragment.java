@@ -113,6 +113,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     }
 
+    @Override
+    public void showDefaultUserInfo() {
+
+    }
+
     protected abstract void initInject();
     protected abstract int getLayoutId();
     protected abstract void initEventAndData();

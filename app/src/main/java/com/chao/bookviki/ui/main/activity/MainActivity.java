@@ -58,8 +58,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     NavigationView mNavigationView;
     @BindView(R.id.view_search)
     MaterialSearchView mSearchView;
+    //注销
     View btnLogout;
+    //登录头像
     View img_avatar;
+    //用户名
     TextView tv_login_name;
 
     private LoginBean mLoginBean;
@@ -226,7 +229,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 e.printStackTrace();
             }
         }
-        //showLoginOk();
+        mPresenter.queryLoginState();
     }
 
     @Override
@@ -397,6 +400,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mDrawerLayout.closeDrawers();
             SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
             tv_login_name.setText(bean.name);
+            btnLogout.setVisibility(View.GONE);
 
         }
     }
@@ -405,7 +409,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void showLogOutInfo() {
         mDrawerLayout.closeDrawers();
         SnackbarUtil.showShort(getWindow().getDecorView(),"注销成功");
-        tv_login_name.setText("火星人");
+        tv_login_name.setText("点击头像登录");
+        btnLogout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showDefaultUserInfo() {
+         //   tv_login_name.setText(loginBean.getName());
+       //     btnLogout.setVisibility(View.VISIBLE);
+
+            tv_login_name.setText("点击头像登录");
+            btnLogout.setVisibility(View.GONE);
     }
 
     public void checkPermissions() {

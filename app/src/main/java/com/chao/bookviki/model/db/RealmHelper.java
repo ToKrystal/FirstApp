@@ -101,6 +101,20 @@ public class RealmHelper {
         }
         return true;
     }
+
+    /**
+     * 返回登录的用户信息
+     * @return
+     */
+    public LoginBean returnLoginBean(){
+        RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
+        if(results.isEmpty()){
+            return null;
+        }
+        return results.get(0);
+    }
+
+
     /**
      * 删除 收藏记录
      * @param id

@@ -42,6 +42,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
         registerLogOutEvent();
     }
 
+    //注册登录事件
     void registerLoginEvent() {
         Subscription rxSubscription = RxBus.getDefault().toObservable(LoginBean.class)
                 .subscribe(new CommonSubscriber<LoginBean>(mView, "登录显示异常ヽ(≧Д≦)ノ") {
@@ -54,6 +55,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
         addSubscrebe(rxSubscription);
     }
 
+    //注册登出事件
     void registerLogOutEvent() {
         Subscription rxSubscription = RxBus.getDefault().toObservable(LogOutBean.class)
                 .subscribe(new CommonSubscriber<LogOutBean>(mView, "注销异常ヽ(≧Д≦)ノ") {
@@ -144,5 +146,13 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     public void deleteLoginBean(LoginBean bean) {
         mRealmHelper.deleteLoginBean(bean.name);
 
+    }
+
+    @Override
+    public void queryLoginState() {
+       LoginBean bean = mRealmHelper.returnLoginBean();
+        if (bean == null){
+            mView.showDefaultUserInfo();
+        }
     }
 }
