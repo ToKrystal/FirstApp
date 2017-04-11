@@ -30,9 +30,9 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
 
 
     @Override
-    public void postLogin(String email, String pass) {
+    public void postLogin(String email, String pass,String channelId) {
 
-        Subscription rxSubscription = mRetrofitHelper.postLogin(email,pass)
+        Subscription rxSubscription = mRetrofitHelper.postLogin(email,pass,channelId)
                 .compose(RxUtil.<BookHttpResponse<LoginBean>>rxSchedulerHelper())
                 .compose(RxUtil.<LoginBean>handleBookResult())
                 .subscribe(new CommonSubscriber<LoginBean>(mView) {

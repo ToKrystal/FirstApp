@@ -19,7 +19,7 @@ public interface LoginContract {
     interface Presenter extends BasePresenter<View> {
 
         //   void getCommentData(int id,int commentKind);
-        void postLogin(String name,String pass);
+        void postLogin(String name,String pass,String channelId);
         void insertLoginData(LoginBean bean);
 
     }

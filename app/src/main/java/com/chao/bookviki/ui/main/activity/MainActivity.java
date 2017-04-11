@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             SharedPreferenceUtil.setNightModeState(false);
@@ -264,7 +265,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                App.getInstance().exitApp();
+               App.getInstance().exitApp();
             }
         });
         builder.show();
@@ -400,7 +401,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mDrawerLayout.closeDrawers();
             SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
             tv_login_name.setText(bean.name);
-            btnLogout.setVisibility(View.GONE);
+            btnLogout.setVisibility(View.VISIBLE);
 
         }
     }
@@ -410,7 +411,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerLayout.closeDrawers();
         SnackbarUtil.showShort(getWindow().getDecorView(),"注销成功");
         tv_login_name.setText("点击头像登录");
-        btnLogout.setVisibility(View.VISIBLE);
+        btnLogout.setVisibility(View.GONE);
     }
 
     @Override

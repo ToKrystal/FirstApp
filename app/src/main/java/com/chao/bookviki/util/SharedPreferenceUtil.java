@@ -40,6 +40,13 @@ public class SharedPreferenceUtil {
     public static void setBaiYunBindState(boolean state) {
         getAppSp().edit().putBoolean(Constants.BAI_TUI_BIND, state).apply();
     }
+    public static void setBaiDuYunChannelId(String channleId){
+        getAppSp().edit().putString(Constants.BAI_DU_YUN_CHANNLEID,channleId).apply();
+    }
+
+    public static String getBaiDuYunChannelId(){
+        return getAppSp().getString(Constants.BAI_DU_YUN_CHANNLEID,null);
+    }
 
     public static boolean getNoImageState() {
         return getAppSp().getBoolean(Constants.SP_NO_IMAGE, DEFAULT_NO_IMAGE);

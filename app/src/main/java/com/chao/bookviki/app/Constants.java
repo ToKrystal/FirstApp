@@ -79,6 +79,8 @@ public class Constants {
 
     public static final String BAI_TUI_BIND = "baidutuisongbind_state";
 
+    public static final String BAI_DU_YUN_CHANNLEID = "baiduyunchannleid";
+
     //================= INTENT ====================
     public static final String IT_GANK_TYPE = "type";
 

@@ -97,7 +97,7 @@ public interface BookApis {
     //表单
     @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/6")
-    Observable<BookHttpResponse<LoginBean>> postLogin(@Field("email")String email, @Field("password")String pass);
+    Observable<BookHttpResponse<LoginBean>> postLogin(@Field("email")String email, @Field("password")String pass,@Field("channelId")String channelId);
 
    // @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/7")

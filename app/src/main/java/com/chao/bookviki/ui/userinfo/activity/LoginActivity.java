@@ -12,6 +12,7 @@ import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.presenter.LoginPresenter;
 import com.chao.bookviki.presenter.contract.LoginContract;
+import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 
 import butterknife.BindView;
@@ -80,6 +81,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CreateAccountActivity.class);
                 mContext.startActivity(intent);
+                finish();
             }
         });
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Authenticating...");
                 progressDialog.show();
-                mPresenter.postLogin(email,pass);
+                String channelId = SharedPreferenceUtil.getBaiDuYunChannelId();
+                mPresenter.postLogin(email,pass,null);
 
 
             }

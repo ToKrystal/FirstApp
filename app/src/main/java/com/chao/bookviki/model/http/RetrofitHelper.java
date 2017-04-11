@@ -217,8 +217,8 @@ public class RetrofitHelper {
     public Observable<BookHttpResponse<String>> postReplay(String id, String content){
         return mBookApiService.postReplay(id,content);
     }
-    public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass){
-        return mBookApiService.postLogin(email,pass);
+    public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass,String channelId){
+        return mBookApiService.postLogin(email,pass,channelId);
     }
 
     public Observable<BookHttpResponse<LoginBean>> postCreateAccount(CreateAccountBean bean) {

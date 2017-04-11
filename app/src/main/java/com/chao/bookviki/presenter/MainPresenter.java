@@ -28,7 +28,7 @@ import rx.functions.Func1;
  * Created by codeest on 16/8/9.
  */
 
-public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
+public class  MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;

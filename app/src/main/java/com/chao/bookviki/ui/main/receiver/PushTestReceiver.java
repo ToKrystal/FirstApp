@@ -9,6 +9,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.android.pushservice.PushMessageReceiver;
+import com.chao.bookviki.component.RxBus;
+import com.chao.bookviki.model.bean.LogOutBean;
+import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.util.LogUtil;
+import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,6 +78,7 @@ public class PushTestReceiver extends PushMessageReceiver {
         if (errorCode == 0) {
             // 绑定成功
             Log.d(TAG, "绑定成功");
+            SharedPreferenceUtil.setBaiDuYunChannelId(channelId);
         }
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
         updateContent(context, responseString);

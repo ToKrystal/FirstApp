@@ -2,7 +2,6 @@ package com.chao.bookviki.ui.userinfo.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +13,7 @@ import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.presenter.CreateAccountPresenter;
 import com.chao.bookviki.presenter.contract.CreateAccountContract;
-import com.chao.bookviki.ui.main.activity.MainActivity;
+import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 
 import butterknife.BindView;
@@ -53,14 +52,12 @@ public class CreateAccountActivity extends BaseActivity<CreateAccountPresenter> 
             progressDialog.dismiss();
         }
         mPresenter.insertLoginBean();
-        Intent intent = new Intent();
-        intent.setClass(this,MainActivity.class);
-        intent.putExtra("loginOk",true);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("beanInfo",bean);
-        intent.putExtras(bundle);
-        startActivity(intent);
+
+
         finish();
+
+
+
 
     }
 
@@ -90,7 +87,7 @@ public class CreateAccountActivity extends BaseActivity<CreateAccountPresenter> 
                 String name = input_name.getText().toString();
                 String email = inout_email.getText().toString();
                 String password = input_password.getText().toString();
-                CreateAccountBean bean = new CreateAccountBean(name,password,email);
+                CreateAccountBean bean = new CreateAccountBean(name,password,email, SharedPreferenceUtil.getBaiDuYunChannelId());
                 mPresenter.postCreateAccount(bean);
 
             }

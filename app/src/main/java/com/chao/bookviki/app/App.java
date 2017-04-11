@@ -59,8 +59,8 @@ public class App extends Application{
     protected  void autoBindBaiduYunTuiSong(){
         if (!SharedPreferenceUtil.getBaiYunBindState())
         {
-            PushManager.startWork(instance, PushConstants.LOGIN_TYPE_API_KEY,"uMiiz4aXzctDkVvRhxusLbdD");
-            SharedPreferenceUtil.setBaiYunBindState(true);
+           PushManager.startWork(instance, PushConstants.LOGIN_TYPE_API_KEY,"uMiiz4aXzctDkVvRhxusLbdD");
+           SharedPreferenceUtil.setBaiYunBindState(true);
         }
 
     };
@@ -86,7 +86,7 @@ public class App extends Application{
         if (SharedPreferenceUtil.getBaiYunBindState())
         {
             PushManager.stopWork(instance);
-            SharedPreferenceUtil.setBaiYunBindState(false);
+           SharedPreferenceUtil.setBaiYunBindState(false);
         }
         if (allActivities != null) {
             synchronized (allActivities) {

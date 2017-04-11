@@ -1,6 +1,7 @@
 package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.base.RxPresenter;
+import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.db.RealmHelper;
@@ -40,8 +41,8 @@ public class CreateAccountPresenter extends RxPresenter<CreateAccountContract.Vi
                     @Override
                     public void onNext(LoginBean bean) {
                         mData = bean;
+                        RxBus.getDefault().post(bean);
                         mView.jump2CreateSucc(bean);
-
                     }
                     @Override
                     public void onError(Throwable e) {
