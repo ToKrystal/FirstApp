@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 progressDialog.setMessage("Authenticating...");
                 progressDialog.show();
                 String channelId = SharedPreferenceUtil.getBaiDuYunChannelId();
-                mPresenter.postLogin(email,pass,null);
+                mPresenter.postLogin(email,pass,channelId);
 
 
             }

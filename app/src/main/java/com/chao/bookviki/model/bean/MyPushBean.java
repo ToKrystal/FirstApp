@@ -7,4 +7,7 @@ package com.chao.bookviki.model.bean;
 public class MyPushBean {
     public String ojectId;
 
+    public MyPushBean(String ojectId) {
+        this.ojectId = ojectId;
+    }
 }

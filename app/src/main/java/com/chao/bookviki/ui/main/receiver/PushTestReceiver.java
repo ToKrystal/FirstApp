@@ -10,9 +10,7 @@ import android.util.Log;
 
 import com.baidu.android.pushservice.PushMessageReceiver;
 import com.chao.bookviki.component.RxBus;
-import com.chao.bookviki.model.bean.LogOutBean;
-import com.chao.bookviki.model.bean.LoginBean;
-import com.chao.bookviki.util.LogUtil;
+import com.chao.bookviki.model.bean.MyPushBean;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -107,9 +105,10 @@ public class PushTestReceiver extends PushMessageReceiver {
             JSONObject customJson = null;
             try {
                 customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
+                String objectId = null;
+                if (!customJson.isNull("objectId")) {
+                    objectId = customJson.getString("objectId");
+                    RxBus.getDefault().post(new MyPushBean(objectId));
                 }
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
@@ -207,7 +206,7 @@ public class PushTestReceiver extends PushMessageReceiver {
      *            上下文
      * @param errorCode
      *            错误码。0表示某些tag已经设置成功；非0表示所有tag的设置均失败。
-     * @param successTags
+     * @param sucessTags
      *            设置成功的tag
      * @param failTags
      *            设置失败的tag
@@ -233,7 +232,7 @@ public class PushTestReceiver extends PushMessageReceiver {
      *            上下文
      * @param errorCode
      *            错误码。0表示某些tag已经删除成功；非0表示所有tag均删除失败。
-     * @param successTags
+     * @param sucessTags
      *            成功删除的tag
      * @param failTags
      *            删除失败的tag

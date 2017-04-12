@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.baidu.android.pushservice.PushManager;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
@@ -268,9 +269,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-              // App.getInstance().exitApp();
-                RxBus.getDefault().post(new MyPushBean());
+                PushManager.stopWork(mContext);
+            //  App.getInstance().exitApp();
+               // RxBus.getDefault().post(new MyPushBean());
 
             }
         });
@@ -401,7 +402,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 //设置通知标题
                 .setContentTitle("最简单的Notification")
                 //设置通知内容
-                .setContentText("只有小图标、标题、内容");
+                .setContentText(bean.ojectId);
         //设置通知时间，默认为系统发出通知的时间，通常不用设置
         //.setWhen(System.currentTimeMillis());
         //通过builder.build()方法生成Notification对象,并发送通知,id=1
