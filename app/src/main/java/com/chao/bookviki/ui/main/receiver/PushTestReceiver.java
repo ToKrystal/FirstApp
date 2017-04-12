@@ -102,6 +102,7 @@ public class PushTestReceiver extends PushMessageReceiver {
         Log.d(TAG, messageString);
 
         // 自定义内容获取方式，mykey和myvalue对应透传消息推送时自定义内容中设置的键和值
+        //{"objectId":2222}
         if (!TextUtils.isEmpty(customContentString)) {
             JSONObject customJson = null;
             try {

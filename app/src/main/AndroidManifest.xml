@@ -106,7 +106,15 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+
+
+
+
         <activity android:name="com.chao.bookviki.ui.gold.activity.BookCommentActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>

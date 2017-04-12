@@ -1,5 +1,7 @@
 package com.chao.bookviki.ui.main.activity;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -7,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -16,13 +19,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chao.bookviki.R;
-import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.component.UpdateService;
 import com.chao.bookviki.model.bean.LogOutBean;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.bean.MyPushBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.presenter.MainPresenter;
 import com.chao.bookviki.presenter.contract.MainContract;
@@ -265,7 +268,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-               App.getInstance().exitApp();
+
+              // App.getInstance().exitApp();
+                RxBus.getDefault().post(new MyPushBean());
+
             }
         });
         builder.show();
@@ -346,12 +352,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 mPresenter.doLogout();
                if (mLoginBean != null){
                    mPresenter.deleteLoginBean(mLoginBean);
                    mLoginBean = null;
                   RxBus.getDefault().post(new LogOutBean());
                }
+
+
+
             }
         });
         builder.show();
@@ -378,6 +388,27 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void startDownloadService() {
         startService(new Intent(mContext, UpdateService.class));
+    }
+
+    @Override
+    public void jump2PushSucc(MyPushBean bean) {
+        //获取NotificationManager实例
+        NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //实例化NotificationCompat.Builde并设置相关属性
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                //设置小图标
+                .setSmallIcon(R.mipmap.account)
+                //设置通知标题
+                .setContentTitle("最简单的Notification")
+                //设置通知内容
+                .setContentText("只有小图标、标题、内容");
+        //设置通知时间，默认为系统发出通知的时间，通常不用设置
+        //.setWhen(System.currentTimeMillis());
+        //通过builder.build()方法生成Notification对象,并发送通知,id=1
+        notifyManager.notify(1, builder.build());
+
+
+
     }
 
     /*public void showLoginOk() {

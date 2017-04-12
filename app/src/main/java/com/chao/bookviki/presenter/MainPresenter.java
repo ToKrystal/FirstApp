@@ -7,6 +7,7 @@ import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.LogOutBean;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.bean.MyPushBean;
 import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.event.NightModeEvent;
@@ -40,6 +41,20 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
         registerEvent();
         registerLoginEvent();
         registerLogOutEvent();
+        registerPushEvent();
+    }
+
+    private void registerPushEvent() {
+        Subscription rxSubscription = RxBus.getDefault().toObservable(MyPushBean.class)
+                .subscribe(new CommonSubscriber<MyPushBean>(mView, "跳转异常ヽ(≧Д≦)ノ") {
+                    @Override
+                    public void onNext(MyPushBean bean) {
+                        // mView.useNightMode(aBoolean);
+                      //  mView.showLogInInfo(bean);
+                        mView.jump2PushSucc(bean);
+                    }
+                });
+        addSubscrebe(rxSubscription);
     }
 
     //注册登录事件
