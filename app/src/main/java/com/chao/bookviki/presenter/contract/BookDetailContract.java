@@ -54,6 +54,8 @@ public interface BookDetailContract {
 
         void replay(String id,String content);
 
+        void save2DetailPrestener(BookListBean bean);
+
     }
 
 }

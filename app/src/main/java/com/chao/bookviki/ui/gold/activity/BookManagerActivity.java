@@ -7,11 +7,15 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
+import com.chao.bookviki.base.BaseActivity;
 import com.chao.bookviki.base.SimpleActivity;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
+import com.chao.bookviki.presenter.FollowPresenter;
+import com.chao.bookviki.presenter.contract.FollowContract;
 import com.chao.bookviki.ui.gold.adapter.BookManagerAdapter;
+import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.DefaultItemTouchHelpCallback;
 
 import java.util.Collections;
@@ -23,7 +27,7 @@ import io.realm.RealmList;
  *设置展示列表显示显示哪些内容
  */
 
-public class BookManagerActivity extends SimpleActivity {
+public class BookManagerActivity extends BaseActivity<FollowPresenter> implements FollowContract.View {
 
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
@@ -71,5 +75,21 @@ public class BookManagerActivity extends SimpleActivity {
     protected void onDestroy() {
         super.onDestroy();
         RxBus.getDefault().post(new BookManagerBean(mList));
+    }
+
+    @Override
+    protected void initInject() {
+        getActivityComponent().inject(this);
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showFollowSuc() {
+        SnackbarUtil.showShort(getWindow().getDecorView(),"关注成功");
+
     }
 }

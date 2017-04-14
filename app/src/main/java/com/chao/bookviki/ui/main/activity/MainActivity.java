@@ -272,6 +272,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 PushManager.stopWork(mContext);
+                SharedPreferenceUtil.setBaiYunBindState(false);
             //  App.getInstance().exitApp();
                // RxBus.getDefault().post(new MyPushBean());
 
@@ -397,6 +398,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void jump2PushSucc(MyPushBean bean) {
         Intent notifyIntent =
                 new Intent(this, BookDetailActivity.class);
+        notifyIntent.putExtra("objectId",bean.ojectId);
         PendingIntent notifyPendingIntent =
                 PendingIntent.getActivity(
                         this,

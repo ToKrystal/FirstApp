@@ -110,7 +110,17 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
         Bundle bundle = intent.getExtras();
      //   bundle.setClassLoader(BookListBean.class.getClassLoader());
-        mTopBean = bundle.getParcelable("beanInfo");
+try {
+    mTopBean = bundle.getParcelable("beanInfo");
+    String test = mTopBean.getObjectId();
+}catch (NullPointerException e) {
+
+    mTopBean = initBean();
+}
+mPresenter.save2DetailPrestener(mTopBean);
+
+
+
        // topicId = mTopBean.getObjectId();
         //isNotTransition = intent.getBooleanExtra("isNotTransition",false);
 
@@ -196,19 +206,18 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
 
     private BookListBean initBean() {
         BookListBean bean = new BookListBean();
-       /* bean.setId("349335");
-        bean.setTitle("各位自建博客使用多说的博主注意了");
-        bean.setContent_rendered("<p>今日收到邮件，多说由于公司业务调整，将在今年 6 月 1 日关闭了。大家快导出评论数据，做好迁移工作吧。</p>\\n");
-        bean.setReplies(51);
-        NodeListBean.MemberBean me = new NodeListBean.MemberBean();
-        me.setUsername("vvard3n");
-        me.setavatar_normal("//v2ex.assets.uxengine.net/avatar/778f/dc47/63946_normal.png?m=1423041587");
-        bean.setMember(me);
-        NodeListBean.NodeBean s = new NodeListBean.NodeBean();
-        s.setTitle("程序员");
-        bean.setNode(s);
-        bean.setLast_modified(1490148627);
-        bean.setCreated(1490148557);*/
+        bean.setCollectionCount(2);
+        bean.setCommentsCount(1);
+        bean.setCreatedAt("432434343");
+        bean.setObjectId("123445");
+        BookListBean.GoldListScreenshotBean xxBean = new BookListBean.GoldListScreenshotBean();
+        xxBean.setUrl("34343434");
+        bean.setScreenshot(xxBean);
+        bean.setTitle("xxx");
+        bean.setUrl("34343434");
+        BookListBean.GoldListUserBean xBean  = new BookListBean.GoldListUserBean();
+        xBean.setUsername("43434434");
+        bean.setUser(xBean);
         return  bean;
     }
 

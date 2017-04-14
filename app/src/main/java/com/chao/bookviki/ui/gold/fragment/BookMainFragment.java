@@ -82,6 +82,10 @@ public class BookMainFragment extends BaseFragment<BookMainPresenter> implements
         currentIndex = 0;
     }
 
+    /**
+     * 本地存的
+     * @param mBean
+     */
     @Override
     public void jumpToManager(BookManagerBean mBean) {
         Intent intent = new Intent(getActivity(), BookManagerActivity.class);

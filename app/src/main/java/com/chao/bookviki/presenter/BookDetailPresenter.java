@@ -2,6 +2,7 @@ package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
+import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RealmLikeBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
@@ -27,7 +28,8 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;
    // private BookDetailBean mData;
-    private NodeListBean mData;
+    //private NodeListBean mData;
+    private BookListBean mData;
 
 
     @Inject
@@ -132,13 +134,17 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
 
     }
 
+    @Override
+    public void save2DetailPrestener(BookListBean bean) {
+        mData = bean;
+    }
 
 
     @Override
     public void insertLikeData() {
         if (mData != null) {
             RealmLikeBean bean = new RealmLikeBean();
-            bean.setId(mData.getId());
+            bean.setId(mData.getObjectId());
             bean.setImage("");
             bean.setTitle(mData.getTitle());
             bean.setType(Constants.TYPE_BOOK);
@@ -152,7 +158,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     @Override
     public void deleteLikeData() {
         if (mData != null) {
-            mRealmHelper.deleteLikeBean(String.valueOf(mData.getId()));
+            mRealmHelper.deleteLikeBean(String.valueOf(mData.getObjectId()));
         } else {
             mView.showError("操作失败");
         }

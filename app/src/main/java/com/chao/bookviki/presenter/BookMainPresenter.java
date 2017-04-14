@@ -27,6 +27,9 @@ public class BookMainPresenter extends RxPresenter<BookMainContract.View> implem
         registerEvent();
     }
 
+    /**
+     * 在main 注册tab event BookManagerBean 改变时更新tab
+     */
     private void registerEvent() {
         addRxBusSubscribe(BookManagerBean.class, new Action1<BookManagerBean>() {
             @Override
