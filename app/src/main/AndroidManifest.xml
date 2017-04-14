@@ -93,7 +93,7 @@
 
         //掘金
 
-        <activity android:name="com.chao.bookviki.ui.gold.activity.BookManagerActivity"
+        <activity android:name="com.chao.bookviki.ui.gold.activity.BookFollowActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 

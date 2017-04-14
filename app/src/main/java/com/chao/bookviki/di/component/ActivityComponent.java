@@ -6,7 +6,7 @@ import com.chao.bookviki.di.module.ActivityModule;
 import com.chao.bookviki.di.scope.ActivityScope;
 import com.chao.bookviki.ui.gold.activity.BookCommentActivity;
 import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
-import com.chao.bookviki.ui.gold.activity.BookManagerActivity;
+import com.chao.bookviki.ui.gold.activity.BookFollowActivity;
 import com.chao.bookviki.ui.main.activity.MainActivity;
 import com.chao.bookviki.ui.main.activity.WelcomeActivity;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
@@ -54,5 +54,5 @@ public interface ActivityComponent {
 
     void inject(CreateAccountActivity createAccountActivity);
 
-    void inject(BookManagerActivity bookManagerActivity);
+    void inject(BookFollowActivity bookFollowActivity);
 }

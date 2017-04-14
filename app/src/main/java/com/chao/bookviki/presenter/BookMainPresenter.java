@@ -5,6 +5,7 @@ import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.presenter.contract.BookMainContract;
+import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import javax.inject.Inject;
@@ -27,13 +28,15 @@ public class BookMainPresenter extends RxPresenter<BookMainContract.View> implem
         registerEvent();
     }
 
-    /**
+    /**目前有被调用
      * 在main 注册tab event BookManagerBean 改变时更新tab
+     * BookManagerBean 任何数据改变都会触发
      */
     private void registerEvent() {
         addRxBusSubscribe(BookManagerBean.class, new Action1<BookManagerBean>() {
             @Override
             public void call(BookManagerBean goldManagerBean) {
+                LogUtil.i("首页触发事件");
                 mRealmHelper.updateBookManagerList(goldManagerBean);
                 mView.updateTab(goldManagerBean.getManagerList());
             }
@@ -65,14 +68,14 @@ public class BookMainPresenter extends RxPresenter<BookMainContract.View> implem
 
     private void initList() {
         mList = new RealmList<>();
-        mList.add(new BookManagerItemBean(0, true));
-        mList.add(new BookManagerItemBean(1, true));
-        mList.add(new BookManagerItemBean(2, true));
-        mList.add(new BookManagerItemBean(3, true));
-        mList.add(new BookManagerItemBean(4, false));
-        mList.add(new BookManagerItemBean(5, false));
-        mList.add(new BookManagerItemBean(6, false));
-        mList.add(new BookManagerItemBean(7, false));
+        mList.add(new BookManagerItemBean(0, true,""));
+        mList.add(new BookManagerItemBean(1, true,""));
+        mList.add(new BookManagerItemBean(2, true,""));
+        mList.add(new BookManagerItemBean(3, true,""));
+        mList.add(new BookManagerItemBean(4, false,""));
+        mList.add(new BookManagerItemBean(5, false,""));
+        mList.add(new BookManagerItemBean(6, false,""));
+        mList.add(new BookManagerItemBean(7, false,""));
     }
 }
 

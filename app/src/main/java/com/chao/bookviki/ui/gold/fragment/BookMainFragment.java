@@ -6,6 +6,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.chao.bookviki.ui.gold.activity.BookFollowActivity;
+import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
@@ -14,7 +16,6 @@ import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.presenter.BookMainPresenter;
 import com.chao.bookviki.presenter.contract.BookMainContract;
-import com.chao.bookviki.ui.gold.activity.BookManagerActivity;
 import com.chao.bookviki.ui.gold.adapter.BookPagerAdapter;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class BookMainFragment extends BaseFragment<BookMainPresenter> implements
 
     @Override
     protected void initEventAndData() {
+        LogUtil.i("首页InitEventAdaData调用");
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置tab滚动
         mTabLayout.setupWithViewPager(mViewPager);
         mPresenter.initManagerList();
@@ -88,7 +90,7 @@ public class BookMainFragment extends BaseFragment<BookMainPresenter> implements
      */
     @Override
     public void jumpToManager(BookManagerBean mBean) {
-        Intent intent = new Intent(getActivity(), BookManagerActivity.class);
+        Intent intent = new Intent(getActivity(), BookFollowActivity.class);
         intent.putExtra(Constants.IT_GOLD_MANAGER, mBean);
         mContext.startActivity(intent);
     }

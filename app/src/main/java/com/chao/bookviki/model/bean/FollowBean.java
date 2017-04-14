@@ -5,5 +5,9 @@ package com.chao.bookviki.model.bean;
  */
 
 public class FollowBean {
-    public String type;
+    public String typeId;
+
+    public FollowBean(String typeId) {
+        this.typeId = typeId;
+    }
 }

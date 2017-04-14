@@ -8,13 +8,12 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
-import com.chao.bookviki.base.SimpleActivity;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.presenter.FollowPresenter;
 import com.chao.bookviki.presenter.contract.FollowContract;
-import com.chao.bookviki.ui.gold.adapter.BookManagerAdapter;
+import com.chao.bookviki.ui.gold.adapter.BookFollowAdapter;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.DefaultItemTouchHelpCallback;
 
@@ -27,7 +26,7 @@ import io.realm.RealmList;
  *设置展示列表显示显示哪些内容
  */
 
-public class BookManagerActivity extends BaseActivity<FollowPresenter> implements FollowContract.View {
+public class BookFollowActivity extends BaseActivity<FollowPresenter> implements FollowContract.View {
 
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
@@ -35,7 +34,7 @@ public class BookManagerActivity extends BaseActivity<FollowPresenter> implement
     RecyclerView rvGoldManagerListRecycleView;
 
     RealmList<BookManagerItemBean> mList;
-    BookManagerAdapter mAdapter;
+    BookFollowAdapter mAdapter;
     DefaultItemTouchHelpCallback mCallback;//滑动和拖拽Item回调
 
     @Override
@@ -46,8 +45,9 @@ public class BookManagerActivity extends BaseActivity<FollowPresenter> implement
     @Override
     protected void initEventAndData() {
         setToolBar(toolBar, "首页特别展示");
+        //获取从main界面传过来的关注数据
         mList = ((BookManagerBean) getIntent().getParcelableExtra(Constants.IT_GOLD_MANAGER)).getManagerList();
-        mAdapter = new BookManagerAdapter(mContext, mList);
+        mAdapter = new BookFollowAdapter(mContext, mList);
         rvGoldManagerListRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
         rvGoldManagerListRecycleView.setAdapter(mAdapter);
         mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {

@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
+import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
 import com.chao.bookviki.R;
 
@@ -21,12 +23,12 @@ import io.realm.RealmList;
  *
  */
 
-public class BookManagerAdapter extends RecyclerView.Adapter<BookManagerAdapter.ViewHolder> {
+public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.ViewHolder> {
 
     private RealmList<BookManagerItemBean> mList;
     private LayoutInflater inflater;
 
-    public BookManagerAdapter(Context mContext, RealmList<BookManagerItemBean> mList) {
+    public BookFollowAdapter(Context mContext, RealmList<BookManagerItemBean> mList) {
         inflater = LayoutInflater.from(mContext);
         this.mList = mList;
     }
@@ -43,7 +45,11 @@ public class BookManagerAdapter extends RecyclerView.Adapter<BookManagerAdapter.
         holder.scSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //改变触发事件
                 mList.get(holder.getAdapterPosition()).setSelect(b);
+                String objectId = mList.get(holder.getAdapterPosition()).getTypeId();
+                FollowBean bean = new FollowBean(objectId);
+                RxBus.getDefault().post(bean);
             }
         });
     }
