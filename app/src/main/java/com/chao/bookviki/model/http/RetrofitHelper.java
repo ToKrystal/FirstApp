@@ -13,6 +13,7 @@ import com.chao.bookviki.model.bean.HotListBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.NodeBean;
 import com.chao.bookviki.model.bean.NodeListBean;
+import com.chao.bookviki.model.bean.PersonalInfoBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.bean.SectionChildListBean;
 import com.chao.bookviki.model.bean.SectionListBean;
@@ -221,11 +222,14 @@ public class RetrofitHelper {
     public Observable<BookHttpResponse<LoginBean>> postLogin(String email, String pass,String channelId){
         return mBookApiService.postLogin(email,pass,channelId);
     }
-    public Observable<BookHttpResponse<FollowBean>> postFollow(String typeId){
-        return mBookApiService.postFollow(typeId);
+    public Observable<BookHttpResponse<FollowBean>> postFollow(String typeId,boolean follow){
+        return mBookApiService.postFollow(typeId,follow);
     }
 
     public Observable<BookHttpResponse<LoginBean>> postCreateAccount(CreateAccountBean bean) {
         return  mBookApiService.postCreateAccount(bean);
+    }
+    public Observable<BookHttpResponse<String>> postUpdatePersonalInfo(PersonalInfoBean bean) {
+        return  mBookApiService.postUpdatePersonInfo(bean);
     }
 }

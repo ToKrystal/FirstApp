@@ -4,6 +4,7 @@ import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.CreateAccountBean;
 import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.bean.PersonalInfoBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 
@@ -122,8 +123,16 @@ public interface BookApis {
      */
     @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/9")
-    Observable<BookHttpResponse<FollowBean>> postFollow(@Field("typeId")String typeId);
+    Observable<BookHttpResponse<FollowBean>> postFollow(@Field("typeId")String typeId,@Field("follow") boolean follow);
 
+
+    /**
+     * 修改个人资料
+     * @param bean
+     * @return
+     */
+    @POST("/BookSpringMVC/bookapi/10")
+    Observable<BookHttpResponse<String>> postUpdatePersonInfo(@Body PersonalInfoBean bean);
 
 
     //@POST("ajax.mobileSword")

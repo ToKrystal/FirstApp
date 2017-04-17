@@ -92,4 +92,9 @@ public class BookFollowActivity extends BaseActivity<FollowPresenter> implements
         SnackbarUtil.showShort(getWindow().getDecorView(),"关注成功");
 
     }
+
+    @Override
+    public void showUnFollowSuc() {
+        SnackbarUtil.showShort(getWindow().getDecorView(),"取消关注成功");
+    }
 }

@@ -11,6 +11,7 @@ public interface FollowContract {
     interface View extends BaseView {
 
         void showFollowSuc();
+        void showUnFollowSuc();
 
 
 
@@ -18,7 +19,7 @@ public interface FollowContract {
 
 
     interface  Presenter extends BasePresenter<View> {
-        void postFollow(String objectId);
+        void postFollow(String objectId,boolean follow);
 
 
     }

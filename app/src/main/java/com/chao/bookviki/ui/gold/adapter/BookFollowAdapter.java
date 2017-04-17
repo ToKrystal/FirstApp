@@ -48,7 +48,7 @@ public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.Vi
                 //改变触发事件
                 mList.get(holder.getAdapterPosition()).setSelect(b);
                 String objectId = mList.get(holder.getAdapterPosition()).getTypeId();
-                FollowBean bean = new FollowBean(objectId);
+                FollowBean bean = new FollowBean(objectId,b);
                 RxBus.getDefault().post(bean);
             }
         });
