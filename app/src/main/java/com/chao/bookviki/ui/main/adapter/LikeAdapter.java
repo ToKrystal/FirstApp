@@ -17,7 +17,6 @@ import com.chao.bookviki.ui.gank.activity.GirlDetailActivity;
 import com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity;
 import com.chao.bookviki.R;
 import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
-import com.chao.bookviki.ui.vtex.activity.RepliesActivity;
 
 import java.util.List;
 
@@ -224,9 +223,9 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
     public void gotoVtexDetail(String topicId) {
-        Intent intent = new Intent();
+       /* Intent intent = new Intent();
         intent.setClass(mContext, RepliesActivity.class);
         intent.putExtra(Constants.IT_VTEX_TOPIC_ID,topicId);
-        mContext.startActivity(intent);
+        mContext.startActivity(intent);*/
     }
 }

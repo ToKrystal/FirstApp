@@ -39,7 +39,6 @@ import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.userinfo.fragment.UserInfoFragment;
-import com.chao.bookviki.ui.vtex.fragment.VtexMainFragment;
 import com.chao.bookviki.ui.zhihu.fragment.ZhihuMainFragment;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
@@ -76,7 +75,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     ZhihuMainFragment mZhihuFragment;
     GankMainFragment mGankFragment;
     // GoldMainFragment mGoldFragment;
-    VtexMainFragment mVtexFragment;
     LikeFragment mLikeFragment;
     SettingFragment mSettingFragment;
     AboutFragment mAboutFragment;
@@ -129,7 +127,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mGankFragment = new GankMainFragment();
         // mGoldFragment = new GoldMainFragment();
         mBookMainFragment = new BookMainFragment();
-        mVtexFragment = new VtexMainFragment();
         mLikeFragment = new LikeFragment();
         mSettingFragment = new SettingFragment();
         mAboutFragment = new AboutFragment();
@@ -138,7 +135,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
-        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
+        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         btnLogout =  mNavigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         img_avatar = mNavigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         tv_login_name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_login_name);
@@ -174,10 +171,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         showFragment = Constants.TYPE_GOLD;
                         mSearchMenuItem.setVisible(false);
                         break;
-                    case R.id.drawer_vtex:
-                        showFragment = Constants.TYPE_VTEX;
-                        mSearchMenuItem.setVisible(false);
-                        break;
+
                     case R.id.drawer_setting:
                         showFragment = Constants.TYPE_SETTING;
                         mSearchMenuItem.setVisible(false);
@@ -291,8 +285,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 // return mGoldFragment;
 
                 return mBookMainFragment;
-            case Constants.TYPE_VTEX:
-                return mVtexFragment;
             case Constants.TYPE_LIKE:
                 return mLikeFragment;
             case Constants.TYPE_SETTING:
@@ -316,8 +308,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case Constants.TYPE_GOLD:
                 return R.id.drawer_book;
 
-            case Constants.TYPE_VTEX:
-                return R.id.drawer_vtex;
+
             case Constants.TYPE_LIKE:
                 return R.id.drawer_like;
             case Constants.TYPE_SETTING:

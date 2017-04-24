@@ -5,7 +5,6 @@ import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.ui.main.fragment.AboutFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
-import com.chao.bookviki.ui.vtex.fragment.VtexMainFragment;
 import com.chao.bookviki.ui.zhihu.fragment.ZhihuMainFragment;
 
 import javax.inject.Singleton;
@@ -42,11 +41,6 @@ public class PageModule {
         return new UserInfoFragment();
     }
 
-    @Singleton
-    @Provides
-    VtexMainFragment provideVtexMain() {
-        return new VtexMainFragment();
-    }
 
     @Singleton
     @Provides

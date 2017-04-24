@@ -97,9 +97,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 
-        <activity android:name="com.chao.bookviki.ui.vtex.activity.RepliesActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+
 
         //book
         <activity android:name="com.chao.bookviki.ui.gold.activity.BookDetailActivity"
