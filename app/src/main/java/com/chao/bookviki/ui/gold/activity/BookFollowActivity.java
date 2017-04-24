@@ -84,7 +84,7 @@ public class BookFollowActivity extends BaseActivity<FollowPresenter> implements
 
     @Override
     public void showError(String msg) {
-
+        SnackbarUtil.showShort(getWindow().getDecorView(),"操作失败");
     }
 
     @Override

@@ -27,7 +27,7 @@ import rx.Observable;
 public interface BookApis {
    // String HOST = "http://news-at.zhihu.com/api/4/";
     String CONTENTHOST = "https://www.v2ex.com/";
-    String HOST = "http://169.254.55.217:8080/SpringMVC/bookapi/";
+    String HOST = "http://192.168.56.1:8080/SpringMVC/bookapi/";
     //String HOST = "https://api.leancloud.cn/";
 
     /**

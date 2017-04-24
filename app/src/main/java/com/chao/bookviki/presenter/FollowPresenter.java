@@ -55,6 +55,11 @@ public class FollowPresenter extends RxPresenter<FollowContract.View> implements
                         mView.showFollowSuc();
                         else mView.showUnFollowSuc();
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showError("");
+                    }
                 });
         addSubscrebe(rxSubscription);
 

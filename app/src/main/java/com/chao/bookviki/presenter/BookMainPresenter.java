@@ -68,10 +68,10 @@ public class BookMainPresenter extends RxPresenter<BookMainContract.View> implem
 
     private void initList() {
         mList = new RealmList<>();
-        mList.add(new BookManagerItemBean(0, true,""));
-        mList.add(new BookManagerItemBean(1, true,""));
-        mList.add(new BookManagerItemBean(2, true,""));
-        mList.add(new BookManagerItemBean(3, true,""));
+        mList.add(new BookManagerItemBean(0, true,"android"));
+        mList.add(new BookManagerItemBean(1, true,"ios"));
+        mList.add(new BookManagerItemBean(2, true,"backend"));
+        mList.add(new BookManagerItemBean(3, true,"frontend"));
         mList.add(new BookManagerItemBean(4, false,""));
         mList.add(new BookManagerItemBean(5, false,""));
         mList.add(new BookManagerItemBean(6, false,""));
