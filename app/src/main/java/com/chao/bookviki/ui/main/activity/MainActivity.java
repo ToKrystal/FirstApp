@@ -120,6 +120,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mToolbar.setTitle(mNavigationView.getMenu().findItem(getCurrentItem(showFragment)).getTitle().toString());
             hideFragment = showFragment;
         }
+        jump2PushSucc(null);
     }
 
     @Override
@@ -398,7 +399,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void jump2PushSucc(MyPushBean bean) {
         Intent notifyIntent =
                 new Intent(this, BookDetailActivity.class);
-        notifyIntent.putExtra("objectId",bean.ojectId);
+    //    notifyIntent.putExtra("objectId",bean.ojectId);
         PendingIntent notifyPendingIntent =
                 PendingIntent.getActivity(
                         this,
@@ -407,18 +408,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
 
-
+//bean.ojectId
 
         //获取NotificationManager实例
         NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //实例化NotificationCompat.Builde并设置相关属性
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 //设置小图标
-                .setSmallIcon(R.mipmap.account)
+                .setSmallIcon(R.mipmap.chao3)
                 //设置通知标题
-                .setContentTitle("最简单的Notification")
+                .setContentTitle("这是一篇有趣的文章")
                 //设置通知内容
-                .setContentText(bean.ojectId).setContentIntent(notifyPendingIntent);
+                .setContentText("我们希望这种情况永远不会发生。如果有降落伞").setContentIntent(notifyPendingIntent);
         //设置通知时间，默认为系统发出通知的时间，通常不用设置
         //.setWhen(System.currentTimeMillis());
         //通过builder.build()方法生成Notification对象,并发送通知,id=1

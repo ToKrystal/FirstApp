@@ -70,7 +70,13 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 return;
             }
             ImageLoader.load(mContext, VtexPresenter.parseImg(mTopBean.getUrl()), topHolder.ivRepliesTopFace);
-            topHolder.tvRepliesTopContent.setHtml(mTopBean.getUrl(), new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
+            topHolder.tvRepliesTopContent.setHtml("没有降落伞跳下飞机……谁都知道这糟透了，因为很有可能就一命呜呼了！但是，如果你必须从飞机上跳下来，而且这架飞机离地面几千米，在自由下落中幸存几率有多少？ 孤独一掷\n" +
+                    "\n" +
+                    "首先，我们希望这种情况永远不会发生。如果有降落伞，可能还有一线生机。但如果没有降落伞，而跳下飞机是唯一选择，那该做的第一件事就是在地面上寻找大海或河流等有水的地方，然后尝试瞄准目标。假设一切做得完美，那么生存几率是多少？\n" +
+                    "\n" +
+                    "缓冲物体\n" +
+                    "\n" +
+                    "在跳下之前，首先找到一个大物体，缓冲一下即将来临的自由落体，最好能将自己包裹成一团。缓冲物体能吸收掉一部分人体掉落时的动能，使生还成为了可能。 ", new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
             topHolder.tvRepliesTopName.setText(mTopBean.getUser().getUsername());
             topHolder.tvRepliesTopTitle.setText(mTopBean.getTitle());
             topHolder.tvRepliesTopNum.setText(String.format("%s,   共%s条回复", DateUtil.formatTime2String(Long.valueOf("1423253523525")), mTopBean.getCommentsCount()));

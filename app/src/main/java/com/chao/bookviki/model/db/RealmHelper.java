@@ -19,7 +19,7 @@ import io.realm.RealmResults;
 
 public class RealmHelper {
 
-    private static final String DB_NAME = "myRealm.realm";
+    private static final String DB_NAME = "myBookRealm.realm";
 
     private Realm mRealm;
 
