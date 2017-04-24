@@ -134,6 +134,9 @@ public interface BookApis {
     @POST("/BookSpringMVC/bookapi/10")
     Observable<BookHttpResponse<String>> postUpdatePersonInfo(@Body PersonalInfoBean bean);
 
+    @POST("/BookSpringMVC/bookapi/11")
+    Observable<BookHttpResponse<String>> postChannelIdNotLogin(@Field("channelId")String channelId);
+
 
     //@POST("ajax.mobileSword")
  //Observable<String> login(@QueryMap HashMap<String,String> paramsMap);

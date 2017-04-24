@@ -12,8 +12,6 @@ import com.chao.bookviki.ui.main.activity.WelcomeActivity;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.userinfo.activity.CreateAccountActivity;
 import com.chao.bookviki.ui.userinfo.activity.UserEditActivity;
-import com.chao.bookviki.ui.vtex.activity.NodeListActivity;
-import com.chao.bookviki.ui.vtex.activity.RepliesActivity;
 import com.chao.bookviki.ui.zhihu.activity.SectionActivity;
 import com.chao.bookviki.ui.zhihu.activity.ThemeActivity;
 import com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity;
@@ -40,9 +38,9 @@ public interface ActivityComponent {
 
     void inject(SectionActivity sectionActivity);
 
-    void inject(RepliesActivity repliesActivity);
+    //void inject(RepliesActivity repliesActivity);
 
-    void inject(NodeListActivity nodeListActivity);
+    //void inject(NodeListActivity nodeListActivity);
 
     void inject(BookDetailActivity bookDetailActivity);
 

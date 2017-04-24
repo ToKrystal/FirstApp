@@ -216,6 +216,10 @@ public class RetrofitHelper {
     public Observable<List<RepliesListBean>> fetchRepliesList(String id){
         return mBookApiService.getRepliesList(id);
     }
+
+    public Observable<BookHttpResponse<List<BookListBean>>> fetchSingleInfo(String objectId){
+        return  mBookApiService.getSingleBookList(objectId);
+    }
     public Observable<BookHttpResponse<String>> postReplay(String id, String content){
         return mBookApiService.postReplay(id,content);
     }
@@ -231,5 +235,9 @@ public class RetrofitHelper {
     }
     public Observable<BookHttpResponse<String>> postUpdatePersonalInfo(PersonalInfoBean bean) {
         return  mBookApiService.postUpdatePersonInfo(bean);
+    }
+
+    public Observable<BookHttpResponse<String>> postChannelIdNotLogin(String channelId) {
+        return  mBookApiService.postChannelIdNotLogin(channelId);
     }
 }

@@ -11,6 +11,7 @@ import android.util.Log;
 import com.baidu.android.pushservice.PushMessageReceiver;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.MyPushBean;
+import com.chao.bookviki.model.bean.PushBindSucBean;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -77,6 +78,20 @@ public class PushTestReceiver extends PushMessageReceiver {
             // 绑定成功
             Log.d(TAG, "绑定成功");
             SharedPreferenceUtil.setBaiDuYunChannelId(channelId);
+            final String channelId1 = channelId;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    RxBus.getDefault().post(new PushBindSucBean(channelId1));
+                }
+            }).start();
+
+
         }
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
         updateContent(context, responseString);

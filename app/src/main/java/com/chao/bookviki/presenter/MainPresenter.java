@@ -8,12 +8,15 @@ import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.LogOutBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.MyPushBean;
+import com.chao.bookviki.model.bean.PushBindSucBean;
 import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.event.NightModeEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
+import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.MyHttpResponse;
 import com.chao.bookviki.presenter.contract.MainContract;
+import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -42,6 +45,7 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
         registerLoginEvent();
         registerLogOutEvent();
         registerPushEvent();
+        registerPushBindEvent();
     }
 
     private void registerPushEvent() {
@@ -56,6 +60,31 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
                 });
         addSubscrebe(rxSubscription);
     }
+
+    private void registerPushBindEvent() {
+        Subscription rxSubscription = RxBus.getDefault().toObservable(PushBindSucBean.class)
+                .subscribe(new CommonSubscriber<PushBindSucBean>(mView, "默认异常ヽ(≧Д≦)ノ") {
+                    @Override
+                    public void onNext(PushBindSucBean bean) {
+                        Subscription rxSubscription1 = mRetrofitHelper.postChannelIdNotLogin(bean.channelId)
+                                .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
+                                .compose(RxUtil.<String>handleBookResult())
+                                .subscribe(new CommonSubscriber<String>(mView) {
+                                    @Override
+                                    public void onNext(String String) {
+                                        LogUtil.i("无登录状态时post channelId 成功");
+                                    }
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        mView.showError("");
+                                    }
+                                });
+                        addSubscrebe(rxSubscription1);
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
 
     //注册登录事件
     void registerLoginEvent() {

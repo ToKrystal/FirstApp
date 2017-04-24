@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chao.bookviki.di.component.DaggerFragmentComponent;
 import com.chao.bookviki.di.module.FragmentModule;
 import com.chao.bookviki.app.App;
-import com.chao.bookviki.di.component.DaggerFragmentComponent;
 import com.chao.bookviki.di.component.FragmentComponent;
 import com.chao.bookviki.model.bean.LoginBean;
 
