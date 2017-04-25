@@ -4,13 +4,18 @@ import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.chao.bookviki.presenter.contract.UserEditContract;
 import com.chao.bookviki.R;
 import com.chao.bookviki.base.BaseActivity;
+import com.chao.bookviki.model.bean.LoginBean;
+import com.chao.bookviki.model.bean.PersonalInfoBean;
 import com.chao.bookviki.presenter.UserEditPresenter;
+import com.chao.bookviki.presenter.contract.UserEditContract;
+import com.chao.bookviki.util.SnackbarUtil;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -22,6 +27,14 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
 
 
     private MaterialDialog.Builder mInputDialog;
+    private LoginBean bean;
+    @BindView(R.id.name_tv)
+     TextView name_tv;
+    @BindView(R.id.signature_tv)
+     TextView signature_tv;
+    @BindView(R.id.intro_tv)
+     TextView intro_tv;
+
     @Override
     public void showError(String msg) {
 
@@ -41,7 +54,12 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
     @Override
     protected void initEventAndData() {
         initDialog();
-
+        bean = mPresenter.queryLoginBean();
+        if (bean != null){
+            name_tv.setText(bean.getNickName());
+            signature_tv.setText(bean.getSignUpName());
+            intro_tv.setText(bean.getSimpleDesc());
+        }
     }
 
     private void initDialog() {
@@ -55,18 +73,18 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         mInputDialog.inputType(InputType.TYPE_CLASS_TEXT);
         mInputDialog.widgetColorRes(R.color.colorPrimary);
     }
-
-    @OnClick({R.id.user_name_ll, R.id.user_signature_ll, R.id.user_intro_ll, R.id.user_address_ll, R.id.user_github_ll, R.id.user_blog_ll, R.id.user_twitter_ll})
+//, R.id.user_address_ll, R.id.user_github_ll, R.id.user_blog_ll, R.id.user_twitter_ll
+    @OnClick({R.id.user_name_ll, R.id.user_signature_ll, R.id.user_intro_ll})
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
             case R.id.user_name_ll:
             case R.id.user_signature_ll:
             case R.id.user_intro_ll:
-            case R.id.user_address_ll:
+           /* case R.id.user_address_ll:
             case R.id.user_github_ll:
             case R.id.user_blog_ll:
-            case R.id.user_twitter_ll:
+            case R.id.user_twitter_ll:*/
                 showDialogs(id);
                 break;
             default:
@@ -79,17 +97,17 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         switch (id) {
             case R.id.user_name_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_name));
-                mInputDialog.input("","",nameCallback);
+                mInputDialog.input("",bean != null? bean.getNickName() : "",nameCallback);
                 break;
             case R.id.user_signature_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_signature));
-                mInputDialog.input("", "", signatureCallback);
+                mInputDialog.input("", bean !=null? bean.getSignUpName() : "", signatureCallback);
                 break;
             case R.id.user_intro_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_intro));
-                mInputDialog.input("", "", introCallback);
+                mInputDialog.input( "", bean !=null? bean.getSimpleDesc() : "",introCallback);
                 break;
-            case R.id.user_address_ll:
+           /* case R.id.user_address_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_address));
                 mInputDialog.input("", "", addressCallback);
                 break;
@@ -104,7 +122,7 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
             case R.id.user_twitter_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_twitter));
                 mInputDialog.input("", "", twitterCallback);
-                break;
+                break;*/
         }
 
         mInputDialog.show();
@@ -115,6 +133,9 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         @Override
         public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
             if (!TextUtils.isEmpty(input)) {
+                PersonalInfoBean bean = new PersonalInfoBean();
+                bean.setNickName(input.toString());
+                mPresenter.postUpdatePersonalInfo(bean);
                // mUserEntity.setName(input.toString());
                // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
@@ -125,6 +146,9 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         @Override
         public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
             if (!TextUtils.isEmpty(input)) {
+                PersonalInfoBean bean = new PersonalInfoBean();
+                bean.setSimpleDesc(input.toString());
+                mPresenter.postUpdatePersonalInfo(bean);
                // mUserEntity.setIntroduction(input.toString());
                // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
@@ -135,11 +159,25 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         @Override
         public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
             if (!TextUtils.isEmpty(input)) {
+                PersonalInfoBean bean = new PersonalInfoBean();
+                bean.setSignUpName(input.toString());
+                mPresenter.postUpdatePersonalInfo(bean);
               //  mUserEntity.setSignature(input.toString());
               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
         }
     };
+
+    @Override
+    public void showUpdateSuc() {
+        SnackbarUtil.showShort(getWindow().getDecorView(),"修改成功");
+    }
+
+    @Override
+    public void showUserInfo(LoginBean bean) {
+        this.bean = bean;
+    }
+/*
 
     MaterialDialog.InputCallback addressCallback = new MaterialDialog.InputCallback() {
         @Override
@@ -180,6 +218,7 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
             }
         }
     };
+*/
 
 
 

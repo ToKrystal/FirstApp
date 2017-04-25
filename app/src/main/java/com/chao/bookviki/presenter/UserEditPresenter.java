@@ -1,6 +1,7 @@
 package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.base.RxPresenter;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.PersonalInfoBean;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.RetrofitHelper;
@@ -23,7 +24,7 @@ public class UserEditPresenter extends RxPresenter<UserEditContract.View> implem
 
     @Inject
     public UserEditPresenter(RealmHelper mRealHelper,RetrofitHelper mRetrofitHelper) {
-        this.mRealmHelper = mRealmHelper;
+        this.mRealmHelper = mRealHelper;
         this.mRetrofitHelper = mRetrofitHelper;
     }
 
@@ -35,6 +36,7 @@ public class UserEditPresenter extends RxPresenter<UserEditContract.View> implem
                 .subscribe(new CommonSubscriber<String>(mView) {
                     @Override
                     public void onNext(String str) {
+                        mView.showUpdateSuc();
 
 
                     }
@@ -48,5 +50,10 @@ public class UserEditPresenter extends RxPresenter<UserEditContract.View> implem
 
 
 
+    }
+
+    @Override
+    public LoginBean queryLoginBean() {
+        return  mRealmHelper.returnLoginBean();
     }
 }

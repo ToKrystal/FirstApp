@@ -1,7 +1,8 @@
 package com.chao.bookviki.presenter.contract;
 
-import com.chao.bookviki.base.BaseView;
 import com.chao.bookviki.base.BasePresenter;
+import com.chao.bookviki.base.BaseView;
+import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.PersonalInfoBean;
 
 /**
@@ -10,6 +11,8 @@ import com.chao.bookviki.model.bean.PersonalInfoBean;
 
 public interface UserEditContract  {
     interface View extends BaseView {
+        void showUpdateSuc();
+        void showUserInfo(LoginBean bean);
 
     }
 
@@ -18,6 +21,7 @@ public interface UserEditContract  {
      */
     interface Presenter extends BasePresenter<View> {
         void postUpdatePersonalInfo(PersonalInfoBean bean);
+        LoginBean queryLoginBean();
 
     }
 }

@@ -17,7 +17,7 @@
         android:gravity="center"
         />
 
-    <android.support.v7.widget.SwitchCompat
+    <!--<android.support.v7.widget.SwitchCompat
         android:id="@+id/sc_gold_manager_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:src="@drawable/selector_like"
         android:background="@drawable/selector_like"
         android:visibility="gone"
-        />
+        />-->
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/image_button"
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_alignParentEnd="true"
         android:background="#00000000"
         android:src="@mipmap/add"
-        android:text="follw"
+        android:text="关注"
         android:clickable="true"
         />
 </RelativeLayout>

@@ -14,10 +14,16 @@ public class LoginBean  extends RealmObject implements Parcelable {
     @PrimaryKey
     public String name;
     public String icon_url;
+    public String nickName;
+    public String signUpName;
+    public String simpleDesc;
 
-    public LoginBean(String name, String icon_url) {
+    public LoginBean(String name, String icon_url, String nickName, String signUpName, String simpleDesc) {
         this.name = name;
         this.icon_url = icon_url;
+        this.nickName = nickName;
+        this.signUpName = signUpName;
+        this.simpleDesc = simpleDesc;
     }
 
     public LoginBean(){}
@@ -31,6 +37,9 @@ public class LoginBean  extends RealmObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
         dest.writeString(this.icon_url);
+        dest.writeString(this.nickName);
+        dest.writeString(this.signUpName);
+        dest.writeString(this.simpleDesc);
 
     }
     public static final Creator<LoginBean> CREATOR = new Creator<LoginBean>() {
@@ -48,6 +57,9 @@ public class LoginBean  extends RealmObject implements Parcelable {
 
         this.name = in.readString();
         this.icon_url = in.readString();
+        this.nickName = in.readString();
+        this.signUpName = in.readString();
+        this.simpleDesc = in.readString();
     }
 
     public String getName() {
@@ -64,5 +76,29 @@ public class LoginBean  extends RealmObject implements Parcelable {
 
     public void setIcon_url(String icon_url) {
         this.icon_url = icon_url;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getSignUpName() {
+        return signUpName;
+    }
+
+    public void setSignUpName(String signUpName) {
+        this.signUpName = signUpName;
+    }
+
+    public String getSimpleDesc() {
+        return simpleDesc;
+    }
+
+    public void setSimpleDesc(String simpleDesc) {
+        this.simpleDesc = simpleDesc;
     }
 }
