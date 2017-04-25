@@ -1,6 +1,7 @@
 package com.chao.bookviki.ui.gold.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
 import com.chao.bookviki.R;
+import com.chao.bookviki.util.LogUtil;
+import com.chao.bookviki.util.SnackbarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +55,12 @@ public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.Vi
                 RxBus.getDefault().post(bean);
             }
         });
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtil.i("点击");
+            }
+        });
     }
 
     @Override
@@ -65,6 +74,8 @@ public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.Vi
         TextView tvType;
         @BindView(R.id.sc_gold_manager_switch)
         SwitchCompat scSwitch;
+        @BindView(R.id.image_button)
+        AppCompatImageButton imageButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
