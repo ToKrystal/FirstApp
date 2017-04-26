@@ -2,7 +2,6 @@ package com.chao.bookviki.presenter;
 
 import android.Manifest;
 import android.os.Handler;
-import android.util.Log;
 
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.base.RxPresenter;
@@ -59,9 +58,10 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
             @Override
             public void run() {
                String channelId =  SharedPreferenceUtil.getBaiDuYunChannelId();
-                if (channelId != null && SharedPreferenceUtil.getBaiYunBindState() == true){
+                if (channelId != null && SharedPreferenceUtil.getBaiYunBindState() && !SharedPreferenceUtil.getPushStateNotLogin()){
                     PushBindSucBean bean =  new PushBindSucBean(channelId);
                     RxBus.getDefault().post(bean);
+                    SharedPreferenceUtil.setPushStateNotLogin();
                 }
                 //要做的事情
                 handler.postDelayed(this, 5000);

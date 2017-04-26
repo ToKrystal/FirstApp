@@ -81,6 +81,8 @@ public class Constants {
 
     public static final String BAI_DU_YUN_CHANNLEID = "baiduyunchannleid";
 
+    public static final String PUSH_STATE_NOT_LOGIN = "pushstatenotlogin";
+
     //================= INTENT ====================
     public static final String IT_GANK_TYPE = "type";
 

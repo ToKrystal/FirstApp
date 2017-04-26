@@ -20,6 +20,7 @@ public class SharedPreferenceUtil {
     private static final boolean DEFAULT_VERSION_POINT = false;
     private static final boolean DEFAULT_MANAGER_POINT = false;
     private static final boolean DEFAULT_BIND_YUN = false;
+    private static final boolean HAD_PUSH_STATE_NOT_LOGIN = false;
 
     private static final int DEFAULT_CURRENT_ITEM = Constants.TYPE_GOLD;
 
@@ -42,6 +43,12 @@ public class SharedPreferenceUtil {
     }
     public static void setBaiDuYunChannelId(String channleId){
         getAppSp().edit().putString(Constants.BAI_DU_YUN_CHANNLEID,channleId).apply();
+    }
+    public static void setPushStateNotLogin(){
+        getAppSp().edit().putBoolean(Constants.PUSH_STATE_NOT_LOGIN,true).apply();
+    }
+    public static boolean getPushStateNotLogin(){
+        return  getAppSp().getBoolean(Constants.PUSH_STATE_NOT_LOGIN,false);
     }
 
     public static String getBaiDuYunChannelId(){

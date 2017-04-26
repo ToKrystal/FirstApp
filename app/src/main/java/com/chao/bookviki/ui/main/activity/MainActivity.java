@@ -118,7 +118,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mToolbar.setTitle(mNavigationView.getMenu().findItem(getCurrentItem(showFragment)).getTitle().toString());
             hideFragment = showFragment;
         }
-        jump2PushSucc(null);
     }
 
     @Override
@@ -348,16 +347,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 mPresenter.doLogout();
                if (mLoginBean != null){
                    mPresenter.deleteLoginBean(mLoginBean);
                    mLoginBean = null;
                   RxBus.getDefault().post(new LogOutBean());
                }
-
-
-
             }
         });
         builder.show();
