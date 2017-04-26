@@ -1,6 +1,8 @@
 package com.chao.bookviki.presenter;
 
 import android.Manifest;
+import android.os.Handler;
+import android.util.Log;
 
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.base.RxPresenter;
@@ -18,6 +20,7 @@ import com.chao.bookviki.model.http.response.MyHttpResponse;
 import com.chao.bookviki.presenter.contract.MainContract;
 import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.RxUtil;
+import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -36,6 +39,7 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
 
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;
+    private Handler handler;
 
     @Inject
     public MainPresenter(RetrofitHelper mRetrofitHelper,RealmHelper realmHelper) {
@@ -46,6 +50,26 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
         registerLogOutEvent();
         registerPushEvent();
         registerPushBindEvent();
+        registerTimeTask();
+    }
+
+    private void registerTimeTask() {
+        handler=new Handler();
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+               String channelId =  SharedPreferenceUtil.getBaiDuYunChannelId();
+                if (channelId != null && SharedPreferenceUtil.getBaiYunBindState() == true){
+                    PushBindSucBean bean =  new PushBindSucBean(channelId);
+                    RxBus.getDefault().post(bean);
+                }
+                //要做的事情
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        handler.postDelayed(runnable, 5000);//每两秒执行一次runnable.
+      //  handler.removeCallbacks(runnable);
     }
 
     private void registerPushEvent() {
@@ -66,20 +90,7 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
                 .subscribe(new CommonSubscriber<PushBindSucBean>(mView, "默认异常ヽ(≧Д≦)ノ") {
                     @Override
                     public void onNext(PushBindSucBean bean) {
-                        Subscription rxSubscription1 = mRetrofitHelper.postChannelIdNotLogin(bean.channelId)
-                                .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
-                                .compose(RxUtil.<String>handleBookResult())
-                                .subscribe(new CommonSubscriber<String>(mView) {
-                                    @Override
-                                    public void onNext(String String) {
-                                        LogUtil.i("无登录状态时post channelId 成功");
-                                    }
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        mView.showError("");
-                                    }
-                                });
-                        addSubscrebe(rxSubscription1);
+                       postChannelIdNotLogin(bean.channelId);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -198,5 +209,24 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
         if (bean == null){
             mView.showDefaultUserInfo();
         }
+    }
+
+    @Override
+    public void postChannelIdNotLogin(String channelId) {
+        Subscription rxSubscription = mRetrofitHelper.postChannelIdNotLogin(channelId)
+                .compose(RxUtil.<BookHttpResponse<String>>rxSchedulerHelper())
+                .compose(RxUtil.<String>handleBookResult())
+                .subscribe(new CommonSubscriber<String>(mView) {
+                    @Override
+                    public void onNext(String String) {
+                        LogUtil.i("无登录状态时post channelId 成功");
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.i("无登录状态时post channelId 失败");
+                        mView.showError("");
+                    }
+                });
+        addSubscrebe(rxSubscription);
     }
 }

@@ -34,5 +34,7 @@ public interface MainContract {
         void deleteLoginBean(LoginBean bean);
 
         void queryLoginState();
+
+        void postChannelIdNotLogin(String channelId);
     }
 }

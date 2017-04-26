@@ -134,6 +134,7 @@ public interface BookApis {
     @POST("/BookSpringMVC/bookapi/10")
     Observable<BookHttpResponse<String>> postUpdatePersonInfo(@Body PersonalInfoBean bean);
 
+    @FormUrlEncoded
     @POST("/BookSpringMVC/bookapi/11")
     Observable<BookHttpResponse<String>> postChannelIdNotLogin(@Field("channelId")String channelId);
 
