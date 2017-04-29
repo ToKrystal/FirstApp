@@ -24,6 +24,8 @@ public class BookListBean implements Parcelable {
 
     private GoldListScreenshotBean screenshot;
 
+    private String content;
+
     public BookListBean(){}
     protected BookListBean(Parcel in){
         this.objectId = in.readString();
@@ -34,6 +36,7 @@ public class BookListBean implements Parcelable {
         this.url = in.readString();
         this.user = in.readParcelable(getClass().getClassLoader());
         this.screenshot = in.readParcelable(getClass().getClassLoader());
+        this.content = in.readString();
 
 
     }
@@ -53,6 +56,7 @@ public class BookListBean implements Parcelable {
         dest.writeString(this.url);
         dest.writeParcelable(this.user, flags);
         dest.writeParcelable(this.screenshot, flags);
+        dest.writeString(this.content);
     }
 
     public static final Creator<BookListBean> CREATOR = new Creator<BookListBean>() {
@@ -217,6 +221,14 @@ public class BookListBean implements Parcelable {
 
     public void setUser(GoldListUserBean user) {
         this.user = user;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
