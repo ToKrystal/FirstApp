@@ -40,6 +40,7 @@ import com.chao.bookviki.ui.main.fragment.SettingFragment;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.userinfo.fragment.UserInfoFragment;
 import com.chao.bookviki.ui.zhihu.fragment.ZhihuMainFragment;
+import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.util.SystemUtil;
@@ -383,9 +384,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void jump2PushSucc(MyPushBean bean) {
+        LogUtil.i("收到透传消息，正在展示通知栏");
+
         Intent notifyIntent =
                 new Intent(this, BookDetailActivity.class);
-    //    notifyIntent.putExtra("objectId",bean.ojectId);
+        notifyIntent.putExtra("objectId",bean.ojectId);
         PendingIntent notifyPendingIntent =
                 PendingIntent.getActivity(
                         this,

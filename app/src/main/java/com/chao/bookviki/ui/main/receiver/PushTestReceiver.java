@@ -112,8 +112,8 @@ public class PushTestReceiver extends PushMessageReceiver {
         }
         try {
         if(!customJson.isNull("objectId")){
-            String  objectId = null;
-            objectId = customJson.getString("objectId");
+            LogUtil.i("收到透传消息，开始发送事件");
+            String objectId = customJson.getString("objectId");
             RxBus.getDefault().post(new MyPushBean(objectId));
         }
             } catch (JSONException e) {

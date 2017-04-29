@@ -88,6 +88,7 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
     private BookListBean mTopBean;
  //   private String topicId;
     private MaterialDialog.Builder mInputDialog;
+    private String objectId;
 
     @Override
     protected void initInject() {
@@ -110,12 +111,17 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenter> implem
         Bundle bundle = intent.getExtras();
      //   bundle.setClassLoader(BookListBean.class.getClassLoader());
 try {
+    //手动触发不是从adpter进来的null
     mTopBean = bundle.getParcelable("beanInfo");
-    String test = mTopBean.getObjectId();
+    objectId = mTopBean.getObjectId();
 }catch (NullPointerException e) {
+//此处为了推送进来的入口
+   // mTopBean = initBean();
+     objectId = intent.getStringExtra("objectId");
+    mPresenter.getSingleBookList(objectId);
 
-    mTopBean = initBean();
 }
+//保存到presenter 供保存Like
 mPresenter.save2DetailPrestener(mTopBean);
 
 
@@ -143,7 +149,7 @@ mPresenter.save2DetailPrestener(mTopBean);
        // imgUrl = "https://pic4.zhimg.com/v2-0983ac630d50d798ba099a0cce8c0ca3.jpg";
        // imgUrl = intent.getExtras().getString("url");
         //获取该主题的评论
-        mPresenter.getContent(mTopBean.getObjectId());
+        mPresenter.getContent(objectId);
         /*if (mTopBean == null) {
             mPresenter.getTopInfo(topicId);
         }*/
