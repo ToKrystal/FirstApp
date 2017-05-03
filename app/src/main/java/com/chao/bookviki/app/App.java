@@ -16,10 +16,13 @@ import com.chao.bookviki.di.component.AppComponent;
 import com.chao.bookviki.di.component.DaggerAppComponent;
 import com.chao.bookviki.di.module.AppModule;
 import com.chao.bookviki.di.module.HttpModule;
+import com.chao.bookviki.model.bean.PushBindSucBean;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import rx.functions.Action1;
 
 /**
  * 自定义application
@@ -54,7 +57,6 @@ public class App extends Application{
         InitializeService.start(this);
         autoBindBaiduYunTuiSong();
     }
-
 
     protected  void autoBindBaiduYunTuiSong(){
         if (!SharedPreferenceUtil.getBaiYunBindState())

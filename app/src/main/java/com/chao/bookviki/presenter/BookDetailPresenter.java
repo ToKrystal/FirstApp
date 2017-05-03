@@ -83,6 +83,24 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
     }
 
     /**
+     * 获取单个主题 供Push到Detail
+     */
+    @Override
+    public void getSingleBookList(String objectId) {
+        Subscription rxSubscription = mRetrofitHelper.fetchSingleInfo(objectId)
+                .compose(RxUtil.<BookHttpResponse<List<BookListBean>>>rxSchedulerHelper())
+                .compose(RxUtil.<List<BookListBean>>handleBookResult())//response-> bean
+                .subscribe(new CommonSubscriber<List<BookListBean>>(mView) {
+                    @Override
+                    public void onNext(List<BookListBean> beans) {
+                        mView.showTopInfo(beans.get(0));
+                    }
+                });
+        addSubscrebe(rxSubscription);
+
+    }
+
+    /**
      * 获取主题信息
      *
      */
@@ -130,8 +148,6 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
         }else {
             mView.jump2LoginPage();
         }
-
-
     }
 
     @Override
