@@ -4,7 +4,9 @@ import com.chao.bookviki.model.http.exception.ApiException;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.GankHttpResponse;
 import com.chao.bookviki.model.http.response.GoldHttpResponse;
+import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.model.http.response.MyHttpResponse;
+import com.chao.bookviki.model.http.response.YingWenYuLuResponse;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -120,7 +122,49 @@ public class RxUtil {
         };
     }
 
+    //处理精选阅读新闻
+    public static <T> Observable.Transformer<JingXuanNewsResponse<T>, T> handleJingXuanNewsResult() {   //compose判断结果
+        return new Observable.Transformer<JingXuanNewsResponse<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<JingXuanNewsResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<JingXuanNewsResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(JingXuanNewsResponse<T> tBookHttpResponse) {
+                        if(tBookHttpResponse.getList() != null) {
+                            return createData(tBookHttpResponse.getList());
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
 
+    //处理精选阅读-英文语录body
+    public static <T> Observable.Transformer<YingWenYuLuResponse<T>, T> handleYingWenYuLuResult() {   //compose判断结果
+        return new Observable.Transformer<YingWenYuLuResponse<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<YingWenYuLuResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<YingWenYuLuResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(YingWenYuLuResponse<T> tBookHttpResponse) {
+                        YingWenYuLuResponse.BodyResponse<T> body = tBookHttpResponse.getShowapi_res_body();
+                        if(body != null) {
+                            if (body.getData() != null){
+                                return createData(body.getData());
+                            }else {
+                                return Observable.error(new ApiException("服务器返回error"));
+                            }
+
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
 
     /**
      * 生成Observable

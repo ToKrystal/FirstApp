@@ -36,7 +36,7 @@ public class BookMainFragment extends BaseFragment<BookMainPresenter> implements
     ViewPager mViewPager;
 
     public static String[] typeStr = {"日常", "美文", "格言", "生活", "设计", "产品", "阅读", "工具资源"};
-    public static String[] type = {"android", "ios", "frontend", "backend", "design", "product", "article", "freebie"};
+    public static String[] type = {"daily", "beautifultxt", "geyan", "shenghuo", "design", "product", "article", "freebie"};
 
     List<BookPagerFragment> fragments = new ArrayList<>();
     private int currentIndex = 0;

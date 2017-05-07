@@ -10,6 +10,7 @@ import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.GankSearchItemBean;
 import com.chao.bookviki.model.bean.HotListBean;
+import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.NodeBean;
 import com.chao.bookviki.model.bean.NodeListBean;
@@ -21,16 +22,21 @@ import com.chao.bookviki.model.bean.ThemeChildListBean;
 import com.chao.bookviki.model.bean.ThemeListBean;
 import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.model.bean.WelcomeBean;
+import com.chao.bookviki.model.bean.YingWenYuLuBean;
 import com.chao.bookviki.model.bean.ZhihuDetailBean;
 import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.GoldApis;
+import com.chao.bookviki.model.http.api.JingXuanNewsApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.VtexApis;
+import com.chao.bookviki.model.http.api.YingWenYuLuApis;
 import com.chao.bookviki.model.http.api.ZhihuApis;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.GankHttpResponse;
+import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.model.http.response.MyHttpResponse;
+import com.chao.bookviki.model.http.response.YingWenYuLuResponse;
 
 import java.util.List;
 
@@ -47,15 +53,19 @@ public class RetrofitHelper {
     private MyApis mMyApiService;
     private GoldApis mGoldApiService;
     private VtexApis mVtexApiService;
+    private JingXuanNewsApis jingXuanNewsApis;
+    private YingWenYuLuApis yingWenYuLuApis;
 
     public RetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService,
-                          MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService,BookApis bookApis) {
+                          MyApis myApiService, GoldApis goldApiService, VtexApis vtexApiService,BookApis bookApis,JingXuanNewsApis jingXuanNewsApis,YingWenYuLuApis yingWenYuLuApis) {
         this.mZhihuApiService = zhihuApiService;
         this.mGankApiService = gankApiService;
         this.mMyApiService = myApiService;
         this.mGoldApiService = goldApiService;
         this.mVtexApiService = vtexApiService;
         this.mBookApiService = bookApis;
+        this.jingXuanNewsApis = jingXuanNewsApis;
+        this.yingWenYuLuApis = yingWenYuLuApis;
     }
 
     public Observable<DailyListBean> fetchDailyListInfo() {
@@ -239,5 +249,13 @@ public class RetrofitHelper {
 
     public Observable<BookHttpResponse<String>> postChannelIdNotLogin(String channelId) {
         return  mBookApiService.postChannelIdNotLogin(channelId);
+    }
+
+    public Observable<JingXuanNewsResponse<List<JingXuanNewsBean>>> getJingXuanNewsList(String type,int page,int limit){
+        return jingXuanNewsApis.getJingXuanNews(type,page,limit);
+    }
+
+    public Observable<YingWenYuLuResponse<List<YingWenYuLuBean>>> getYingWenYuLus(int count,int showapi_appid,String showapi_sign ){
+        return yingWenYuLuApis.getYingWenYuLus(count,showapi_appid,showapi_sign);
     }
 }

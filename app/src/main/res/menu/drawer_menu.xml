@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/drawer_group_content">
         <menu>
-            <item
+           <!-- <item
                 android:id="@+id/drawer_zhihu"
                 android:icon="@mipmap/ic_daily_share"
                 android:checkable="true"
                 android:checked="true"
-                android:title="@string/zhihu"/>
+                android:title="@string/zhihu"/>-->
 
             <item
                 android:id="@+id/drawer_gank"

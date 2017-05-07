@@ -1,25 +1,25 @@
 package com.chao.bookviki.di.module;
 
-import android.app.Application;
-
+import com.chao.bookviki.BuildConfig;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
-import com.chao.bookviki.di.component.AppComponent;
+import com.chao.bookviki.di.qualifier.BookUrl;
 import com.chao.bookviki.di.qualifier.GankUrl;
 import com.chao.bookviki.di.qualifier.GoldUrl;
+import com.chao.bookviki.di.qualifier.JingXuanNewsUrl;
+import com.chao.bookviki.di.qualifier.MyUrl;
 import com.chao.bookviki.di.qualifier.VtexUrl;
+import com.chao.bookviki.di.qualifier.YingWenYuLuUrl;
 import com.chao.bookviki.di.qualifier.ZhihuUrl;
+import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.GoldApis;
+import com.chao.bookviki.model.http.api.JingXuanNewsApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.VtexApis;
-import com.chao.bookviki.util.PersistentCookieStore;
-import com.chao.bookviki.util.SystemUtil;
-import com.chao.bookviki.BuildConfig;
-import com.chao.bookviki.di.qualifier.BookUrl;
-import com.chao.bookviki.di.qualifier.MyUrl;
-import com.chao.bookviki.model.http.api.BookApis;
+import com.chao.bookviki.model.http.api.YingWenYuLuApis;
 import com.chao.bookviki.model.http.api.ZhihuApis;
+import com.chao.bookviki.util.SystemUtil;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
@@ -27,19 +27,14 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 
 import java.io.File;
 import java.io.IOException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
-import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -111,6 +106,20 @@ public class HttpModule {
     @BookUrl
     Retrofit provideBookRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, BookApis.HOST);
+    }
+
+    @Singleton
+    @Provides
+    @JingXuanNewsUrl
+    Retrofit provideJingXuanNewsRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, JingXuanNewsApis.HOST);
+    }
+
+    @Singleton
+    @Provides
+    @YingWenYuLuUrl
+    Retrofit provideYingWenYuLuRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, YingWenYuLuApis.HOST);
     }
 
     @Singleton
@@ -218,6 +227,18 @@ public class HttpModule {
     @Provides
     BookApis provideBookService(@BookUrl Retrofit retrofit) {
         return retrofit.create(BookApis.class);
+    }
+
+    @Singleton
+    @Provides
+    JingXuanNewsApis provideJingXuanNewsService(@JingXuanNewsUrl Retrofit retrofit) {
+        return retrofit.create(JingXuanNewsApis.class);
+    }
+
+    @Singleton
+    @Provides
+    YingWenYuLuApis provideYingWenYuLuService(@YingWenYuLuUrl Retrofit retrofit) {
+        return retrofit.create(YingWenYuLuApis.class);
     }
 
 

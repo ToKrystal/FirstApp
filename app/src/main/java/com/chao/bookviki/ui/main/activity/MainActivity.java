@@ -39,7 +39,6 @@ import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
 import com.chao.bookviki.ui.userinfo.fragment.UserInfoFragment;
-import com.chao.bookviki.ui.zhihu.fragment.ZhihuMainFragment;
 import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
@@ -73,7 +72,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private LoginBean mLoginBean;
 
-    ZhihuMainFragment mZhihuFragment;
+  //  ZhihuMainFragment mZhihuFragment;
     GankMainFragment mGankFragment;
     // GoldMainFragment mGoldFragment;
     LikeFragment mLikeFragment;
@@ -86,8 +85,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     MenuItem mSearchMenuItem;
     ActionBarDrawerToggle mDrawerToggle;
 
-    private int hideFragment = Constants.TYPE_ZHIHU;
-    private int showFragment = Constants.TYPE_ZHIHU;
+    private int hideFragment = Constants.TYPE_GANK;
+    private int showFragment = Constants.TYPE_GANK;
 
     @Override
     protected void initInject() {
@@ -111,10 +110,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             SharedPreferenceUtil.setNightModeState(false);
         } else {
             showFragment = SharedPreferenceUtil.getCurrentItem();
-            hideFragment = Constants.TYPE_ZHIHU;
+            hideFragment = Constants.TYPE_GANK;
 
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
-            mNavigationView.getMenu().findItem(R.id.drawer_zhihu).setChecked(false);
+            mNavigationView.getMenu().findItem(R.id.drawer_gank).setChecked(false);
             //设置toolbar文字为Menu Item 文字
             mToolbar.setTitle(mNavigationView.getMenu().findItem(getCurrentItem(showFragment)).getTitle().toString());
             hideFragment = showFragment;
@@ -124,7 +123,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void initEventAndData() {
         setToolBar(mToolbar,"发现阅读");
-        mZhihuFragment = new ZhihuMainFragment();
+     //   mZhihuFragment = new ZhihuMainFragment();
         mGankFragment = new GankMainFragment();
         // mGoldFragment = new GoldMainFragment();
         mBookMainFragment = new BookMainFragment();
@@ -136,7 +135,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
-        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mGankFragment,mBookMainFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
+        loadMultipleRootFragment(R.id.fl_main_content,0,mGankFragment,mBookMainFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         btnLogout =  mNavigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         img_avatar = mNavigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         tv_login_name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_login_name);
@@ -156,10 +155,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.drawer_zhihu:
+                   /* case R.id.drawer_zhihu:
                         showFragment = Constants.TYPE_ZHIHU;
                         mSearchMenuItem.setVisible(false);
-                        break;
+                        break;*/
                     case R.id.drawer_gank:
                         showFragment = Constants.TYPE_GANK;
                         mSearchMenuItem.setVisible(true);
@@ -278,8 +277,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private SupportFragment getTargetFragment(int item) {
         switch (item) {
-            case Constants.TYPE_ZHIHU:
-                return mZhihuFragment;
+            /*case Constants.TYPE_ZHIHU:
+                return mZhihuFragment;*/
             case Constants.TYPE_GANK:
                 return mGankFragment;
             case Constants.TYPE_GOLD:
@@ -295,13 +294,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             case Constants.TYPE_USER_INFO:
                 return userInfoFragment;
         }
-        return mZhihuFragment;
+        return mGankFragment;
     }
 
     private int getCurrentItem(int item) {
         switch (item) {
-            case Constants.TYPE_ZHIHU:
-                return R.id.drawer_zhihu;
+            /*case Constants.TYPE_ZHIHU:
+                return R.id.drawer_zhihu;*/
 
             case Constants.TYPE_GANK:
                 return R.id.drawer_gank;
@@ -320,7 +319,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_userInfo;
 
         }
-        return R.id.drawer_zhihu;
+        return R.id.drawer_gank;
     }
 
     @Override

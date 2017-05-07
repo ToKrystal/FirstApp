@@ -31,10 +31,6 @@ public class PageModule {
         return new GankMainFragment();
     }
 
-
-
-
-
     @Singleton
     @Provides
     UserInfoFragment provideUserInfo() {

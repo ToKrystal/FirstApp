@@ -1,7 +1,6 @@
 package com.chao.bookviki.ui.gank.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chao.bookviki.R;
-import com.chao.bookviki.model.bean.JingXuanNewsBean;
+import com.chao.bookviki.model.bean.YingWenYuLuBean;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
-import com.chao.bookviki.util.DateUtil;
 
 import java.util.List;
 
@@ -23,15 +21,15 @@ import butterknife.ButterKnife;
  * Created by codeest on 16/8/20.
  */
 
-public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class YingWenYuLuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<JingXuanNewsBean> mList;
-    private OnItemClickListener onItemClickListener;
+    private List<YingWenYuLuBean> mList;
+  //  private OnItemClickListener onItemClickListener;
 
     private String tech;
 
-    public TechAdapter(Context mContext, List<JingXuanNewsBean> mList, String tech) {
+    public YingWenYuLuAdapter(Context mContext, List<YingWenYuLuBean> mList, String tech) {
         inflater = LayoutInflater.from(mContext);
         this.mList = mList;
         this.tech = "Android";
@@ -39,7 +37,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_tech, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_tech_yingwenyulu, parent, false));
     }
 
     @Override
@@ -51,10 +49,9 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if(tech.equals(GankMainFragment.tabTitle[2])) {
             ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_web);
         }
-        ((ViewHolder)holder).tvContent.setText(mList.get(position).getTitle());
-        ((ViewHolder)holder).tvAuthor.setText("未知");
-        ((ViewHolder)holder).tvTime.setText(DateUtil.formatDateTime(mList.get(position).getTime(), true));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder)holder).tvContent.setText(mList.get(position).getEnglish());
+        ((ViewHolder)holder).tvChinese.setText(mList.get(position).getChinese());
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(onItemClickListener != null) {
@@ -62,7 +59,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     onItemClickListener.onItemClick(holder.getAdapterPosition(),cv);
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -76,10 +73,9 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView ivIcon;
         @BindView(R.id.tv_tech_title)
         TextView tvContent;
-        @BindView(R.id.tv_tech_author)
-        TextView tvAuthor;
-        @BindView(R.id.tv_tech_time)
-        TextView tvTime;
+        @BindView(R.id.tv_tech_chinese)
+        TextView tvChinese;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -87,11 +83,11 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    /*public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position,View view);
-    }
+        void onItemClick(int position, View view);
+    }*/
 }

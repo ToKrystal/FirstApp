@@ -6,6 +6,7 @@ import com.chao.bookviki.di.module.FragmentModule;
 import com.chao.bookviki.di.scope.FragmentScope;
 import com.chao.bookviki.ui.gank.fragment.GirlFragment;
 import com.chao.bookviki.ui.gank.fragment.TechFragment;
+import com.chao.bookviki.ui.gank.fragment.YingWenYuLuFragment;
 import com.chao.bookviki.ui.gold.fragment.BookCommentFragment;
 import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
 import com.chao.bookviki.ui.gold.fragment.BookPagerFragment;
@@ -56,6 +57,8 @@ public interface FragmentComponent {
     void inject(BookPagerFragment bookPagerFragment);
 
     void inject(BookMainFragment bookMainFragment);
+
+    void inject(YingWenYuLuFragment yingWenYuLuFragment);
 
 
 

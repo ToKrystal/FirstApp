@@ -9,18 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseFragment;
 import com.chao.bookviki.component.ImageLoader;
-import com.chao.bookviki.model.bean.GankItemBean;
-import com.chao.bookviki.util.SnackbarUtil;
-import com.chao.bookviki.util.SystemUtil;
-import com.chao.bookviki.widget.ProgressImageView;
-import com.chao.bookviki.R;
+import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.presenter.TechPresenter;
 import com.chao.bookviki.presenter.contract.TechContract;
 import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
 import com.chao.bookviki.ui.gank.adapter.TechAdapter;
+import com.chao.bookviki.util.SnackbarUtil;
+import com.chao.bookviki.util.SystemUtil;
+import com.chao.bookviki.widget.ProgressImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,8 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
     @BindView(R.id.tech_appbar)
     AppBarLayout appbar;
 
-    List<GankItemBean> mList;
+  //  List<GankItemBean> mList;
+    List<JingXuanNewsBean> mList;
     TechAdapter mAdapter;
 
     boolean isLoadingMore = false;
@@ -70,21 +71,26 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
     protected void initEventAndData() {
         mPresenter.getGirlImage();
         mList = new ArrayList<>();
+        //android
         tech = getArguments().getString(Constants.IT_GANK_TYPE);
+        //104
         type = getArguments().getInt(Constants.IT_GANK_TYPE_CODE);
         mAdapter = new TechAdapter(mContext,mList,tech);
         rvTechContent.setLayoutManager(new LinearLayoutManager(mContext));
         rvTechContent.setAdapter(mAdapter);
         ivProgress.start();
-        mPresenter.getGankData(tech, type);
+        //获取精选新闻
+        mPresenter.getJingXuanNews("war");
+     //   mPresenter.getGankData(tech, type);
+        //点击跳转
         mAdapter.setOnItemClickListener(new TechAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View shareView) {
                 TechDetailActivity.launch(new TechDetailActivity.Builder()
                         .setContext(mContext)
-                        .setId(mList.get(position).get_id())
-                        .setTitle(mList.get(position).getDesc())
-                        .setUrl(mList.get(position).getUrl())
+                        .setId(String.valueOf(mList.get(position).getId()))
+                        .setTitle(mList.get(position).getTitle())
+                        .setUrl(mList.get(position).getDocurl())
                         .setType(type)
                 .setAnimConfig(mActivity, shareView));
             }
@@ -98,7 +104,7 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
                 if (lastVisibleItem >= totalItemCount - 2 && dy > 0) {  //还剩2个Item时加载更多
                     if(!isLoadingMore){
                         isLoadingMore = true;
-                        mPresenter.getMoreGankData(tech);
+                        mPresenter.getMoreJingXuanNews("war");
                     }
                 }
             }
@@ -119,7 +125,7 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getGankData(tech, type);
+                mPresenter.getJingXuanNews("war");
             }
         });
     }
@@ -134,7 +140,7 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
         SnackbarUtil.showShort(rvTechContent,msg);
     }
 
-    @Override
+   /* @Override
     public void showContent(List<GankItemBean> list) {
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
@@ -144,20 +150,41 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
         mList.clear();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void showMoreContent(List<GankItemBean> list) {
         ivProgress.stop();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         isLoadingMore = false;
-    }
+    }*/
 
     @Override
     public void showGirlImage(String url, String copyright) {
         ImageLoader.load(mContext, url, ivOrigin);
         Glide.with(mContext).load(url).bitmapTransform(new BlurTransformation(mContext)).into(ivBlur);
         tvCopyright.setText(String.format("by: %s",copyright));
+    }
+
+    @Override
+    public void showJingXuanItem(List<JingXuanNewsBean> beans) {
+        if(swipeRefresh.isRefreshing()) {
+            swipeRefresh.setRefreshing(false);
+        } else {
+            ivProgress.stop();
+        }
+        mList.clear();
+        mList.addAll(beans);
+        mAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void showMoreJingXuanItem(List<JingXuanNewsBean> beans) {
+        ivProgress.stop();
+        mList.addAll(beans);
+        mAdapter.notifyDataSetChanged();
+        isLoadingMore = false;
     }
 }
