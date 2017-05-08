@@ -13,8 +13,12 @@ import com.chao.bookviki.R;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.util.DateUtil;
+import com.chao.bookviki.util.JingXuanDiverdedUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,18 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private List<JingXuanNewsBean> mList;
     private OnItemClickListener onItemClickListener;
+    /**
+     * 1	war	军事
+     2	sport	体育
+     3	tech	科技
+     4	edu	教育
+     5	ent	娱乐
+     6	money	财经
+     7	gupiao	股票
+     8	travel	旅游
+     9	lady	女人
+     */
+    private Map<String,String> map;
 
     private String tech;
 
@@ -35,6 +51,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         inflater = LayoutInflater.from(mContext);
         this.mList = mList;
         this.tech = "Android";
+        this.map = JingXuanDiverdedUtil.map;
     }
 
     @Override
@@ -52,7 +69,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_web);
         }
         ((ViewHolder)holder).tvContent.setText(mList.get(position).getTitle());
-        ((ViewHolder)holder).tvAuthor.setText("未知");
+        ((ViewHolder)holder).tvAuthor.setText(map.get(mList.get(position).getChannelname()));
         ((ViewHolder)holder).tvTime.setText(DateUtil.formatDateTime(mList.get(position).getTime(), true));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

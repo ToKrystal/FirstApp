@@ -42,13 +42,7 @@ public class YingWenYuLuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(tech.equals(GankMainFragment.tabTitle[0])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_android);
-        } else if(tech.equals(GankMainFragment.tabTitle[1])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_ios);
-        } else if(tech.equals(GankMainFragment.tabTitle[2])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_web);
-        }
+        ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.yingwenyuluicon);
         ((ViewHolder)holder).tvContent.setText(mList.get(position).getEnglish());
         ((ViewHolder)holder).tvChinese.setText(mList.get(position).getChinese());
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {

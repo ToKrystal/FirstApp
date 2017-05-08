@@ -1,5 +1,7 @@
 package com.chao.bookviki.presenter;
 
+import android.util.Log;
+
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
@@ -11,11 +13,15 @@ import com.chao.bookviki.model.http.response.GankHttpResponse;
 import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.presenter.contract.TechContract;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
+import com.chao.bookviki.util.JingXuanDiverdedUtil;
+import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,6 +36,16 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
 
     private RetrofitHelper mRetrofitHelper;
     private static final int NUM_OF_PAGE = 20;
+    private Map<String,TypeObj> type2ObjMap;
+    private Map<String,List<JingXuanNewsBean>> type2NewsBeanMap;
+
+    public static class TypeObj{
+        public Integer currentPage;
+
+        public TypeObj(Integer currentPage) {
+            this.currentPage = currentPage;
+        }
+    }
 
     private int currentPage = 1;
     private String queryStr = null;
@@ -52,6 +68,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     @Inject
     public TechPresenter(RetrofitHelper mRetrofitHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        type2ObjMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
+        type2NewsBeanMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
         //查询事件
         registerEvent();
     }
@@ -156,21 +174,82 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
         addSubscrebe(rxSubscription);
     }*/
 
+   /* @Override
+    public void getJingXuanNews(String type) {
+        //随机生成所有type,大小为limit
+        Map<String,Integer> type2NumMap = JingXuanDiverdedUtil.diverided(NUM_OF_PAGE);
+        //请求
+        final List<JingXuanNewsBean> toShowList = new ArrayList<>(NUM_OF_PAGE);
+        for (Map.Entry<String,Integer> entry : type2NumMap.entrySet()){
+            String newsType = entry.getKey();
+            final int needNum = entry.getValue();
+            List<JingXuanNewsBean> list = type2NewsBeanMap.get(newsType);
+            if (list == null){
+                list = new ArrayList<>(NUM_OF_PAGE*2);
+                type2NewsBeanMap.put(newsType,list);
+            }
+            //填充list
+            final List<JingXuanNewsBean> finalList = list;
+            if (list.size() < needNum){//不够了
+                TypeObj obj = type2ObjMap.get(newsType);
+                int currentPage;
+                if (obj == null){
+                    obj = new TypeObj(1);
+                    type2ObjMap.put(newsType,obj);
+                }else {
+                    obj.currentPage++;
+                }
+                currentPage = obj.currentPage;
+                Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(newsType,currentPage,NUM_OF_PAGE)
+                        .compose(RxUtil.<JingXuanNewsResponse<List<JingXuanNewsBean>>>rxSchedulerHelper())
+                        .compose(RxUtil.<List<JingXuanNewsBean>>handleJingXuanNewsResult())
+                        .subscribe(new CommonSubscriber<List<JingXuanNewsBean>>(mView) {
+                            @Override
+                            public void onNext(List<JingXuanNewsBean> beans) {
+                                //mView.showJingXuanItem(jingXuanNewsBean);
+                                //完成了
+                                finalList.addAll(beans);
+                                //发事件解决
+                            }
+                        });
+                addSubscrebe(rxSubscription);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //保证完成
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (Map.Entry<String,Integer> entry : type2NumMap.entrySet()){
+            String tt = entry.getKey();
+            int needNum = entry.getValue();
+            LogUtil.i(type2NewsBeanMap.get(tt).size()+"");
+            List<JingXuanNewsBean> list = type2NewsBeanMap.get(tt);
+            toShowList.addAll(list.subList(0,needNum));
+            list.subList(0,needNum).clear();
+        }
+        mView.showJingXuanItem(toShowList);
+    }*/
+
     @Override
     public void getJingXuanNews(String type) {
-        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(type,currentPage,NUM_OF_PAGE)
+        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(type,++currentPage,NUM_OF_PAGE)
                 .compose(RxUtil.<JingXuanNewsResponse<List<JingXuanNewsBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<JingXuanNewsBean>>handleJingXuanNewsResult())
-                .subscribe(new CommonSubscriber<List<JingXuanNewsBean>>(mView) {
+                .subscribe(new CommonSubscriber<List<JingXuanNewsBean>>(mView, "加载更多数据失败ヽ(≧Д≦)ノ") {
                     @Override
-                    public void onNext(List<JingXuanNewsBean> jingXuanNewsBean) {
-                        mView.showJingXuanItem(jingXuanNewsBean);
+                    public void onNext(List<JingXuanNewsBean> beans) {
+                        mView.showMoreJingXuanItem(beans);
                     }
                 });
         addSubscrebe(rxSubscription);
     }
-
-
 
     @Override
     public void getMoreJingXuanNews(String type) {
