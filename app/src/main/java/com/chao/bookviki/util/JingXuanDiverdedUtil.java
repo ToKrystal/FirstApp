@@ -24,6 +24,7 @@ public class JingXuanDiverdedUtil {
     private static Random random = new Random();
     public static final Map<String,String> map;
     private static final List<String> list;
+    public static  Map<Integer,TypeObj> type2PageMap;
     static {
         map = new HashMap<>();
         map.put("war","军事");
@@ -36,6 +37,31 @@ public class JingXuanDiverdedUtil {
         map.put("travel","旅游");
         map.put("lady","女人");
         list = new ArrayList<>(map.keySet());
+        type2PageMap = new HashMap<>(map.size());
+        int i = 0;
+        for (Map.Entry<String,String> entry : map.entrySet()){
+            String type = entry.getKey();
+            TypeObj obj = new TypeObj(type,1);
+            type2PageMap.put(i,obj);
+            i++;
+        }
+
+    }
+
+   public static class TypeObj{
+        public String type;
+        public int currentPage;
+
+        public TypeObj(String type, int currentPage) {
+            this.type = type;
+            this.currentPage = currentPage;
+        }
+    }
+
+    public static TypeObj getRanDomType(){
+        int index = random.nextInt(type2PageMap.size());
+        TypeObj temp  = type2PageMap.get(index);
+        return temp;
     }
 
     public static Map<String, Integer> diverided(int limit){

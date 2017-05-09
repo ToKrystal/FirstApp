@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -38,7 +39,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     private static final int NUM_OF_PAGE = 20;
     private Map<String,TypeObj> type2ObjMap;
     private Map<String,List<JingXuanNewsBean>> type2NewsBeanMap;
-
+    public   Map<Integer,JingXuanDiverdedUtil.TypeObj> type2PageMap;
+    private Random random ;
     public static class TypeObj{
         public Integer currentPage;
 
@@ -51,6 +53,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     private String queryStr = null;
     private String currentTech = GankMainFragment.tabTitle[0];
     private int currentType = Constants.TYPE_ANDROID;
+
+
 
     /**
      * war 	军事
@@ -72,6 +76,20 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
         type2NewsBeanMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
         //查询事件
         registerEvent();
+        random = new Random();
+        type2PageMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
+        int i = 0;
+        for (Map.Entry<String,String> entry : JingXuanDiverdedUtil.map.entrySet()){
+            String type = entry.getKey();
+            JingXuanDiverdedUtil.TypeObj obj = new JingXuanDiverdedUtil.TypeObj(type,1);
+            type2PageMap.put(i,obj);
+            i++;
+        }
+    }
+
+    private  JingXuanDiverdedUtil.TypeObj getRanDomType(){
+        int index = random.nextInt(type2PageMap.size());
+        return type2PageMap.get(index);
     }
 
     private void registerEvent() {
@@ -239,13 +257,14 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
 
     @Override
     public void getJingXuanNews(String type) {
-        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(type,++currentPage,NUM_OF_PAGE)
+        JingXuanDiverdedUtil.TypeObj obj = getRanDomType();
+        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(obj.type,obj.currentPage,NUM_OF_PAGE)
                 .compose(RxUtil.<JingXuanNewsResponse<List<JingXuanNewsBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<JingXuanNewsBean>>handleJingXuanNewsResult())
                 .subscribe(new CommonSubscriber<List<JingXuanNewsBean>>(mView, "加载更多数据失败ヽ(≧Д≦)ノ") {
                     @Override
                     public void onNext(List<JingXuanNewsBean> beans) {
-                        mView.showMoreJingXuanItem(beans);
+                        mView.showJingXuanItem(beans);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -259,7 +278,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
             getMoreSearchNewsData();
             return;
         }
-        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(type,++currentPage,NUM_OF_PAGE)
+        JingXuanDiverdedUtil.TypeObj obj = getRanDomType();
+        Subscription rxSubscription = mRetrofitHelper.getJingXuanNewsList(obj.type,++obj.currentPage,NUM_OF_PAGE)
                 .compose(RxUtil.<JingXuanNewsResponse<List<JingXuanNewsBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<JingXuanNewsBean>>handleJingXuanNewsResult())
                 .subscribe(new CommonSubscriber<List<JingXuanNewsBean>>(mView, "加载更多数据失败ヽ(≧Д≦)ノ") {
