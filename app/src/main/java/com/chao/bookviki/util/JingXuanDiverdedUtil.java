@@ -1,5 +1,7 @@
 package com.chao.bookviki.util;
 
+import com.chao.bookviki.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,7 @@ public class JingXuanDiverdedUtil {
      */
     private static Random random = new Random();
     public static final Map<String,String> map;
+    public static final Map<String,Integer> iconMap;
     private static final List<String> list;
     public static  Map<Integer,TypeObj> type2PageMap;
     static {
@@ -45,6 +48,16 @@ public class JingXuanDiverdedUtil {
             type2PageMap.put(i,obj);
             i++;
         }
+        iconMap = new HashMap<>(map.size());
+        iconMap.put("war", R.mipmap.junshi);
+        iconMap.put("sport",R.mipmap.tiyu);
+        iconMap.put("tech",R.mipmap.keji);
+        iconMap.put("edu",R.mipmap.jiaoyu);
+        iconMap.put("ent",R.mipmap.yule);
+        iconMap.put("money",R.mipmap.caijing);
+        iconMap.put("gupiao",R.mipmap.gupiao);
+        iconMap.put("travel",R.mipmap.lvyou);
+        iconMap.put("lady",R.mipmap.nvren);
 
     }
 

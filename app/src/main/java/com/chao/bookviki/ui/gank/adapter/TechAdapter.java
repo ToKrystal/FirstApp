@@ -11,12 +11,9 @@ import android.widget.TextView;
 
 import com.chao.bookviki.R;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.util.DateUtil;
 import com.chao.bookviki.util.JingXuanDiverdedUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +41,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      9	lady	女人
      */
     private Map<String,String> map;
+    private Map<String,Integer> iconMap;
 
     private String tech;
 
@@ -52,6 +50,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mList = mList;
         this.tech = "Android";
         this.map = JingXuanDiverdedUtil.map;
+        this.iconMap = JingXuanDiverdedUtil.iconMap;
     }
 
     @Override
@@ -61,13 +60,7 @@ public class TechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(tech.equals(GankMainFragment.tabTitle[0])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_android);
-        } else if(tech.equals(GankMainFragment.tabTitle[1])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_ios);
-        } else if(tech.equals(GankMainFragment.tabTitle[2])) {
-            ((ViewHolder)holder).ivIcon.setImageResource(R.mipmap.ic_web);
-        }
+        ((ViewHolder)holder).ivIcon.setImageResource(iconMap.get(mList.get(position).getChannelname()));
         ((ViewHolder)holder).tvContent.setText(mList.get(position).getTitle());
         ((ViewHolder)holder).tvAuthor.setText(map.get(mList.get(position).getChannelname()));
         ((ViewHolder)holder).tvTime.setText(DateUtil.formatDateTime(mList.get(position).getTime(), true));

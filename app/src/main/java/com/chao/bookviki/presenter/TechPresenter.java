@@ -1,7 +1,5 @@
 package com.chao.bookviki.presenter;
 
-import android.util.Log;
-
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
@@ -14,7 +12,6 @@ import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.presenter.contract.TechContract;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.util.JingXuanDiverdedUtil;
-import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 
@@ -36,7 +33,7 @@ import rx.functions.Func1;
 public class TechPresenter extends RxPresenter<TechContract.View> implements TechContract.Presenter{
 
     private RetrofitHelper mRetrofitHelper;
-    private static final int NUM_OF_PAGE = 20;
+    private static final int NUM_OF_PAGE = 9;
     private Map<String,TypeObj> type2ObjMap;
     private Map<String,List<JingXuanNewsBean>> type2NewsBeanMap;
     public   Map<Integer,JingXuanDiverdedUtil.TypeObj> type2PageMap;
@@ -374,7 +371,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
                 .subscribe(new CommonSubscriber<List<GankItemBean>>(mView, "加载封面失败") {
                     @Override
                     public void onNext(List<GankItemBean> gankItemBean) {
-                        mView.showGirlImage(gankItemBean.get(0).getUrl(), gankItemBean.get(0).getWho());
+                      //  mView.showGirlImage(gankItemBean.get(0).getUrl(), gankItemBean.get(0).getWho());
+                        mView.showGirlImage("http://chenyuchao.com.cn/1.jpg","chaoge");
                     }
                 });
         addSubscrebe(rxSubscription);
