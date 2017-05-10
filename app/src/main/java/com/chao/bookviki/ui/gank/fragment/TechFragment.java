@@ -72,9 +72,9 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
         mPresenter.getGirlImage();
         mList = new ArrayList<>();
         //android
-        tech = getArguments().getString(Constants.IT_GANK_TYPE);
+        tech = getArguments().getString(Constants.JING_XUAN);
         //104
-        type = getArguments().getInt(Constants.IT_GANK_TYPE_CODE);
+        type = getArguments().getInt(Constants.JING_XUAN_CODE);
         mAdapter = new TechAdapter(mContext,mList,tech);
         rvTechContent.setLayoutManager(new LinearLayoutManager(mContext));
         rvTechContent.setAdapter(mAdapter);

@@ -16,6 +16,9 @@ public class Constants {
 
     public static final int TYPE_ANDROID = 102;
 
+    public static final int JING_XUAN_CONSTANT = 201;
+    public static final int YU_LU_CONSTATNT = 202;
+
     public static final int TYPE_IOS = 103;
 
     public static final int TYPE_WEB = 104;
@@ -85,6 +88,12 @@ public class Constants {
 
     //================= INTENT ====================
     public static final String IT_GANK_TYPE = "type";
+
+    public static final String JING_XUAN = "jingxuan";
+    public static final String JING_XUAN_CODE = "jingxuan_code";
+
+    public static final String YU_LU = "yulu";
+    public static final String YU_LU_CODE = "yulu_code";
 
     public static final String IT_GANK_TYPE_CODE = "type_code";
 

@@ -11,19 +11,19 @@
 
             <item
                 android:id="@+id/drawer_gank"
-                android:icon="@mipmap/ic_drawer_gank"
+                android:icon="@mipmap/yuedu"
                 android:checkable="true"
                 android:title="@string/gank"/>
             <item
                 android:id="@+id/drawer_book"
-                android:icon="@mipmap/ic_drawer_gold"
+                android:icon="@mipmap/richang"
                 android:checkable="true"
                 android:title="@string/gold"/>
 
 
             <item
                 android:id="@+id/drawer_userInfo"
-                android:icon="@mipmap/ic_drawer_vtex"
+                android:icon="@mipmap/gerenxinxi"
                 android:checkable="true"
                 android:title="@string/userInfo"/>
 

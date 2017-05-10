@@ -3,9 +3,11 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
+import com.chao.bookviki.model.bean.ImageBean;
 import com.chao.bookviki.model.bean.YingWenYuLuBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
+import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.YingWenYuLuResponse;
 import com.chao.bookviki.presenter.contract.YingWenYuLuContract;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
@@ -80,6 +82,23 @@ public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> 
                             mView.showYingWenYuLus(beans);
                         }
 
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void getRandomImage() {
+
+        Subscription rxSubscription = mRetrofitHelper.getRandomImages(1)
+                .compose(RxUtil.<BookHttpResponse<ImageBean>>rxSchedulerHelper())
+                .compose(RxUtil.<ImageBean>handleBookResult())
+                .subscribe(new CommonSubscriber<ImageBean>(mView, "加载封面失败") {
+                    @Override
+                    public void onNext(ImageBean gankItemBean) {
+                        //  mView.showGirlImage(gankItemBean.get(0).getUrl(), gankItemBean.get(0).getWho());
+                        //   mView.showGirlImage("http://chenyuchao.com.cn/1.jpg","chaoge");
+                        mView.showImage(gankItemBean.url,gankItemBean.name);
                     }
                 });
         addSubscrebe(rxSubscription);

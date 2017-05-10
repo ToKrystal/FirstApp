@@ -51,9 +51,14 @@ public class GankMainFragment extends SimpleFragment {
     //    webFragment = new TechFragment();
     //    girlFragment = new GirlFragment();
         Bundle androidBundle = new Bundle();
-        androidBundle.putString(Constants.IT_GANK_TYPE, tabTitle[0]);
-        androidBundle.putInt(Constants.IT_GANK_TYPE_CODE, Constants.TYPE_ANDROID);
+        androidBundle.putString(Constants.JING_XUAN, tabTitle[0]);
+        androidBundle.putInt(Constants.JING_XUAN_CODE, Constants.JING_XUAN_CONSTANT);
         androidFragment.setArguments(androidBundle);
+
+        Bundle yuluBundle = new Bundle();
+        yuluBundle.putString(Constants.YU_LU, tabTitle[1]);
+        yuluBundle.putInt(Constants.YU_LU_CODE, Constants.YU_LU_CONSTATNT);
+        yingWenYuLuFragment.setArguments(yuluBundle);
        /* Bundle iosBundle = new Bundle();
         iosBundle.putString(Constants.IT_GANK_TYPE, tabTitle[1]);
         iosBundle.putInt(Constants.IT_GANK_TYPE_CODE, Constants.TYPE_IOS);

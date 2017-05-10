@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chao.bookviki.R;
+import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseFragment;
+import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.YingWenYuLuBean;
 import com.chao.bookviki.presenter.YingWenYuLuPresenter;
 import com.chao.bookviki.presenter.contract.YingWenYuLuContract;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by Jessica on 2017/5/7.
@@ -83,6 +87,13 @@ public class YingWenYuLuFragment extends BaseFragment<YingWenYuLuPresenter> impl
     }
 
     @Override
+    public void showImage(String url, String name) {
+        ImageLoader.load(mContext, url, ivOrigin);
+        Glide.with(mContext).load(url).bitmapTransform(new BlurTransformation(mContext)).into(ivBlur);
+        tvCopyright.setText(String.format("by: %s",name));
+    }
+
+    @Override
     protected void initInject() {
         getFragmentComponent().inject(this);
 
@@ -95,8 +106,14 @@ public class YingWenYuLuFragment extends BaseFragment<YingWenYuLuPresenter> impl
 
     @Override
     protected void initEventAndData() {
-        tech = "";
-        type = 101;
+        mPresenter.getRandomImage();
+        //android
+        tech = getArguments().getString(Constants.YU_LU);
+        //104
+        type = getArguments().getInt(Constants.YU_LU_CODE);
+
+      //  tech = "";
+    //   type = 101;
         mList = new ArrayList<>();
         mAdapter = new YingWenYuLuAdapter(mContext,mList,tech);
         rvTechContent.setLayoutManager(new LinearLayoutManager(mContext));

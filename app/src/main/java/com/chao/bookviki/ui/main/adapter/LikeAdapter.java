@@ -79,25 +79,25 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                         }
                     });
                     break;
-                case Constants.TYPE_ANDROID:
-                    ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_android);
-                    ((ArticleViewHolder) holder).from.setText("来自 干货");
+                case Constants.JING_XUAN_CONSTANT:
+                    ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.yuedu);
+                    ((ArticleViewHolder) holder).from.setText("来自 精选阅读");
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             gotoTechDetail(mList.get(holder.getAdapterPosition()).getUrl(), null, mList.get(holder.getAdapterPosition()).getTitle()
-                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.TYPE_ANDROID);
+                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.JING_XUAN_CONSTANT);
                         }
                     });
                     break;
-                case Constants.TYPE_IOS:
-                    ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_ios);
-                    ((ArticleViewHolder) holder).from.setText("来自 干货");
+                case Constants.YU_LU_CONSTATNT:
+                    ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.yingwenyuluicon);
+                    ((ArticleViewHolder) holder).from.setText("来自 英文语录");
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             gotoTechDetail(mList.get(holder.getAdapterPosition()).getUrl(), null, mList.get(holder.getAdapterPosition()).getTitle()
-                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.TYPE_IOS);
+                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.YU_LU_CONSTATNT);
                         }
                     });
                     break;

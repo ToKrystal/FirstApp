@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">View New</string>
-    <string name="app_intro">A pure reading App for you</string>
+    <string name="app_intro">Try to give all you want</string>
 
     //main drawer
     <string name="logout">注销</string>
@@ -15,7 +15,7 @@
     <string name="drawer_setting">设置</string>
     <string name="drawer_open">打开</string>
     <string name="drawer_close">关闭</string>
-    <string name="drawer_group_content">资讯</string>
+    <string name="drawer_group_content">阅读</string>
     <string name="drawer_group_options">选项</string>
 
     <string name="detail_bottom_share">分享</string>
@@ -60,10 +60,9 @@
     <string name="setting_normal">常规</string>
     <string name="setting_other">其他</string>
 
-    <string name="about_addr">项目地址:\nhttps://github.com/codeestX/GeekNews</string>
-    <string name="about_author">作者:Est\t\t(codeest.dev@gmail.com)</string>
-    <string name="about_project">项目简介:\n极客日报,一个纯粹的阅读App\n为了熟悉当前Android端主流框架的使用,也为了能有一款将新闻、技术文章、福利一网打尽的简洁的阅读应用,利用闲暇时间做了这个项目n(*≧▽≦*)n\n
-        本着学习的目的,该项目会持续迭代与优化,加入更丰富的阅读内容与功能,并不断尝试最新的技术,欢迎star、fork、issue、email</string>
-    <string name="about_award">请作者吃糖(￣▽￣)</string>
-    <string name="about_info">GeekNews\t\t\tV1.3.0</string>
+    <string name="about_addr">APP下载地址:\n目前暂无，敬请期待！</string>
+    <string name="about_author">个人邮箱:网易\t(yuchao_89@yeah.net)</string>
+    <string name="about_project">APP简介:\nView New，最纯粹的阅读体验\n利用业余时间个人搭建的APP前端和后台系统整合，利用了当前较为热门的开发技术开发，为了最佳的阅读体验而努力，其中部分数据来源经过筛选，欢迎各位提意见并不断完善本APP的体验功能。</string>
+    <string name="about_award">热情捐赠(┬＿┬)</string>
+    <string name="about_info">View New\t\t\tV1.1.0</string>
 </resources>

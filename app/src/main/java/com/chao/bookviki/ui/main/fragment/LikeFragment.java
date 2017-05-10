@@ -88,7 +88,7 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
         if (!hidden) {
             mPresenter.getLikeData();
             if (!SharedPreferenceUtil.getLikePoint()) {
-                SnackbarUtil.show(rvLikeList,"支持侧滑删除，长按拖曳哦(。・`ω´・)");
+                SnackbarUtil.show(rvLikeList,"可以滑动删除以及拖动");
                 SharedPreferenceUtil.setLikePoint(true);
             }
         }

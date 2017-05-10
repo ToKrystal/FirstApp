@@ -17,11 +17,15 @@ public interface YingWenYuLuContract {
         void showYingWenYuLus(List<YingWenYuLuBean> beans);
 
         void showMoreYinWenYuLus(List<YingWenYuLuBean> beans);
+
+        void showImage(String url,String name);
     }
 
     interface Presenter extends BasePresenter<View> {
 
         void getYingWenYuLu(int count,int appId,String sign,boolean showMore);
+
+        void getRandomImage();
 
     }
 }
