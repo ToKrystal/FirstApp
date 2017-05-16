@@ -4,9 +4,11 @@ import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.GankItemBean;
+import com.chao.bookviki.model.bean.ImageBean;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
+import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.GankHttpResponse;
 import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.presenter.contract.TechContract;
@@ -365,7 +367,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
 
     @Override
     public void getGirlImage() {
-        Subscription rxSubscription = mRetrofitHelper.fetchRandomGirl(1)
+       /* Subscription rxSubscription = mRetrofitHelper.fetchRandomGirl(1)
                 .compose(RxUtil.<GankHttpResponse<List<GankItemBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<GankItemBean>>handleResult())
                 .subscribe(new CommonSubscriber<List<GankItemBean>>(mView, "加载封面失败") {
@@ -373,6 +375,19 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
                     public void onNext(List<GankItemBean> gankItemBean) {
                       //  mView.showGirlImage(gankItemBean.get(0).getUrl(), gankItemBean.get(0).getWho());
                         mView.showGirlImage("http://chenyuchao.com.cn/1.jpg","chaoge");
+                    }
+                });
+        addSubscrebe(rxSubscription);*/
+
+        Subscription rxSubscription = mRetrofitHelper.getRandomImages(1)
+                .compose(RxUtil.<BookHttpResponse<ImageBean>>rxSchedulerHelper())
+                .compose(RxUtil.<ImageBean>handleBookResult())
+                .subscribe(new CommonSubscriber<ImageBean>(mView, "加载封面失败") {
+                    @Override
+                    public void onNext(ImageBean gankItemBean) {
+                        //  mView.showGirlImage(gankItemBean.get(0).getUrl(), gankItemBean.get(0).getWho());
+                     //   mView.showGirlImage("http://chenyuchao.com.cn/1.jpg","chaoge");
+                        mView.showGirlImage(gankItemBean.url,gankItemBean.name);
                     }
                 });
         addSubscrebe(rxSubscription);

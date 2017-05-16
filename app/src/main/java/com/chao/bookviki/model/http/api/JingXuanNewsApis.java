@@ -42,4 +42,6 @@ public interface JingXuanNewsApis {
     Observable<JingXuanNewsResponse<List<JingXuanNewsBean>>> getJingXuanNews(@Query("type") String type, @Query("page") int page, @Query("limit") int limit);
 
 
+
+
 }

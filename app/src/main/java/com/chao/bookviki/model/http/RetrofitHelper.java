@@ -10,6 +10,7 @@ import com.chao.bookviki.model.bean.FollowBean;
 import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.GankSearchItemBean;
 import com.chao.bookviki.model.bean.HotListBean;
+import com.chao.bookviki.model.bean.ImageBean;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.NodeBean;
@@ -250,6 +251,12 @@ public class RetrofitHelper {
     public Observable<BookHttpResponse<String>> postChannelIdNotLogin(String channelId) {
         return  mBookApiService.postChannelIdNotLogin(channelId);
     }
+
+    public Observable<BookHttpResponse<ImageBean>> getRandomImages(int num) {
+        return  mBookApiService.getRandomImage(num);
+    }
+
+
 
     public Observable<JingXuanNewsResponse<List<JingXuanNewsBean>>> getJingXuanNewsList(String type,int page,int limit){
         return jingXuanNewsApis.getJingXuanNews(type,page,limit);
