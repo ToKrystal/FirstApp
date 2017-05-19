@@ -6,10 +6,8 @@ import com.chao.bookviki.model.http.api.VtexApis;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.http.api.BookApis;
-import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.YingWenYuLuApis;
-import com.chao.bookviki.model.http.api.ZhihuApis;
 
 import javax.inject.Singleton;
 
@@ -34,9 +32,9 @@ public class AppModule {
     //提供Retrofit
     @Provides
     @Singleton
-    RetrofitHelper provideRetrofitHelper(ZhihuApis zhihuApiService, GankApis gankApiService,
+    RetrofitHelper provideRetrofitHelper(
                                          MyApis myApiService,  VtexApis vtexApiService, BookApis bookApis, JingXuanNewsApis jingXuanNewsApis, YingWenYuLuApis yingWenYuLuApis) {
-        return new RetrofitHelper(zhihuApiService, gankApiService,
+        return new RetrofitHelper(
                 myApiService, vtexApiService,bookApis,jingXuanNewsApis,yingWenYuLuApis);
     }
 

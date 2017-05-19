@@ -1,7 +1,6 @@
 package com.chao.bookviki.presenter;
 
 import com.chao.bookviki.base.RxPresenter;
-import com.chao.bookviki.model.bean.WelcomeBean;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.presenter.contract.WelcomeContract;
 import com.chao.bookviki.util.RxUtil;
@@ -33,21 +32,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
 
     @Override
     public void getWelcomeData() {
-        Subscription rxSubscription =  mRetrofitHelper.fetchWelcomeInfo(RES)
-                .compose(RxUtil.<WelcomeBean>rxSchedulerHelper())
-                .subscribe(new Action1<WelcomeBean>() {
-                    @Override
-                    public void call(WelcomeBean welcomeBean) {
-                        mView.showContent(welcomeBean);
-                        startCountDown();
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        mView.jumpToMain();
-                    }
-                });
-        addSubscrebe(rxSubscription);
+        startCountDown();
     }
 
     private void startCountDown() {

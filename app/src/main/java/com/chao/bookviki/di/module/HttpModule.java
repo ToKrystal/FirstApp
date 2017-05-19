@@ -11,12 +11,10 @@ import com.chao.bookviki.di.qualifier.VtexUrl;
 import com.chao.bookviki.di.qualifier.YingWenYuLuUrl;
 import com.chao.bookviki.di.qualifier.ZhihuUrl;
 import com.chao.bookviki.model.http.api.BookApis;
-import com.chao.bookviki.model.http.api.GankApis;
 import com.chao.bookviki.model.http.api.JingXuanNewsApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.VtexApis;
 import com.chao.bookviki.model.http.api.YingWenYuLuApis;
-import com.chao.bookviki.model.http.api.ZhihuApis;
 import com.chao.bookviki.util.SystemUtil;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -65,21 +63,6 @@ public class HttpModule {
     @Provides
     OkHttpClient.Builder provideOkHttpBuilder() {
         return new OkHttpClient.Builder();
-    }
-
-    @Singleton
-    @Provides
-    @ZhihuUrl
-    Retrofit provideZhihuRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, ZhihuApis.HOST);
-    }
-
-
-    @Singleton
-    @Provides
-    @GankUrl
-    Retrofit provideGankRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, GankApis.HOST);
     }
 
     @Singleton
@@ -184,18 +167,6 @@ public class HttpModule {
         builder.retryOnConnectionFailure(true);
         builder.cookieJar(mcookieJar);
         return builder.build();
-    }
-
-    @Singleton
-    @Provides
-    ZhihuApis provideZhihuService(@ZhihuUrl Retrofit retrofit) {
-        return retrofit.create(ZhihuApis.class);
-    }
-
-    @Singleton
-    @Provides
-    GankApis provideGankService(@GankUrl  Retrofit retrofit) {
-        return retrofit.create(GankApis.class);
     }
 
     @Singleton

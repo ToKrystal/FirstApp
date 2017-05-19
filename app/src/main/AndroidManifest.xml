@@ -62,24 +62,7 @@
             android:screenOrientation="portrait">
         </activity>
 
-        //知乎
-        <activity android:name="com.chao.bookviki.ui.zhihu.activity.CalendarActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.chao.bookviki.ui.zhihu.activity.CommentActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.chao.bookviki.ui.zhihu.activity.ThemeActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.chao.bookviki.ui.zhihu.activity.SectionActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+
 
         //Gank
         <activity android:name="com.chao.bookviki.ui.gank.activity.TechDetailActivity"
@@ -113,9 +96,7 @@
 
 
 
-        <activity android:name="com.chao.bookviki.ui.gold.activity.BookCommentActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+
         <activity android:name="com.chao.bookviki.ui.userinfo.activity.UserEditActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
