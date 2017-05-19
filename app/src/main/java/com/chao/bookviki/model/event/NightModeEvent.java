@@ -1,8 +1,5 @@
 package com.chao.bookviki.model.event;
 
-/**
- * Created by codeest on 16/8/27.
- */
 
 public class NightModeEvent {
 

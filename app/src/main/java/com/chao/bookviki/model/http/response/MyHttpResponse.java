@@ -1,8 +1,5 @@
 package com.chao.bookviki.model.http.response;
 
-/**
- * Created by codeest on 16/10/10.
- */
 
 public class MyHttpResponse<T> {
 

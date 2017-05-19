@@ -3,7 +3,6 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.model.bean.BookListBean;
-import com.chao.bookviki.model.bean.NodeListBean;
 import com.chao.bookviki.model.bean.RealmLikeBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.model.db.RealmHelper;
@@ -97,6 +96,16 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View> im
                     }
                 });
         addSubscrebe(rxSubscription);
+
+    }
+
+    @Override
+    public void replayValidate() {
+        if ( !mRealmHelper.queryIfLogin()){//没有登录
+            mView.jump2LoginPage();
+        }else {
+            mView.showReplayView();
+        }
 
     }
 

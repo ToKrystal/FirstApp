@@ -18,9 +18,7 @@ import com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity;
 
 import dagger.Component;
 
-/**
- * Created by codeest on 16/8/7.
- */
+
 
 @ActivityScope
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
@@ -37,10 +35,6 @@ public interface ActivityComponent {
     void inject(ThemeActivity themeActivity);
 
     void inject(SectionActivity sectionActivity);
-
-    //void inject(RepliesActivity repliesActivity);
-
-    //void inject(NodeListActivity nodeListActivity);
 
     void inject(BookDetailActivity bookDetailActivity);
 

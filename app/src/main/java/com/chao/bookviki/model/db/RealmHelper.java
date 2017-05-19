@@ -14,7 +14,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 /**
- * Created by codeest on 16/8/16.
+ * Created by Jessica on 16/8/16.
  */
 
 public class RealmHelper {
@@ -206,21 +206,7 @@ public class RealmHelper {
     }
 
     /**
-     * 更新 掘金首页管理列表
-     * 先删除后添加
-     * @param bean
-     */
-   /* public void updateGoldManagerList(GoldManagerBean bean) {
-        GoldManagerBean data = mRealm.where(GoldManagerBean.class).findFirst();
-        mRealm.beginTransaction();
-        if (data != null) {
-            data.deleteFromRealm();
-        }
-        mRealm.copyToRealm(bean);
-        mRealm.commitTransaction();
-    }*/
-    /**
-     * 更新 掘金首页管理列表
+     * 更新 日常阅读管理列表
      * 先删除后添加
      * @param bean
      */
@@ -235,17 +221,7 @@ public class RealmHelper {
     }
 
     /**
-     * 获取 掘金首页管理列表
-     * @return
-     */
-   /* public GoldManagerBean getGoldManagerList() {
-        GoldManagerBean bean = mRealm.where(GoldManagerBean.class).findFirst();
-        if (bean == null)
-            return null;
-        return mRealm.copyFromRealm(bean);
-    }*/
-    /**
-     * 获取 掘金首页管理列表
+     * 获取 日常阅读首页管理列表
      * @return
      */
     public BookManagerBean getBookManagerList() {

@@ -7,9 +7,6 @@ import com.chao.bookviki.di.scope.ActivityScope;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by codeest on 16/8/7.
- */
 
 @Module
 public class ActivityModule {

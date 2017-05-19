@@ -6,10 +6,6 @@ import com.chao.bookviki.model.http.response.MyHttpResponse;
 import retrofit2.http.GET;
 import rx.Observable;
 
-/**
- * Created by codeest on 16/10/10.
- * https://github.com/codeestX/my-restful-api
- */
 
 public interface MyApis {
 

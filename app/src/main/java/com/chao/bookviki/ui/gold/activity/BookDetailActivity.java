@@ -275,20 +275,15 @@ mPresenter.save2DetailPrestener(mTopBean);
 
     @OnClick(R.id.tv_detail_bottom_comment)
     void gotoComment() {
-        /*Intent intent = getIntent();
-        intent.setClass(this,CommentActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("allNum",allNum);
-        intent.putExtra("shortNum",shortNum);
-        intent.putExtra("longNum",longNum);
-        startActivity(intent);*/
+        mPresenter.replayValidate();
+    }
+
+    @Override
+    public void showReplayView() {
         mInputDialog.title("评论");
         mInputDialog.input("","",commentCallback);
         mInputDialog.show();
-
-
-
-        }
+    }
 
     MaterialDialog.InputCallback commentCallback = new MaterialDialog.InputCallback() {
         @Override
@@ -350,6 +345,8 @@ mPresenter.save2DetailPrestener(mTopBean);
         Intent intent = new Intent(mContext, LoginActivity.class);
         mContext.startActivity(intent);
     }
+
+
 
 
     @Override

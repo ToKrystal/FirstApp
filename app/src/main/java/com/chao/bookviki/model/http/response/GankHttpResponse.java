@@ -1,8 +1,5 @@
 package com.chao.bookviki.model.http.response;
 
-/**
- * Created by codeest on 2016/8/3.
- */
 public class GankHttpResponse<T> {
 
     private boolean error;

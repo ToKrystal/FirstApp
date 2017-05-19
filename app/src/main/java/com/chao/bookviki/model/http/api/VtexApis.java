@@ -10,9 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
-/**
- * Created by codeest on 16/12/22.
- */
 
 public interface VtexApis {
 

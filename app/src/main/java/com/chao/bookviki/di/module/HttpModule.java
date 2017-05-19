@@ -5,7 +5,6 @@ import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.di.qualifier.BookUrl;
 import com.chao.bookviki.di.qualifier.GankUrl;
-import com.chao.bookviki.di.qualifier.GoldUrl;
 import com.chao.bookviki.di.qualifier.JingXuanNewsUrl;
 import com.chao.bookviki.di.qualifier.MyUrl;
 import com.chao.bookviki.di.qualifier.VtexUrl;
@@ -13,7 +12,6 @@ import com.chao.bookviki.di.qualifier.YingWenYuLuUrl;
 import com.chao.bookviki.di.qualifier.ZhihuUrl;
 import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.GankApis;
-import com.chao.bookviki.model.http.api.GoldApis;
 import com.chao.bookviki.model.http.api.JingXuanNewsApis;
 import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.model.http.api.VtexApis;
@@ -44,9 +42,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by codeest on 2017/2/26.
- */
 
 @Module
 public class HttpModule {
@@ -85,13 +80,6 @@ public class HttpModule {
     @GankUrl
     Retrofit provideGankRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, GankApis.HOST);
-    }
-
-    @Singleton
-    @Provides
-    @GoldUrl
-    Retrofit provideGoldRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, GoldApis.HOST);
     }
 
     @Singleton
@@ -208,13 +196,6 @@ public class HttpModule {
     @Provides
     GankApis provideGankService(@GankUrl  Retrofit retrofit) {
         return retrofit.create(GankApis.class);
-    }
-
-
-    @Singleton
-    @Provides
-    GoldApis provideGoldService(@GoldUrl Retrofit retrofit) {
-        return retrofit.create(GoldApis.class);
     }
 
     @Singleton

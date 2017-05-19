@@ -31,6 +31,8 @@ public interface BookDetailContract {
 
         void jump2LoginPage();
 
+        void showReplayView();
+
 
 
     }
@@ -57,6 +59,8 @@ public interface BookDetailContract {
         void save2DetailPrestener(BookListBean bean);
 
         void getSingleBookList(String objectId);
+
+        void replayValidate();
 
     }
 

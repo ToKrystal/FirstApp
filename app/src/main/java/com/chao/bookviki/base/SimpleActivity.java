@@ -13,7 +13,6 @@ import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
- * Created by codeest on 16/8/11.
  * 无MVP的activity基类
  */
 

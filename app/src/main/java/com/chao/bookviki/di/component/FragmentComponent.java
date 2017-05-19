@@ -21,9 +21,6 @@ import com.chao.bookviki.ui.zhihu.fragment.ThemeFragment;
 
 import dagger.Component;
 
-/**
- * Created by codeest on 16/8/7.
- */
 
 @FragmentScope
 @Component(dependencies = AppComponent.class, modules = FragmentModule.class)
@@ -48,7 +45,6 @@ public interface FragmentComponent {
     void inject(LikeFragment likeFragment);
 
     void inject(SettingFragment settingFragment);
-
 
     void inject(BookCommentFragment bookCommentFragment);
 

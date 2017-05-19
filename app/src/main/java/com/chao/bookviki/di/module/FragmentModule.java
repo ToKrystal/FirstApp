@@ -8,9 +8,6 @@ import com.chao.bookviki.di.scope.FragmentScope;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by codeest on 16/8/7.
- */
 
 @Module
 public class FragmentModule {

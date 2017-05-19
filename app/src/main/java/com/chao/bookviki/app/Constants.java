@@ -14,24 +14,16 @@ public class Constants {
     public static final int TYPE_ZHIHU = 101;
     public static final int TYPE_BOOK = 113;
 
-    public static final int TYPE_ANDROID = 102;
-
     public static final int JING_XUAN_CONSTANT = 201;
     public static final int YU_LU_CONSTATNT = 202;
-
-    public static final int TYPE_IOS = 103;
 
     public static final int TYPE_WEB = 104;
 
     public static final int TYPE_GIRL = 105;
 
-    public static final int TYPE_WECHAT = 106;
-
     public static final int TYPE_JINGXUAN1 = 107;
 
     public static final int TYPE_GOLD = 108;
-
-    public static final int TYPE_VTEX = 109;
 
     public static final int TYPE_SETTING = 110;
 
@@ -41,19 +33,8 @@ public class Constants {
 
     public static final int TYPE_USER_INFO = 114;
 
-    public static final int TYPE_LOGIN = 115;
 
     //================= KEY ====================
-
-//    public static final String KEY_API = "f95283476506aa756559dd28a56f0c0b"; //需要APIKEY请去 http://apistore.baidu.com/ 申请,复用会减少访问可用次数
-    public static final String KEY_API = "52b7ec3471ac3bec6846577e79f20e4c"; //需要APIKEY请去 http://www.tianapi.com/#wxnew 申请,复用会减少访问可用次数
-
-    public static final String KEY_ALIPAY = "aex07566wvayrgxicnaraae";
-
-    public static final String LEANCLOUD_ID = "mhke0kuv33myn4t4ghuid4oq2hjj12li374hvcif202y5bm6";
-
-    public static final String LEANCLOUD_SIGN = "badc5461a25a46291054b902887a68eb,1480438132702";
-
     public static final String BUGLY_ID = "257700f3f8";
 
     //================= PATH ====================
@@ -87,15 +68,12 @@ public class Constants {
     public static final String PUSH_STATE_NOT_LOGIN = "pushstatenotlogin";
 
     //================= INTENT ====================
-    public static final String IT_GANK_TYPE = "type";
 
     public static final String JING_XUAN = "jingxuan";
     public static final String JING_XUAN_CODE = "jingxuan_code";
 
     public static final String YU_LU = "yulu";
     public static final String YU_LU_CODE = "yulu_code";
-
-    public static final String IT_GANK_TYPE_CODE = "type_code";
 
     public static final String IT_DETAIL_TITLE = "title";
 
@@ -115,11 +93,4 @@ public class Constants {
 
     public static final String IT_GOLD_MANAGER = "manager";
 
-    public static final String IT_VTEX_TYPE = "type";
-
-    public static final String IT_VTEX_TOPIC_ID = "id";
-
-    public static final String IT_VTEX_REPLIES_TOP = "top_info";
-
-    public static final String IT_VTEX_NODE_NAME = "node_name";
 }

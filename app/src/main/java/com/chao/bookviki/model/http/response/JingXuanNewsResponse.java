@@ -1,8 +1,5 @@
 package com.chao.bookviki.model.http.response;
 
-/**
- * Created by Jessica on 2017/5/7.
- */
 
 public class JingXuanNewsResponse<T> {
     private T list;

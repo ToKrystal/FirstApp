@@ -10,9 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
 
-/**
- * Created by codeest on 16/8/19.
- */
 
 public interface GankApis {
 
