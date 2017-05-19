@@ -14,9 +14,9 @@ public interface MainContract {
 
     interface View extends BaseView {
 
-        void showUpdateDialog(String versionContent);
+        void showUpdateDialog(String versionContent,String downloadUrl);
 
-        void startDownloadService();
+        void startDownloadService(String downloadUrl);
 
         void jump2PushSucc(MyPushBean bean);
 
@@ -27,14 +27,17 @@ public interface MainContract {
 
         void checkVersion(String currentVersion);
 
-        void checkPermissions(RxPermissions rxPermissions);
+        void checkPermissions(RxPermissions rxPermissions,String downloadUrl);
 
         void doLogout();
 
         void deleteLoginBean(LoginBean bean);
 
+
         void queryLoginState();
 
         void postChannelIdNotLogin(String channelId);
+
+        boolean queryIfLogin();
     }
 }

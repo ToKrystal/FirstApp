@@ -22,6 +22,10 @@ public interface UserEditContract  {
     interface Presenter extends BasePresenter<View> {
         void postUpdatePersonalInfo(PersonalInfoBean bean);
         LoginBean queryLoginBean();
+        void updateLoginBean(LoginBean bean);
+        void updateDesc(String str);
+        void updateSigna(String str);
+        void updateNick(String str);
 
     }
 }

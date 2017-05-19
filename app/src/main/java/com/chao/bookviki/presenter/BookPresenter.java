@@ -26,7 +26,7 @@ public class BookPresenter extends RxPresenter<BookContract.View> implements Boo
 
     private static final int NUM_EACH_PAGE = 20;
     private static final int NUM_HOT_LIMIT = 3;
-    private static int START = 0;
+    private  int START = 0;
 
     private RetrofitHelper mRetrofitHelper;
     private List<BookListBean> totalList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class BookPresenter extends RxPresenter<BookContract.View> implements Boo
         mType = type;
         currentPage = 0;
         totalList.clear();
-        Observable<List<BookListBean>> list = mRetrofitHelper.fetchBookList(type, START, START+=NUM_EACH_PAGE)//获取数据
+        Observable<List<BookListBean>> list = mRetrofitHelper.fetchBookList(type, START+(NUM_EACH_PAGE*(currentPage++)), NUM_EACH_PAGE)//获取数据
                 .compose(RxUtil.<BookHttpResponse<List<BookListBean>>>rxSchedulerHelper())//io -> main
                 .compose(RxUtil.<List<BookListBean>>handleBookResult());//response-> bean
         Calendar cal = Calendar.getInstance();
@@ -76,7 +76,7 @@ public class BookPresenter extends RxPresenter<BookContract.View> implements Boo
 
     @Override
     public void getMoreBookData() {
-        Subscription rxSubscription = mRetrofitHelper.fetchBookList(mType, NUM_EACH_PAGE, currentPage++)
+        Subscription rxSubscription = mRetrofitHelper.fetchBookList(mType, START+(NUM_EACH_PAGE*(currentPage++)), NUM_EACH_PAGE)
                 .compose(RxUtil.<BookHttpResponse<List<BookListBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<BookListBean>>handleBookResult())
                 .subscribe(new CommonSubscriber<List<BookListBean>>(mView) {

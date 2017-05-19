@@ -27,7 +27,7 @@ public class Constants {
 
     public static final int TYPE_WECHAT = 106;
 
-    public static final int TYPE_GANK = 107;
+    public static final int TYPE_JINGXUAN1 = 107;
 
     public static final int TYPE_GOLD = 108;
 

@@ -3,13 +3,11 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.component.RxBus;
-import com.chao.bookviki.model.bean.GankItemBean;
 import com.chao.bookviki.model.bean.ImageBean;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
-import com.chao.bookviki.model.http.response.GankHttpResponse;
 import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.presenter.contract.TechContract;
 import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
@@ -29,7 +27,7 @@ import rx.Subscription;
 import rx.functions.Func1;
 
 /**
- * Created by codeest on 16/8/20.
+ *
  */
 
 public class TechPresenter extends RxPresenter<TechContract.View> implements TechContract.Presenter{
@@ -40,6 +38,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     private Map<String,List<JingXuanNewsBean>> type2NewsBeanMap;
     public   Map<Integer,JingXuanDiverdedUtil.TypeObj> type2PageMap;
     private Random random ;
+    private List<JingXuanNewsBean> mList;
     public static class TypeObj{
         public Integer currentPage;
 
@@ -51,7 +50,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     private int currentPage = 1;
     private String queryStr = null;
     private String currentTech = GankMainFragment.tabTitle[0];
-    private int currentType = Constants.TYPE_ANDROID;
+    private int currentType = Constants.JING_XUAN_CONSTANT;
 
 
 
@@ -71,6 +70,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
     @Inject
     public TechPresenter(RetrofitHelper mRetrofitHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        mList = new ArrayList<>();
         type2ObjMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
         type2NewsBeanMap = new HashMap<>(JingXuanDiverdedUtil.map.size());
         //查询事件
@@ -111,10 +111,20 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
                     public void onNext(String s) {
                         queryStr = s;
                      //   getSearchTechData();
-                        getSearchNewsDate();
+                       // getSearchNewsDate();
+                        //本地搜索
+                        getSearch(s);
                     }
                 });
         addSubscrebe(rxSubscription);
+    }
+
+    private void getSearch(String s) {
+        List<JingXuanNewsBean> list = new ArrayList<>(mList.size());
+        for (JingXuanNewsBean bean : mList){
+            if (bean.getTitle().contains(s)) list.add(bean);
+        }
+        mView.showJingXuanItem(list);
     }
 
     private void getSearchNewsDate() {
@@ -264,6 +274,8 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
                     @Override
                     public void onNext(List<JingXuanNewsBean> beans) {
                         mView.showJingXuanItem(beans);
+                        mList.clear();
+                        mList.addAll(beans);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -274,7 +286,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
         if(queryStr != null) {
             //TODO 搜索的
           //  getMoreSearchGankData();
-            getMoreSearchNewsData();
+            //getMoreSearchNewsData();
             return;
         }
         JingXuanDiverdedUtil.TypeObj obj = getRanDomType();
@@ -285,6 +297,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
                     @Override
                     public void onNext(List<JingXuanNewsBean> beans) {
                         mView.showMoreJingXuanItem(beans);
+                        mList.addAll(beans);
                     }
                 });
         addSubscrebe(rxSubscription);

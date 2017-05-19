@@ -95,10 +95,10 @@ public class GankMainFragment extends SimpleFragment {
     public void doSearch(String query) {
         switch (mViewPager.getCurrentItem()) {
             case 0:
-                RxBus.getDefault().post(new SearchEvent(query, Constants.TYPE_ANDROID));
+                RxBus.getDefault().post(new SearchEvent(query, Constants.JING_XUAN_CONSTANT));
                 break;
             case 1:
-                RxBus.getDefault().post(new SearchEvent(query, Constants.TYPE_IOS));
+                RxBus.getDefault().post(new SearchEvent(query, Constants.YU_LU_CONSTATNT));
                 break;
             case 2:
                 RxBus.getDefault().post(new SearchEvent(query, Constants.TYPE_WEB));

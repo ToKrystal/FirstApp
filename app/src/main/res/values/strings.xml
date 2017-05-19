@@ -64,5 +64,5 @@
     <string name="about_author">个人邮箱:网易\t(yuchao_89@yeah.net)</string>
     <string name="about_project">APP简介:\nView New，最纯粹的阅读体验\n利用业余时间个人搭建的APP前端和后台系统整合，利用了当前较为热门的开发技术开发，为了最佳的阅读体验而努力，其中部分数据来源经过筛选，欢迎各位提意见并不断完善本APP的体验功能。</string>
     <string name="about_award">热情捐赠(┬＿┬)</string>
-    <string name="about_info">View New\t\t\tV1.1.0</string>
+    <string name="about_info">View New\t\t\tV0.0.0</string>
 </resources>

@@ -119,7 +119,7 @@ public class YingWenYuLuFragment extends BaseFragment<YingWenYuLuPresenter> impl
         rvTechContent.setLayoutManager(new LinearLayoutManager(mContext));
         rvTechContent.setAdapter(mAdapter);
         ivProgress.start();
-        mPresenter.getYingWenYuLu(5,37526, EnCodeSign.md5Encode(5,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1") ,false);
+        mPresenter.getYingWenYuLu(10,37526, EnCodeSign.md5Encode(10,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1") ,false);
         rvTechContent.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -129,7 +129,7 @@ public class YingWenYuLuFragment extends BaseFragment<YingWenYuLuPresenter> impl
                 if (lastVisibleItem >= totalItemCount - 2 && dy > 0) {  //还剩2个Item时加载更多
                     if(!isLoadingMore){
                         isLoadingMore = true;
-                        mPresenter.getYingWenYuLu(5,37526, EnCodeSign.md5Encode(5,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1"),true);
+                        mPresenter.getYingWenYuLu(10,37526, EnCodeSign.md5Encode(10,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1"),true);
                     }
                 }
             }
@@ -150,7 +150,7 @@ public class YingWenYuLuFragment extends BaseFragment<YingWenYuLuPresenter> impl
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getYingWenYuLu(5,37526, EnCodeSign.md5Encode(5,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1"),false);
+                mPresenter.getYingWenYuLu(10,37526, EnCodeSign.md5Encode(10,37526,"412cbe4f62db4cd09c27c7c13b4a8fc1"),false);
             }
         });
 

@@ -18,9 +18,7 @@ import android.widget.ImageView;
 
 import com.chao.bookviki.R;
 
-/**
- * Created by codeest on 2016/8/4.
- */
+
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

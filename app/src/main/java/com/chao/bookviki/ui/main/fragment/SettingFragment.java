@@ -11,19 +11,17 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
+import com.chao.bookviki.base.BaseFragment;
 import com.chao.bookviki.component.ACache;
-import com.chao.bookviki.model.event.NightModeEvent;
+import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.presenter.SettingPresenter;
+import com.chao.bookviki.presenter.contract.SettingContract;
+import com.chao.bookviki.ui.main.activity.MainActivity;
 import com.chao.bookviki.util.ShareUtil;
 import com.chao.bookviki.util.SharedPreferenceUtil;
 import com.chao.bookviki.util.SnackbarUtil;
-import com.chao.bookviki.R;
-import com.chao.bookviki.base.BaseFragment;
-import com.chao.bookviki.component.RxBus;
-import com.chao.bookviki.model.bean.VersionBean;
-import com.chao.bookviki.presenter.contract.SettingContract;
-import com.chao.bookviki.ui.main.activity.MainActivity;
 
 import java.io.File;
 
@@ -40,8 +38,6 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
     AppCompatCheckBox cbSettingCache;
     @BindView(R.id.cb_setting_image)
     AppCompatCheckBox cbSettingImage;
-    @BindView(R.id.cb_setting_night)
-    AppCompatCheckBox cbSettingNight;
     @BindView(R.id.ll_setting_feedback)
     LinearLayout llSettingFeedback;
     @BindView(R.id.tv_setting_clear)
@@ -73,15 +69,15 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
         tvSettingClear.setText(ACache.getCacheSize(cacheFile));
         cbSettingCache.setChecked(SharedPreferenceUtil.getAutoCacheState());
         cbSettingImage.setChecked(SharedPreferenceUtil.getNoImageState());
-        cbSettingNight.setChecked(SharedPreferenceUtil.getNightModeState());
         cbSettingCache.setOnCheckedChangeListener(this);
         cbSettingImage.setOnCheckedChangeListener(this);
-        cbSettingNight.setOnCheckedChangeListener(this);
         try {
             PackageManager pm = getActivity().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(getActivity().getPackageName(), PackageManager.GET_ACTIVITIES);
+            //1.0.0
             versionName = pi.versionName;
-            tvSettingUpdate.setText(String.format("当前版本号 v%s",versionName));
+            //build gradle
+            tvSettingUpdate.setText(String.format("当前版本 v%s",versionName));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -95,7 +91,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
 
     @OnClick(R.id.ll_setting_feedback)
     void doFeedBack() {
-        ShareUtil.sendEmail(mContext, "选择邮件客户端:");
+        ShareUtil.sendEmail(mContext, "请选择使用的邮件客户端:");
     }
 
     @OnClick(R.id.ll_setting_clear)
@@ -112,14 +108,6 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
-            case R.id.cb_setting_night:
-                if (isNull) {   //防止夜间模式MainActivity执行reCreate后重复调用
-                    SharedPreferenceUtil.setNightModeState(b);
-                    NightModeEvent event = new NightModeEvent();
-                    event.setNightMode(b);
-                    RxBus.getDefault().post(event);
-                }
-                break;
             case R.id.cb_setting_image:
                 SharedPreferenceUtil.setNoImageState(b);
                 break;
@@ -130,7 +118,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
     }
 
     @Override
-    public void showUpdateDialog(VersionBean bean) {
+    public void showUpdateDialog(final VersionBean bean) {
         StringBuilder content = new StringBuilder("版本号: v");
         content.append(bean.getCode());
         content.append("\r\n");
@@ -148,7 +136,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
             public void onClick(DialogInterface dialogInterface, int i) {
                 Activity mActivity = getActivity();
                 if (mActivity instanceof MainActivity) {
-                    ((MainActivity) mActivity).checkPermissions();
+                    ((MainActivity) mActivity).checkPermissions(bean.getDownloadUrl());
                 }
             }
         });

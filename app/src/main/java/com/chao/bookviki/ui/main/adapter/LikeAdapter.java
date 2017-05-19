@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.RealmLikeBean;
-import com.chao.bookviki.presenter.VtexPresenter;
 import com.chao.bookviki.ui.gank.activity.GirlDetailActivity;
-import com.chao.bookviki.ui.zhihu.activity.ZhihuDetailActivity;
-import com.chao.bookviki.R;
 import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
+import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 
 import java.util.List;
 
@@ -65,13 +64,13 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         if(holder instanceof ArticleViewHolder) {
             ((ArticleViewHolder) holder).title.setText(mList.get(position).getTitle());
             switch (mList.get(position).getType()) {
-                case Constants.TYPE_ZHIHU:
-                    if (mList.get(position).getImage() != null) {
-                        ImageLoader.load(mContext, mList.get(position).getImage(), ((ArticleViewHolder) holder).image);
-                    } else {
-                        ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_launcher);
-                    }
-                    ((ArticleViewHolder) holder).from.setText("来自 知乎");
+                case Constants.TYPE_BOOK:
+                  //  if (mList.get(position).getImage() != null) {
+                  //      ImageLoader.load(mContext, mList.get(position).getImage(), ((ArticleViewHolder) holder).image);
+                 //   } else {
+                        ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.richang);
+                //    }
+                    ((ArticleViewHolder) holder).from.setText("日常");
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -81,7 +80,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     break;
                 case Constants.JING_XUAN_CONSTANT:
                     ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.yuedu);
-                    ((ArticleViewHolder) holder).from.setText("来自 精选阅读");
+                    ((ArticleViewHolder) holder).from.setText("精选阅读");
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -92,7 +91,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     break;
                 case Constants.YU_LU_CONSTATNT:
                     ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.yingwenyuluicon);
-                    ((ArticleViewHolder) holder).from.setText("来自 英文语录");
+                    ((ArticleViewHolder) holder).from.setText("英文语录");
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -101,57 +100,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                         }
                     });
                     break;
-                case Constants.TYPE_WEB:
-                    ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_web);
-                    ((ArticleViewHolder) holder).from.setText("来自 干货");
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            gotoTechDetail(mList.get(holder.getAdapterPosition()).getUrl(), null ,mList.get(holder.getAdapterPosition()).getTitle()
-                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.TYPE_WEB);
-                        }
-                    });
-                    break;
-                case Constants.TYPE_WECHAT:
-                    ImageLoader.load(mContext, mList.get(position).getId(), ((ArticleViewHolder) holder).image);
-                    ((ArticleViewHolder) holder).from.setText("来自 微信");
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            gotoTechDetail(mList.get(holder.getAdapterPosition()).getUrl(), mList.get(holder.getAdapterPosition()).getImage(), mList.get(holder.getAdapterPosition()).getTitle()
-                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.TYPE_WECHAT);
-                        }
-                    });
-                    break;
-                case Constants.TYPE_GOLD:
-                    if (mList.get(position).getImage() != null) {
-                        ImageLoader.load(mContext, mList.get(position).getImage(), ((ArticleViewHolder) holder).image);
-                    } else {
-                        ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_launcher);
-                    }
-                    ((ArticleViewHolder) holder).from.setText("来自 掘金");
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            gotoTechDetail(mList.get(holder.getAdapterPosition()).getUrl(), mList.get(holder.getAdapterPosition()).getImage(), mList.get(holder.getAdapterPosition()).getTitle()
-                                    ,mList.get(holder.getAdapterPosition()).getId(), Constants.TYPE_GOLD);
-                        }
-                    });
-                    break;
-                case Constants.TYPE_VTEX:
-                    if (mList.get(position).getImage() != null) {
-                        ImageLoader.load(mContext, VtexPresenter.parseImg(mList.get(position).getImage()), ((ArticleViewHolder) holder).image);
-                    } else {
-                        ((ArticleViewHolder) holder).image.setImageResource(R.mipmap.ic_launcher);
-                    }
-                    ((ArticleViewHolder) holder).from.setText("来自 V2EX");
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            gotoVtexDetail(mList.get(holder.getAdapterPosition()).getId());
-                        }
-                    });
-                    break;
+
             }
         } else if(holder instanceof GirlViewHolder) {
             ImageLoader.load(mContext, mList.get(position).getImage(), ((GirlViewHolder) holder).image);
@@ -198,8 +147,8 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     public void gotoDailyDetail(int id) {
         Intent intent = new Intent();
-        intent.setClass(mContext, ZhihuDetailActivity.class);
-        intent.putExtra("id",id);
+        intent.setClass(mContext, BookDetailActivity.class);
+        intent.putExtra("objectId",String.valueOf(id));
         intent.putExtra("isNotTransition",true);
         mContext.startActivity(intent);
     }
@@ -222,10 +171,5 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         mContext.startActivity(intent);
     }
 
-    public void gotoVtexDetail(String topicId) {
-       /* Intent intent = new Intent();
-        intent.setClass(mContext, RepliesActivity.class);
-        intent.putExtra(Constants.IT_VTEX_TOPIC_ID,topicId);
-        mContext.startActivity(intent);*/
-    }
+
 }

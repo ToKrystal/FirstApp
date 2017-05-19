@@ -14,6 +14,7 @@ import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import rx.Subscription;
 import rx.functions.Func1;
 
 /**
- * Created by codeest on 16/8/20.
+ *
  */
 
 public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> implements YingWenYuLuContract.Presenter{
@@ -31,12 +32,14 @@ public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> 
 
     private String queryStr = null;
     private String currentTech = GankMainFragment.tabTitle[0];
-    private int currentType = Constants.TYPE_ANDROID;
+    private int currentType = Constants.YU_LU_CONSTATNT;
+    private List<YingWenYuLuBean> mList;
 
 
     @Inject
     public YingWenYuLuPresenter(RetrofitHelper mRetrofitHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
+        mList = new ArrayList<>();
         //查询事件
         registerEvent();
     }
@@ -62,9 +65,22 @@ public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> 
                         queryStr = s;
                      //   getSearchTechData();
                       //  getSearchNewsDate();
+                        getSearchBeans(s);
                     }
+
+
                 });
         addSubscrebe(rxSubscription);
+    }
+
+    private void getSearchBeans(String s) {
+        List<YingWenYuLuBean> list = new ArrayList<>(mList.size());
+        for (YingWenYuLuBean bean : mList){
+            if (bean.getEnglish().contains(s)){
+                list.add(bean);
+            }
+        }
+        mView.showYingWenYuLus(list);
     }
 
 
@@ -78,8 +94,11 @@ public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> 
                     public void onNext(List<YingWenYuLuBean> beans) {
                         if (showMore){
                             mView.showMoreYinWenYuLus(beans);
+                            mList.addAll(beans);
                         }else {
                             mView.showYingWenYuLus(beans);
+                            mList.clear();
+                            mList.addAll(beans);
                         }
 
                     }

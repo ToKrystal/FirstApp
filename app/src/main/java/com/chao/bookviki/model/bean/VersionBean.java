@@ -12,6 +12,8 @@ public class VersionBean {
 
     private String des;
 
+    private String downloadUrl;
+
     public String getCode() {
         return code;
     }
@@ -36,4 +38,11 @@ public class VersionBean {
         return des;
     }
 
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
 }

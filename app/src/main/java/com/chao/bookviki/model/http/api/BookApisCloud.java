@@ -7,6 +7,7 @@ import com.chao.bookviki.model.bean.ImageBean;
 import com.chao.bookviki.model.bean.LoginBean;
 import com.chao.bookviki.model.bean.PersonalInfoBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
+import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 
 import java.util.List;
@@ -25,9 +26,8 @@ import rx.Observable;
  * Created by Jessica on 2017/3/21.
  */
 
-public interface BookApisBa {
+public interface BookApisCloud {
    // String HOST = "http://news-at.zhihu.com/api/4/";
-    String CONTENTHOST = "https://www.v2ex.com/";
    // String HOST = "http://192.168.56.1:8080/SpringMVC/bookapi/";
     String HOST = "http://chenyuchao.com.cn/";
     //String HOST = "https://api.leancloud.cn/";
@@ -149,5 +149,8 @@ public interface BookApisBa {
      */
     @GET("/bookapi/12/num/{num}/")
     Observable<BookHttpResponse<ImageBean>> getRandomImage(@Path("num") int num);
+
+    @GET("/bookapi/13")
+    Observable<BookHttpResponse<VersionBean>> getCurrentVersion();
 
 }

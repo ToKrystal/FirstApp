@@ -17,12 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.android.pushservice.PushManager;
 import com.chao.bookviki.R;
+import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.base.BaseActivity;
+import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.component.UpdateService;
 import com.chao.bookviki.model.bean.LogOutBean;
@@ -66,7 +68,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     //注销
     View btnLogout;
     //登录头像
-    View img_avatar;
+    ImageView img_avatar;
     //用户名
     TextView tv_login_name;
 
@@ -85,8 +87,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     MenuItem mSearchMenuItem;
     ActionBarDrawerToggle mDrawerToggle;
 
-    private int hideFragment = Constants.TYPE_GANK;
-    private int showFragment = Constants.TYPE_GANK;
+    private int hideFragment = Constants.TYPE_JINGXUAN1;
+    private int showFragment = Constants.TYPE_JINGXUAN1;
 
     @Override
     protected void initInject() {
@@ -110,7 +112,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             SharedPreferenceUtil.setNightModeState(false);
         } else {
             showFragment = SharedPreferenceUtil.getCurrentItem();
-            hideFragment = Constants.TYPE_GANK;
+            hideFragment = Constants.TYPE_JINGXUAN1;
 
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
             mNavigationView.getMenu().findItem(R.id.drawer_gank).setChecked(false);
@@ -137,7 +139,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_gank);
         loadMultipleRootFragment(R.id.fl_main_content,0,mGankFragment,mBookMainFragment,mLikeFragment,mSettingFragment,mAboutFragment,userInfoFragment);
         btnLogout =  mNavigationView.getHeaderView(0).findViewById(R.id.btn_logout);
-        img_avatar = mNavigationView.getHeaderView(0).findViewById(R.id.img_avatar);
+        img_avatar = (ImageView) mNavigationView.getHeaderView(0).findViewById(R.id.img_avatar);
         tv_login_name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_login_name);
         img_avatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +162,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         mSearchMenuItem.setVisible(false);
                         break;*/
                     case R.id.drawer_gank:
-                        showFragment = Constants.TYPE_GANK;
+                        showFragment = Constants.TYPE_JINGXUAN1;
                         mSearchMenuItem.setVisible(true);
                         break;
                     /*case R.id.drawer_gold:
@@ -206,10 +208,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(showFragment == Constants.TYPE_GANK) {
+                if(showFragment == Constants.TYPE_JINGXUAN1) {
                     mGankFragment.doSearch(query);
-                } else if(showFragment == Constants.TYPE_WECHAT) {
-                    RxBus.getDefault().post(new SearchEvent(query, Constants.TYPE_WECHAT));
+                } else if(showFragment == Constants.YU_LU_CONSTATNT) {
+                    RxBus.getDefault().post(new SearchEvent(query, Constants.YU_LU_CONSTATNT));
                 }
                 return false;
             }
@@ -265,9 +267,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                PushManager.stopWork(mContext);
-                SharedPreferenceUtil.setBaiYunBindState(false);
-            //  App.getInstance().exitApp();
+              //  PushManager.stopWork(mContext);
+             //   SharedPreferenceUtil.setBaiYunBindState(false);
+              App.getInstance().exitApp();
                // RxBus.getDefault().post(new MyPushBean());
 
             }
@@ -279,7 +281,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         switch (item) {
             /*case Constants.TYPE_ZHIHU:
                 return mZhihuFragment;*/
-            case Constants.TYPE_GANK:
+            case Constants.TYPE_JINGXUAN1:
                 return mGankFragment;
             case Constants.TYPE_GOLD:
                 // return mGoldFragment;
@@ -302,7 +304,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             /*case Constants.TYPE_ZHIHU:
                 return R.id.drawer_zhihu;*/
 
-            case Constants.TYPE_GANK:
+            case Constants.TYPE_JINGXUAN1:
                 return R.id.drawer_gank;
 
             case Constants.TYPE_GOLD:
@@ -323,7 +325,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
-    public void showUpdateDialog(String versionContent) {
+    public void showUpdateDialog(String versionContent, final String downloadUrl) {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setTitle("检测到新版本!");
         builder.setMessage(versionContent);
@@ -331,7 +333,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("马上更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                checkPermissions();
+                checkPermissions(downloadUrl);
             }
         });
         builder.show();
@@ -362,29 +364,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      * 头像点击
      */
     void onImgAvatarClick() {
-        //保存正在展示的fragment标志
-       /* showFragment = Constants.TYPE_LOGIN;
-        mSearchMenuItem.setVisible(false);
-        SharedPreferenceUtil.setCurrentItem(Constants.TYPE_LOGIN);
-        mDrawerLayout.closeDrawers();
-        showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
-        hideFragment = showFragment;*/
-        Intent intent = new Intent(this, LoginActivity.class);
-        //intent.putExtra(Constants.IT_GOLD_MANAGER, mBean);
-        mContext.startActivity(intent);
+        //没有登录才跳转去登录
+        if (!mPresenter.queryIfLogin()){
+            Intent intent = new Intent(this, LoginActivity.class);
+            mContext.startActivity(intent);
+        }
     }
 
 
 
     @Override
-    public void startDownloadService() {
-        startService(new Intent(mContext, UpdateService.class));
+    public void startDownloadService(String downloadUrl) {
+        Intent intent = new Intent(mContext,UpdateService.class);
+        intent.putExtra("url",downloadUrl);
+        startService(intent);
     }
 
     @Override
     public void jump2PushSucc(MyPushBean bean) {
         LogUtil.i("收到透传消息，正在展示通知栏");
-
         Intent notifyIntent =
                 new Intent(this, BookDetailActivity.class);
         notifyIntent.putExtra("objectId",bean.ojectId);
@@ -405,9 +403,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 //设置小图标
                 .setSmallIcon(R.mipmap.chao3)
                 //设置通知标题
-                .setContentTitle("这是一篇有趣的文章")
+                .setContentTitle("这是一篇为您精选的文章")
                 //设置通知内容
-                .setContentText("我们希望这种情况永远不会发生。如果有降落伞").setContentIntent(notifyPendingIntent);
+                .setContentText("查看或许能为您带来额外的乐趣！！").setContentIntent(notifyPendingIntent);
         //设置通知时间，默认为系统发出通知的时间，通常不用设置
         //.setWhen(System.currentTimeMillis());
         //通过builder.build()方法生成Notification对象,并发送通知,id=1
@@ -439,6 +437,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
             tv_login_name.setText(bean.name);
             btnLogout.setVisibility(View.VISIBLE);
+            ImageLoader.load(mContext,bean.getIcon_url(),img_avatar);
 
         }
     }
@@ -449,6 +448,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         SnackbarUtil.showShort(getWindow().getDecorView(),"注销成功");
         tv_login_name.setText("点击头像登录");
         btnLogout.setVisibility(View.GONE);
+        img_avatar.setImageResource(R.drawable.image_placeholder);
     }
 
     @Override
@@ -458,9 +458,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             tv_login_name.setText("点击头像登录");
             btnLogout.setVisibility(View.GONE);
+        img_avatar.setImageResource(R.drawable.image_placeholder);
     }
 
-    public void checkPermissions() {
-        mPresenter.checkPermissions(new RxPermissions(this));
+    public void checkPermissions(String downloadUrl) {
+        mPresenter.checkPermissions(new RxPermissions(this),downloadUrl);
     }
 }

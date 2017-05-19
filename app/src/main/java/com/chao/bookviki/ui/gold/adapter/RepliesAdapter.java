@@ -79,7 +79,7 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             RepliesListBean bean = mList.get(position - 1);
             if (bean == null)
                 return;
-            ImageLoader.load(mContext, VtexPresenter.parseImg(bean.getMember().getavatar_normal()), contentHolder.ivRepliesFace);//评论人的头像
+            ImageLoader.load(mContext, bean.getMember().getavatar_normal(), contentHolder.ivRepliesFace);//评论人的头像
             contentHolder.tvRepliesName.setText(bean.getMember().getUsername());//评论人的名字
             contentHolder.tvRepliesTips.setText(String.format("%d楼 %s", position, DateUtil.formatTime2String(bean.getCreated())));//楼和时间
             contentHolder.tvRepliesContent.setHtml(bean.getContent_rendered(), new HtmlHttpImageGetter(contentHolder.tvRepliesContent));//评论内容

@@ -12,13 +12,12 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.chao.bookviki.model.http.api.MyApis;
 import com.chao.bookviki.util.ToastUtil;
 
 import java.io.File;
 
 /**
- * Created by codeest on 16/10/10.
+ * 下载更新service
  */
 
 public class UpdateService extends Service {
@@ -32,6 +31,7 @@ public class UpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        String downloadUrl = intent.getStringExtra("url");
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -45,16 +45,16 @@ public class UpdateService extends Service {
             }
         };
         registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        startDownload();
+        startDownload(downloadUrl);
         return Service.START_STICKY;
     }
 
-    private void startDownload() {
+    private void startDownload(String downloadUrl) {
         DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(
-                Uri.parse(MyApis.APK_DOWNLOAD_URL));
-        request.setTitle("GeekNews");
-        request.setDescription("新版本下载中");
+                Uri.parse(downloadUrl));
+        request.setTitle("View New");
+        request.setDescription("即将更新到最新版本");
         request.setMimeType("application/vnd.android.package-archive");
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "bookviki.apk");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -62,6 +62,6 @@ public class UpdateService extends Service {
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         }
         dm.enqueue(request);
-        ToastUtil.shortShow("后台下载中，请稍候...");
+        ToastUtil.shortShow("少年正在努力狂奔...");
     }
 }

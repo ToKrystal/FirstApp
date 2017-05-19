@@ -27,7 +27,7 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
 
 
     private MaterialDialog.Builder mInputDialog;
-    private LoginBean bean;
+    private LoginBean userBean;
     @BindView(R.id.name_tv)
      TextView name_tv;
     @BindView(R.id.signature_tv)
@@ -54,11 +54,11 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
     @Override
     protected void initEventAndData() {
         initDialog();
-        bean = mPresenter.queryLoginBean();
-        if (bean != null){
-            name_tv.setText(bean.getNickName());
-            signature_tv.setText(bean.getSignUpName());
-            intro_tv.setText(bean.getSimpleDesc());
+        userBean = mPresenter.queryLoginBean();
+        if (userBean != null){
+            name_tv.setText(userBean.getNickName());
+            signature_tv.setText(userBean.getSignUpName());
+            intro_tv.setText(userBean.getSimpleDesc());
         }
     }
 
@@ -97,15 +97,15 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
         switch (id) {
             case R.id.user_name_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_name));
-                mInputDialog.input("",bean != null? bean.getNickName() : "",nameCallback);
+                mInputDialog.input("", userBean != null? userBean.getNickName() : "",nameCallback);
                 break;
             case R.id.user_signature_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_signature));
-                mInputDialog.input("", bean !=null? bean.getSignUpName() : "", signatureCallback);
+                mInputDialog.input("", userBean !=null? userBean.getSignUpName() : "", signatureCallback);
                 break;
             case R.id.user_intro_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_intro));
-                mInputDialog.input( "", bean !=null? bean.getSimpleDesc() : "",introCallback);
+                mInputDialog.input( "", userBean !=null? userBean.getSimpleDesc() : "", descCallback);
                 break;
            /* case R.id.user_address_ll:
                 mInputDialog.title(getString(R.string.dialog_edit_address));
@@ -135,20 +135,25 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
             if (!TextUtils.isEmpty(input)) {
                 PersonalInfoBean bean = new PersonalInfoBean();
                 bean.setNickName(input.toString());
+                name_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
+                mPresenter.updateNick(input.toString());
                // mUserEntity.setName(input.toString());
                // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
         }
     };
 
-    MaterialDialog.InputCallback introCallback = new MaterialDialog.InputCallback() {
+    MaterialDialog.InputCallback descCallback = new MaterialDialog.InputCallback() {
         @Override
         public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
             if (!TextUtils.isEmpty(input)) {
                 PersonalInfoBean bean = new PersonalInfoBean();
                 bean.setSimpleDesc(input.toString());
+                intro_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
+                mPresenter.updateDesc(input.toString());
+               // RxBus.getDefault().post(userBean);
                // mUserEntity.setIntroduction(input.toString());
                // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
@@ -161,7 +166,9 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
             if (!TextUtils.isEmpty(input)) {
                 PersonalInfoBean bean = new PersonalInfoBean();
                 bean.setSignUpName(input.toString());
+                signature_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
+                mPresenter.updateSigna(input.toString());
               //  mUserEntity.setSignature(input.toString());
               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
@@ -175,7 +182,7 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
 
     @Override
     public void showUserInfo(LoginBean bean) {
-        this.bean = bean;
+        this.userBean = bean;
     }
 /*
 

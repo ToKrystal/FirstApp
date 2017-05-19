@@ -44,7 +44,7 @@ public class BookFollowActivity extends BaseActivity<FollowPresenter> implements
 
     @Override
     protected void initEventAndData() {
-        setToolBar(toolBar, "首页特别展示");
+        setToolBar(toolBar, "关注");
         //获取从main界面传过来的关注数据
         mList = ((BookManagerBean) getIntent().getParcelableExtra(Constants.IT_GOLD_MANAGER)).getManagerList();
         mAdapter = new BookFollowAdapter(mContext, mList);

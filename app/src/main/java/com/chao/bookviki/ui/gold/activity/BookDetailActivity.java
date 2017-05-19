@@ -325,12 +325,14 @@ mPresenter.save2DetailPrestener(mTopBean);
     @Override
     public void showReplay(List<RepliesListBean> mList) {
 
+        ivProgress.stop();
         mAdapter.setContentData(mList);
     }
 
     //展示主题信息
     @Override
     public void showTopInfo(BookListBean mTopInfo) {
+        ivProgress.stop();
         mTopBean = mTopInfo;
         mAdapter.setTopData(mTopInfo);
     }
@@ -339,6 +341,7 @@ mPresenter.save2DetailPrestener(mTopBean);
     @Override
     public void showReplaySucc() {
         SnackbarUtil.showShort(getWindow().getDecorView(),"发表评论成功");
+        mPresenter.getContent(objectId);
         //mPresenter.getContent(mTopBean.getObjectId());
     }
 

@@ -4,17 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-/**
- * Created by codeest on 2016/8/22.
- */
+
 public class ShareUtil {
 
-    private static final String EMAIL_ADDRESS = "codeest.dev@gmail.com";
+    private static final String EMAIL_ADDRESS = "yuchao_89@yeah.net";
 
     public static void shareText(Context context,String text,String title){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT,text);
+        //调用系统
         context.startActivity(Intent.createChooser(intent,title));
     }
 

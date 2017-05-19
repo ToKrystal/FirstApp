@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2017/3/28.
+ * 日常主界面
  */
 
 public class BookMainFragment extends BaseFragment<BookMainPresenter> implements BookMainContract.View {
@@ -35,8 +35,8 @@ public class BookMainFragment extends BaseFragment<BookMainPresenter> implements
     @BindView(R.id.vp_gold_main)
     ViewPager mViewPager;
 
-    public static String[] typeStr = {"日常", "美文", "格言", "生活", "设计", "产品", "阅读", "工具资源"};
-    public static String[] type = {"daily", "beautifultxt", "geyan", "shenghuo", "design", "product", "article", "freebie"};
+    public static String[] typeStr = {"日常", "美文", "格言", "生活", "体育", "娱乐", "电影", "游戏"};
+    public static String[] type = {"daily", "beautifultxt", "geyan", "shenghuo", "tiyu", "yule", "dianying", "youxi"};
 
     List<BookPagerFragment> fragments = new ArrayList<>();
     private int currentIndex = 0;

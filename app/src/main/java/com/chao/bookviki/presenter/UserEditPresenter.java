@@ -56,4 +56,24 @@ public class UserEditPresenter extends RxPresenter<UserEditContract.View> implem
     public LoginBean queryLoginBean() {
         return  mRealmHelper.returnLoginBean();
     }
+
+    @Override
+    public void updateLoginBean(LoginBean bean) {
+        mRealmHelper.updateLoginBean(bean);
+    }
+
+    @Override
+    public void updateDesc(String str) {
+        mRealmHelper.updateDesc(str);
+    }
+
+    @Override
+    public void updateSigna(String str) {
+        mRealmHelper.updateSigna(str);
+    }
+
+    @Override
+    public void updateNick(String str) {
+        mRealmHelper.updateNick(str);
+    }
 }

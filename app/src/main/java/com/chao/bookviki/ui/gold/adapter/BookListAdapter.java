@@ -1,8 +1,6 @@
 package com.chao.bookviki.ui.gold.adapter;
 
-import android.app.ActivityOptions;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chao.bookviki.R;
 import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.BookListBean;
-import com.chao.bookviki.R;
-import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 import com.chao.bookviki.util.DateUtil;
 import com.chao.bookviki.widget.SquareImageView;
 
@@ -143,7 +140,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
         } else {
-            ((TitleViewHolder) holder).tvTitle.setText(String.format("%s 热门", mType));
+            ((TitleViewHolder) holder).tvTitle.setText(String.format("%s 最新", mType));
             ((TitleViewHolder) holder).btnClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -212,47 +209,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private class MyOnClickListener implements View.OnClickListener {
 
-        private int position;
-        private BookListBean bean;
-
-        public MyOnClickListener(int position, BookListBean bean) {
-            this.position = position;
-            if (position < 0) {
-                this.position = 0;
-            }
-            this.bean= bean;
-        }
-
-        @Override
-        public void onClick(View view) {
-            //  String imgUrl = null;
-            //  if (mList.get(position).getScreenshot() != null && mList.get(position).getScreenshot().getUrl() != null)
-            // imgUrl = mList.get(position).getScreenshot().getUrl();
-            /*TechDetailActivity.launch(new TechDetailActivity.Builder()
-                    .setContext(mContext)
-                    .setId(mList.get(position).getObjectId())
-                    .setTitle(mList.get(position).getTitle())
-                    .setUrl(mList.get(position).getUrl())
-                    .setImgUrl(imgUrl)
-                    .setType(Constants.TYPE_GOLD));*/
-           /* Intent intent = new Intent();
-            intent.setClass(mContext, BookDetailActivity.class);
-            intent.putExtra("id",1);
-           // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
-           //,options.toBundle()
-            mContext.startActivity(intent);*/
-           /* Intent intent = new Intent();
-            intent.setClass(mContext, BookDetailActivity.class);
-            //详细内容的ID
-            intent.putExtra("id",bean.getObjectId());
-            //TODO 传进该主题内容 intent
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
-            mContext.startActivity(intent,options.toBundle());*/
-
-        }
-    }
 
     private String getItemInfoStr(int likeNum, int cmtNum, String author, String time) {
         StringBuilder sb = new StringBuilder(String.valueOf(likeNum));

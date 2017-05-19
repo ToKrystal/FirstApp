@@ -78,6 +78,42 @@ public class RealmHelper {
         mRealm.commitTransaction();
     }
 
+    public void updateLoginBean(LoginBean bean){
+        mRealm.beginTransaction();
+        mRealm.insertOrUpdate(bean);
+        mRealm.commitTransaction();
+    }
+
+    public void updateDesc(String str){
+        RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
+        mRealm.beginTransaction();
+        for(LoginBean item : results) {
+           item.setSimpleDesc(str);
+            mRealm.insertOrUpdate(item);
+        }
+        mRealm.commitTransaction();
+    }
+
+    public void updateSigna(String str){
+        RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
+        mRealm.beginTransaction();
+        for(LoginBean item : results) {
+            item.setSignUpName(str);
+            mRealm.insertOrUpdate(item);
+        }
+        mRealm.commitTransaction();
+    }
+
+    public void updateNick(String str){
+        RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
+        mRealm.beginTransaction();
+        for(LoginBean item : results) {
+            item.setNickName(str);
+            mRealm.insertOrUpdate(item);
+        }
+        mRealm.commitTransaction();
+    }
+
     /**
      * 删除登录信息
      * @param name
@@ -90,6 +126,8 @@ public class RealmHelper {
         }
         mRealm.commitTransaction();
     }
+
+
 
     /**
      * 查询登录信息
@@ -110,8 +148,9 @@ public class RealmHelper {
         RealmResults<LoginBean> results = mRealm.where(LoginBean.class).findAll();
         if(results.isEmpty()){
             return null;
+        }else {
+            return results.get(0);
         }
-        return results.get(0);
     }
 
 

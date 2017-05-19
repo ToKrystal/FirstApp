@@ -26,10 +26,9 @@ import rx.Observable;
  * Created by Jessica on 2017/3/21.
  */
 
-public interface BookApis {
+public interface BookApisLocal {
     // String HOST = "http://news-at.zhihu.com/api/4/";
-    // String HOST = "http://192.168.56.1:8080/SpringMVC/bookapi/";
-    String HOST = "http://chenyuchao.com.cn/";
+    String HOST = "http://192.168.56.1:8080/SpringMVC/bookapi/";
     //String HOST = "https://api.leancloud.cn/";
 
     /**
@@ -66,7 +65,7 @@ public interface BookApis {
      * 获取主题回复
      * @return
      */
-    @GET("/bookapi/4/queryId/{queryId}")
+    @GET("/BookSpringMVC/bookapi/4/queryId/{queryId}")
     Observable<List<RepliesListBean>> getRepliesList(@Path("queryId") String queryId);
 
 
@@ -74,15 +73,15 @@ public interface BookApis {
      * 获取主题列表
      * @return
      */
-    @GET("/bookapi/3/type/{type}/start/{start}/number/{number}")
-    Observable<BookHttpResponse<List<BookListBean>>> getBookList(@Path("type") String type, @Path("start") int start, @Path("number") int number);
+    @GET("/BookSpringMVC/bookapi/3/type/{type}/start/{start}/number/{number}")
+    Observable<BookHttpResponse<List<BookListBean>>> getBookList(@Path("type") String type, @Path("start")int start, @Path("number")int number);
 
 
     /**
      * 获取单个主题
      * @return
      */
-    @GET("/bookapi/5/query/{query}")
+    @GET("/BookSpringMVC/bookapi/5/query/{query}")
     Observable<BookHttpResponse<List<BookListBean>>> getSingleBookList(@Path("query") String query);
 
     /**
@@ -100,11 +99,11 @@ public interface BookApis {
 
     //表单
     @FormUrlEncoded
-    @POST("/bookapi/6")
-    Observable<BookHttpResponse<LoginBean>> postLogin(@Field("email") String email, @Field("password") String pass, @Field("channelId") String channelId);
+    @POST("/BookSpringMVC/bookapi/6")
+    Observable<BookHttpResponse<LoginBean>> postLogin(@Field("email")String email, @Field("password")String pass,@Field("channelId")String channelId);
 
     // @FormUrlEncoded
-    @POST("/bookapi/7")
+    @POST("/BookSpringMVC/bookapi/7")
     Observable<BookHttpResponse<LoginBean>> postCreateAccount(@Body CreateAccountBean bean);
 
     /**
@@ -115,8 +114,8 @@ public interface BookApis {
      * @return
      */
     @FormUrlEncoded
-    @POST("/bookapi/8")
-    Observable<BookHttpResponse<String>> postReplay(@Field("objectId") String id, @Field("content") String content);
+    @POST("/BookSpringMVC/bookapi/8")
+    Observable<BookHttpResponse<String>> postReplay(@Field("objectId")String id, @Field("content")String content);
 
 
     /**
@@ -124,8 +123,8 @@ public interface BookApis {
      * @return
      */
     @FormUrlEncoded
-    @POST("/bookapi/9")
-    Observable<BookHttpResponse<FollowBean>> postFollow(@Field("typeId") String typeId, @Field("follow") boolean follow);
+    @POST("/BookSpringMVC/bookapi/9")
+    Observable<BookHttpResponse<FollowBean>> postFollow(@Field("typeId")String typeId,@Field("follow") boolean follow);
 
 
     /**
@@ -133,12 +132,12 @@ public interface BookApis {
      * @param bean
      * @return
      */
-    @POST("/bookapi/10")
+    @POST("/BookSpringMVC/bookapi/10")
     Observable<BookHttpResponse<String>> postUpdatePersonInfo(@Body PersonalInfoBean bean);
 
     @FormUrlEncoded
-    @POST("/bookapi/11")
-    Observable<BookHttpResponse<String>> postChannelIdNotLogin(@Field("channelId") String channelId);
+    @POST("/BookSpringMVC/bookapi/11")
+    Observable<BookHttpResponse<String>> postChannelIdNotLogin(@Field("channelId")String channelId);
 
 
     //@POST("ajax.mobileSword")
@@ -147,10 +146,10 @@ public interface BookApis {
     /**
      * 随机图
      */
-    @GET("/bookapi/12/num/{num}/")
+    @GET("/BookSpringMVC/bookapi/12/num/{num}/")
     Observable<BookHttpResponse<ImageBean>> getRandomImage(@Path("num") int num);
 
-    @GET("/bookapi/13")
+    @GET("/BookSpringMVC/bookapi/13")
     Observable<BookHttpResponse<VersionBean>> getCurrentVersion();
 
 }

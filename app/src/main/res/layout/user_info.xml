@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -60,18 +61,19 @@
                             android:maxLines="1"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_20"
-                            tools:text="超TTTT" />
+                            android:text="超TTTT" />
 
                         <TextView
                             android:id="@+id/user_real_name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignBottom="@id/user_name_tv"
+                            android:paddingLeft="25dp"
                             android:layout_toEndOf="@id/user_name_tv"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_16"
                             android:visibility="visible"
-                            tools:text="(TYokfd)" />
+                            android:text="(TYokfd)" />
 
 
 
@@ -82,7 +84,7 @@
                         android:id="@+id/user_avatar_civ"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/ic_action_navigation_arrow_back"
+                        android:src="@mipmap/account"
                         app:backgroundImage="@color/main_bg"
                         app:roundAsCircle="true" />
 
@@ -93,7 +95,7 @@
                         android:id="@+id/signature_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="一个热爱分享的 Android 小伙伴..."
+                        android:text="一个热爱分享的 Android 小伙伴..."
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize_14"
                         android:paddingStart="@dimen/space_20"
@@ -112,6 +114,7 @@
                     android:paddingEnd="@dimen/space_3">
 
                     <LinearLayout
+                        android:id="@+id/linear1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -136,6 +139,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linear2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -161,6 +165,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linear3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -209,12 +214,12 @@
 
                 </LinearLayout>
             </FrameLayout>
-            <android.support.v7.widget.Toolbar
+            <!--<android.support.v7.widget.Toolbar
                 android:id="@+id/view_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
 
 
 

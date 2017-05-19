@@ -256,6 +256,10 @@ public class RetrofitHelper {
         return  mBookApiService.getRandomImage(num);
     }
 
+    public Observable<BookHttpResponse<VersionBean>> getCurrentVersion(){
+        return mBookApiService.getCurrentVersion();
+    }
+
 
 
     public Observable<JingXuanNewsResponse<List<JingXuanNewsBean>>> getJingXuanNewsList(String type,int page,int limit){

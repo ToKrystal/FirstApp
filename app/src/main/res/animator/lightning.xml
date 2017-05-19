@@ -5,6 +5,6 @@
     android:valueFrom="M55,65 L15,69 L15,70 L55,61 Z"
     android:valueTo="M55,65 L15,69 L15,10 L55,1 Z"
     android:valueType="pathType"
-    android:duration="800"
+    android:duration="900"
     android:repeatCount="infinite"
     android:repeatMode="reverse" />

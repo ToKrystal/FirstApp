@@ -3,7 +3,7 @@ package com.chao.bookviki.presenter;
 import com.chao.bookviki.base.RxPresenter;
 import com.chao.bookviki.model.bean.VersionBean;
 import com.chao.bookviki.model.http.RetrofitHelper;
-import com.chao.bookviki.model.http.response.MyHttpResponse;
+import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.presenter.contract.SettingContract;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
@@ -27,16 +27,16 @@ public class SettingPresenter extends RxPresenter<SettingContract.View> implemen
 
     @Override
     public void checkVersion(final String currentVersion) {
-        Subscription rxSubscription = mRetrofitHelper.fetchVersionInfo()
-                .compose(RxUtil.<MyHttpResponse<VersionBean>>rxSchedulerHelper())
-                .compose(RxUtil.<VersionBean>handleMyResult())
+        Subscription rxSubscription = mRetrofitHelper.getCurrentVersion()
+                .compose(RxUtil.<BookHttpResponse<VersionBean>>rxSchedulerHelper())
+                .compose(RxUtil.<VersionBean>handleBookResult())
                 .subscribe(new CommonSubscriber<VersionBean>(mView, "获取版本信息失败 T T") {
                     @Override
                     public void onNext(VersionBean versionBean) {
                         if (Integer.valueOf(currentVersion.replace(".", "")) < Integer.valueOf(versionBean.getCode().replace(".", ""))) {
                             mView.showUpdateDialog(versionBean);
                         } else {
-                            mView.showError("已经是最新版本~");
+                            mView.showError("亲！已经是最新版本了！");
                         }
                     }
                 });

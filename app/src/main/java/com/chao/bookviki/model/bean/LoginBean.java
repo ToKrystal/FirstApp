@@ -17,13 +17,17 @@ public class LoginBean  extends RealmObject implements Parcelable {
     public String nickName;
     public String signUpName;
     public String simpleDesc;
+    public int replayNum;
+    public int followNum;
 
-    public LoginBean(String name, String icon_url, String nickName, String signUpName, String simpleDesc) {
+    public LoginBean(String name, String icon_url, String nickName, String signUpName, String simpleDesc, int replayNum, int followNum) {
         this.name = name;
         this.icon_url = icon_url;
         this.nickName = nickName;
         this.signUpName = signUpName;
         this.simpleDesc = simpleDesc;
+        this.replayNum = replayNum;
+        this.followNum = followNum;
     }
 
     public LoginBean(){}
@@ -40,6 +44,8 @@ public class LoginBean  extends RealmObject implements Parcelable {
         dest.writeString(this.nickName);
         dest.writeString(this.signUpName);
         dest.writeString(this.simpleDesc);
+        dest.writeInt(this.replayNum);
+        dest.writeInt(this.followNum);
 
     }
     public static final Creator<LoginBean> CREATOR = new Creator<LoginBean>() {
@@ -60,6 +66,8 @@ public class LoginBean  extends RealmObject implements Parcelable {
         this.nickName = in.readString();
         this.signUpName = in.readString();
         this.simpleDesc = in.readString();
+        this.replayNum = in.readInt();
+        this.followNum = in.readInt();
     }
 
     public String getName() {
@@ -100,5 +108,21 @@ public class LoginBean  extends RealmObject implements Parcelable {
 
     public void setSimpleDesc(String simpleDesc) {
         this.simpleDesc = simpleDesc;
+    }
+
+    public int getReplayNum() {
+        return replayNum;
+    }
+
+    public void setReplayNum(int replayNum) {
+        this.replayNum = replayNum;
+    }
+
+    public int getFollowNum() {
+        return followNum;
+    }
+
+    public void setFollowNum(int followNum) {
+        this.followNum = followNum;
     }
 }

@@ -15,7 +15,6 @@ import com.chao.bookviki.model.db.RealmHelper;
 import com.chao.bookviki.model.event.NightModeEvent;
 import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
-import com.chao.bookviki.model.http.response.MyHttpResponse;
 import com.chao.bookviki.presenter.contract.MainContract;
 import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.RxUtil;
@@ -30,9 +29,7 @@ import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-/**
- * Created by codeest on 16/8/9.
- */
+
 
 public class  MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
@@ -103,7 +100,7 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
                 .subscribe(new CommonSubscriber<LoginBean>(mView, "登录显示异常ヽ(≧Д≦)ノ") {
                     @Override
                     public void onNext(LoginBean bean) {
-                       // mView.useNightMode(aBoolean);
+                        // mView.useNightMode(aBoolean);
                         mView.showLogInInfo(bean);
                     }
                 });
@@ -143,9 +140,9 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
 
     @Override
     public void checkVersion(final String currentVersion) {
-        Subscription rxSubscription = mRetrofitHelper.fetchVersionInfo()
-                .compose(RxUtil.<MyHttpResponse<VersionBean>>rxSchedulerHelper())
-                .compose(RxUtil.<VersionBean>handleMyResult())
+        Subscription rxSubscription = mRetrofitHelper.getCurrentVersion()
+                .compose(RxUtil.<BookHttpResponse<VersionBean>>rxSchedulerHelper())
+                .compose(RxUtil.<VersionBean>handleBookResult())
                 .filter(new Func1<VersionBean, Boolean>() {
                     @Override
                     public Boolean call(VersionBean versionBean) {
@@ -163,26 +160,27 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
                         content.append("\r\n");
                         content.append("更新内容:\r\n");
                         content.append(bean.getDes().replace("\\r\\n","\r\n"));
-                        return content.toString();
+                        return content.toString()+"_"+bean.getDownloadUrl();
                     }
                 })
                 .subscribe(new CommonSubscriber<String>(mView) {
                     @Override
                     public void onNext(String s) {
-                        mView.showUpdateDialog(s);
+                        String[] strArr = s.split("_");
+                        mView.showUpdateDialog(strArr[0],strArr[1]);
                     }
                 });
         addSubscrebe(rxSubscription);
     }
 
     @Override
-    public void checkPermissions(RxPermissions rxPermissions) {
+    public void checkPermissions(RxPermissions rxPermissions, final String downloadUrl) {
         Subscription rxSubscription = rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean granted) {
                         if (granted) {
-                            mView.startDownloadService();
+                            mView.startDownloadService(downloadUrl);
                         } else {
                             mView.showError("下载应用需要文件写入权限哦~");
                         }
@@ -208,6 +206,8 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
        LoginBean bean = mRealmHelper.returnLoginBean();
         if (bean == null){
             mView.showDefaultUserInfo();
+        }else {
+            mView.showLogInInfo(bean);
         }
     }
 
@@ -228,5 +228,10 @@ public class  MainPresenter extends RxPresenter<MainContract.View> implements Ma
                     }
                 });
         addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public boolean queryIfLogin() {
+        return mRealmHelper.queryIfLogin();
     }
 }

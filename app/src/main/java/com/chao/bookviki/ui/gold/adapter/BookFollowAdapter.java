@@ -18,9 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
 
-/**
- *
- */
 
 public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.ViewHolder> {
 
@@ -51,8 +48,9 @@ public class BookFollowAdapter extends RecyclerView.Adapter<BookFollowAdapter.Vi
         });*/
       //  boolean isSelect = mList.get(position).getIsSelect();
       //  holder.imageButton.setImageResource( isSelect? R.mipmap.add : R.mipmap.chosse);
-        holder.imageButton.setTag(ADD);
-        holder.imageButton.setImageResource(R.mipmap.add);
+        boolean isSelect = mList.get(position).getIsSelect();
+        holder.imageButton.setTag(isSelect? CHOSSE:ADD);
+        holder.imageButton.setImageResource(isSelect? R.mipmap.chosse:R.mipmap.add);
 
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

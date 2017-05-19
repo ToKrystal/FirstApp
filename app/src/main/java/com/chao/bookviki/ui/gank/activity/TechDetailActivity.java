@@ -153,7 +153,7 @@ public class TechDetailActivity extends SimpleActivity {
                 SystemUtil.copyToClipBoard(mContext,url);
                 return true;
             case R.id.action_share:
-                ShareUtil.shareText(mContext,url,"分享一篇文章");
+                ShareUtil.shareText(mContext,url,"分享文章通过");
         }
         return super.onOptionsItemSelected(item);
     }
