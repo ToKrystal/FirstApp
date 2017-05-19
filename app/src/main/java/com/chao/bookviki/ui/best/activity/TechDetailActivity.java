@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.activity;
+package com.chao.bookviki.ui.best.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;

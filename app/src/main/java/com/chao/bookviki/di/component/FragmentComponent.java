@@ -4,11 +4,11 @@ import android.app.Activity;
 
 import com.chao.bookviki.di.module.FragmentModule;
 import com.chao.bookviki.di.scope.FragmentScope;
-import com.chao.bookviki.ui.gank.fragment.TechFragment;
-import com.chao.bookviki.ui.gank.fragment.YingWenYuLuFragment;
-import com.chao.bookviki.ui.gold.fragment.BookCommentFragment;
-import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
-import com.chao.bookviki.ui.gold.fragment.BookPagerFragment;
+import com.chao.bookviki.ui.best.fragment.TechFragment;
+import com.chao.bookviki.ui.best.fragment.YingWenYuLuFragment;
+import com.chao.bookviki.ui.daily.fragment.BookCommentFragment;
+import com.chao.bookviki.ui.daily.fragment.BookMainFragment;
+import com.chao.bookviki.ui.daily.fragment.BookPagerFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
 import com.chao.bookviki.ui.userinfo.fragment.UserInfoFragment;

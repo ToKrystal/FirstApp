@@ -6,9 +6,6 @@ import com.chao.bookviki.model.db.RealmHelper;
 
 import javax.inject.Inject;
 
-/**
- * Created by codeest on 2016/8/23.
- */
 public class LikePresenter extends RxPresenter<LikeContract.View> implements LikeContract.Presenter {
 
     private RealmHelper mRealmHelper;

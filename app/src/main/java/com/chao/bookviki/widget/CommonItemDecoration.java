@@ -6,9 +6,6 @@ import android.view.View;
 
 import com.chao.bookviki.util.SystemUtil;
 
-/**
- * Created by codeest on 16/12/24.
- */
 
 public class CommonItemDecoration extends RecyclerView.ItemDecoration{
 

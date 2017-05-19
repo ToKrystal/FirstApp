@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.adapter;
+package com.chao.bookviki.ui.daily.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;

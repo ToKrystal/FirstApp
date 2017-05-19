@@ -6,9 +6,6 @@ import com.chao.bookviki.presenter.contract.BookCommentContract;
 
 import javax.inject.Inject;
 
-/**
- * Created by codeest on 16/8/18.
- */
 
 public class BookCommentPresenter extends RxPresenter<BookCommentContract.View> implements BookCommentContract.Presenter {
 

@@ -28,9 +28,6 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * Created by codeest on 16/8/23.
- */
 
 public class SettingFragment extends BaseFragment<SettingPresenter> implements CompoundButton.OnCheckedChangeListener, SettingContract.View{
 

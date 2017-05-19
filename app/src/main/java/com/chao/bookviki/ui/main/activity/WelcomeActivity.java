@@ -14,9 +14,6 @@ import com.chao.bookviki.presenter.contract.WelcomeContract;
 
 import butterknife.BindView;
 
-/**
- * Created by codeest on 16/8/15.
- */
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeContract.View {
 

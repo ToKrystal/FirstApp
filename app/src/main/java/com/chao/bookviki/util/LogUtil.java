@@ -3,9 +3,6 @@ package com.chao.bookviki.util;
 import com.orhanobut.logger.Logger;
 import com.chao.bookviki.BuildConfig;
 
-/**
- * Created by codeest on 2016/8/3.
- */
 public class LogUtil {
 
     public static boolean isDebug = BuildConfig.DEBUG;

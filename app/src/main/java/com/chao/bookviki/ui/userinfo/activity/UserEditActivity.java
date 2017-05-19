@@ -24,8 +24,6 @@ import butterknife.OnClick;
 
 public class UserEditActivity extends BaseActivity<UserEditPresenter> implements UserEditContract.View {
 
-
-
     private MaterialDialog.Builder mInputDialog;
     private LoginBean userBean;
     @BindView(R.id.name_tv)
@@ -81,10 +79,6 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
             case R.id.user_name_ll:
             case R.id.user_signature_ll:
             case R.id.user_intro_ll:
-           /* case R.id.user_address_ll:
-            case R.id.user_github_ll:
-            case R.id.user_blog_ll:
-            case R.id.user_twitter_ll:*/
                 showDialogs(id);
                 break;
             default:
@@ -107,22 +101,6 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
                 mInputDialog.title(getString(R.string.dialog_edit_intro));
                 mInputDialog.input( "", userBean !=null? userBean.getSimpleDesc() : "", descCallback);
                 break;
-           /* case R.id.user_address_ll:
-                mInputDialog.title(getString(R.string.dialog_edit_address));
-                mInputDialog.input("", "", addressCallback);
-                break;
-            case R.id.user_github_ll:
-                mInputDialog.title(getString(R.string.dialog_edit_github));
-                mInputDialog.input("", "", githubCallback);
-                break;
-            case R.id.user_blog_ll:
-                mInputDialog.title(getString(R.string.dialog_edit_blog));
-                mInputDialog.input("", "", blogCallback);
-                break;
-            case R.id.user_twitter_ll:
-                mInputDialog.title(getString(R.string.dialog_edit_twitter));
-                mInputDialog.input("", "", twitterCallback);
-                break;*/
         }
 
         mInputDialog.show();
@@ -138,8 +116,6 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
                 name_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
                 mPresenter.updateNick(input.toString());
-               // mUserEntity.setName(input.toString());
-               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
         }
     };
@@ -153,9 +129,6 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
                 intro_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
                 mPresenter.updateDesc(input.toString());
-               // RxBus.getDefault().post(userBean);
-               // mUserEntity.setIntroduction(input.toString());
-               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
         }
     };
@@ -169,8 +142,6 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
                 signature_tv.setText(input.toString());
                 mPresenter.postUpdatePersonalInfo(bean);
                 mPresenter.updateSigna(input.toString());
-              //  mUserEntity.setSignature(input.toString());
-              // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
             }
         }
     };
@@ -184,50 +155,5 @@ public class UserEditActivity extends BaseActivity<UserEditPresenter> implements
     public void showUserInfo(LoginBean bean) {
         this.userBean = bean;
     }
-/*
-
-    MaterialDialog.InputCallback addressCallback = new MaterialDialog.InputCallback() {
-        @Override
-        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-            if (!TextUtils.isEmpty(input)) {
-              //  mUserEntity.setCity(input.toString());
-              //  mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
-            }
-        }
-    };
-
-    MaterialDialog.InputCallback githubCallback = new MaterialDialog.InputCallback() {
-        @Override
-        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-            if (!TextUtils.isEmpty(input)) {
-               // mUserEntity.setGithub_name(input.toString());
-               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
-            }
-        }
-    };
-
-    MaterialDialog.InputCallback blogCallback = new MaterialDialog.InputCallback() {
-        @Override
-        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-            if (!TextUtils.isEmpty(input)) {
-              //  mUserEntity.setPersonal_website(input.toString());
-              //  mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
-            }
-        }
-    };
-
-    MaterialDialog.InputCallback twitterCallback = new MaterialDialog.InputCallback() {
-        @Override
-        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-            if (!TextUtils.isEmpty(input)) {
-              //  mUserEntity.setTwitter_account(input.toString());
-               // mPresenter.saveUserInfoById(mUserEntity.getId(), mUserEntity);
-            }
-        }
-    };
-*/
-
-
-
 
 }

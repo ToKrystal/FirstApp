@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.model.bean.RealmLikeBean;
-import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
-import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
+import com.chao.bookviki.ui.best.activity.TechDetailActivity;
+import com.chao.bookviki.ui.daily.activity.BookDetailActivity;
 
 import java.util.List;
 

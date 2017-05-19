@@ -10,7 +10,7 @@ import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.JingXuanNewsResponse;
 import com.chao.bookviki.presenter.contract.TechContract;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
+import com.chao.bookviki.ui.best.fragment.BestMainFragment;
 import com.chao.bookviki.util.JingXuanDiverdedUtil;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
@@ -49,7 +49,7 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
 
     private int currentPage = 1;
     private String queryStr = null;
-    private String currentTech = GankMainFragment.tabTitle[0];
+    private String currentTech = BestMainFragment.tabTitle[0];
     private int currentType = Constants.JING_XUAN_CONSTANT;
 
 

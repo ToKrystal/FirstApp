@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.activity;
+package com.chao.bookviki.ui.daily.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import com.chao.bookviki.model.bean.RepliesListBean;
 import com.chao.bookviki.presenter.BookDetailPresenter;
 import com.chao.bookviki.presenter.contract.BookDetailContract;
 import com.chao.bookviki.ui.userinfo.activity.LoginActivity;
-import com.chao.bookviki.ui.gold.adapter.RepliesAdapter;
+import com.chao.bookviki.ui.daily.adapter.RepliesAdapter;
 import com.chao.bookviki.util.ShareUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.CommonItemDecoration;

@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.adapter;
+package com.chao.bookviki.ui.best.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-/**
- * Created by codeest on 16/8/19.
- */
 
-public class GankMainAdapter extends FragmentPagerAdapter{
+public class BestMainAdapter extends FragmentPagerAdapter{
 
     private List<Fragment> fragments;
 
-    public GankMainAdapter(FragmentManager fm,List<Fragment> fragments) {
+    public BestMainAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

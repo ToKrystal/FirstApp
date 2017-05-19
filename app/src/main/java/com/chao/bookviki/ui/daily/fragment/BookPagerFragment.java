@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.fragment;
+package com.chao.bookviki.ui.daily.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import com.chao.bookviki.base.BaseFragment;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.presenter.BookPresenter;
 import com.chao.bookviki.presenter.contract.BookContract;
-import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
-import com.chao.bookviki.ui.gold.adapter.BookListAdapter;
+import com.chao.bookviki.ui.daily.activity.BookDetailActivity;
+import com.chao.bookviki.ui.daily.adapter.BookListAdapter;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.BookItemDecoration;
 import com.chao.bookviki.widget.ProgressImageView;
@@ -80,9 +80,6 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
                 mContext.startActivity(intent,options.toBundle());
             }
         });
-
-
-
         rvGoldListRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
         rvGoldListRecycleView.setAdapter(mAdapter);
         rvGoldListRecycleView.addItemDecoration(mDecoration);
@@ -127,55 +124,12 @@ public class BookPagerFragment extends BaseFragment<BookPresenter> implements Bo
         } else {
             ivProgress.stop();
         }
-        /*StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
-        for(BookListBean bean : goldListBean){
-            String strId = String.valueOf(bookId);
-            stringBuilder.append("('");
-            stringBuilder.append(strId+"','");
-            stringBuilder.append("type"+"','");
-            stringBuilder.append(bean.getCreatedAt()+"','");
-            stringBuilder.append(bean.getTitle()+"',");
-            stringBuilder.append(bean.getCollectionCount()+",");
-            stringBuilder.append(bean.getCommentsCount()+",'");
-            stringBuilder.append(bean.getUrl()+"','");
-            stringBuilder.append(bean.getUser().getUsername()+"','");
-            stringBuilder.append(bean.getScreenshot()== null ? "')":bean.getScreenshot().getUrl()     +"')");
-            stringBuilder.append(",");
-            bookId++;
-
-        }
-        LogUtil.i(stringBuilder.toString());*/
-
         mAdapter.updateData(goldListBean);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMoreContent(List<BookListBean> goldMoreListBean, int start, int end) {
-        /*StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("insert into book_list(objectid,type,createdat,title,collectioncount,commentscount,url,user,screenshot) values");
-        for(BookListBean bean : goldMoreListBean){
-            String strId = String.valueOf(bookId);
-            stringBuilder.append("('");
-            stringBuilder.append(strId+"','");
-            stringBuilder.append("type"+"','");
-            stringBuilder.append(bean.getCreatedAt()+"','");
-            stringBuilder.append(bean.getTitle()+"',");
-            stringBuilder.append(bean.getCollectionCount()+",");
-            stringBuilder.append(bean.getCommentsCount()+",'");
-            stringBuilder.append(bean.getUrl()+"','");
-            stringBuilder.append(bean.getUser().getUsername()+"','");
-            stringBuilder.append(bean.getScreenshot()== null ? "')":bean.getScreenshot().getUrl()     +"')");
-            stringBuilder.append(",");
-            bookId++;
-
-        }
-        LogUtil.i(stringBuilder.toString());*/
-
-
-
-
         mAdapter.updateData(goldMoreListBean);
         mAdapter.notifyItemRangeInserted(start, end);
         isLoadingMore = false;

@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.fragment;
+package com.chao.bookviki.ui.daily.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.chao.bookviki.base.BaseFragment;
 import com.chao.bookviki.presenter.contract.BookCommentContract;
-import com.chao.bookviki.ui.gold.adapter.BookCommentAdapter;
+import com.chao.bookviki.ui.daily.adapter.BookCommentAdapter;
 import com.chao.bookviki.widget.ProgressImageView;
 import com.chao.bookviki.R;
 import com.chao.bookviki.model.bean.BookCommentBean;

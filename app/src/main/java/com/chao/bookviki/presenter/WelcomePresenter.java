@@ -13,9 +13,6 @@ import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action1;
 
-/**
- * Created by codeest on 16/8/15.
- */
 
 public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implements WelcomeContract.Presenter {
 

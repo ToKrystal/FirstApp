@@ -12,9 +12,6 @@ import javax.inject.Inject;
 
 import rx.Subscription;
 
-/**
- * Created by codeest on 16/10/17.
- */
 
 public class SettingPresenter extends RxPresenter<SettingContract.View> implements SettingContract.Presenter {
 

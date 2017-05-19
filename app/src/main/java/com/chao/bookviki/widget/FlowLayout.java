@@ -1,8 +1,5 @@
 package com.chao.bookviki.widget;
 
-/**
- * Created by codeest on 16/12/29.
- */
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,9 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
+    /**
     * 流式布局
-    * Created by zhangxutong on 2016/1/17.
     */
 public class FlowLayout extends ViewGroup {
     private static final String TAG = "zxt/FlowViewGroup";

@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 
-/**
- * Created by codeest on 16/8/31.
- */
 
 public class SharedPreferenceUtil {
 

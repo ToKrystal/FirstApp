@@ -42,7 +42,7 @@ public class RetrofitHelper {
     }
 
     public Observable<BookHttpResponse<List<BookListBean>>> fetchBookHotList(String type, String dataTime, int limit) {
-        return mBookApiService.getBookList("android",0,3);
+        return mBookApiService.getBookList(type,0,3);
     }
 
     public Observable<List<RepliesListBean>> fetchRepliesList(String id){

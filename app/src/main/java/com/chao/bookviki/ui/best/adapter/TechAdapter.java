@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.adapter;
+package com.chao.bookviki.ui.best.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;

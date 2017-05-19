@@ -9,9 +9,6 @@ import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
 
-/**
- * Created by codeest on 16/8/13.
- */
 
 public class DateUtil {
 

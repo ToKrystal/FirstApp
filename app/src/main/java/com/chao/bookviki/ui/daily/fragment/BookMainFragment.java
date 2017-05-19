@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.fragment;
+package com.chao.bookviki.ui.daily.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.chao.bookviki.ui.gold.activity.BookFollowActivity;
+import com.chao.bookviki.ui.daily.activity.BookFollowActivity;
 import com.chao.bookviki.util.LogUtil;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.R;
@@ -16,7 +16,7 @@ import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.presenter.BookMainPresenter;
 import com.chao.bookviki.presenter.contract.BookMainContract;
-import com.chao.bookviki.ui.gold.adapter.BookPagerAdapter;
+import com.chao.bookviki.ui.daily.adapter.BookPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

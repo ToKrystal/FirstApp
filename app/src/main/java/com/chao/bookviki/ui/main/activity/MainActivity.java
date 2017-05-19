@@ -33,9 +33,9 @@ import com.chao.bookviki.model.bean.MyPushBean;
 import com.chao.bookviki.model.event.SearchEvent;
 import com.chao.bookviki.presenter.MainPresenter;
 import com.chao.bookviki.presenter.contract.MainContract;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
-import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
-import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
+import com.chao.bookviki.ui.best.fragment.BestMainFragment;
+import com.chao.bookviki.ui.daily.activity.BookDetailActivity;
+import com.chao.bookviki.ui.daily.fragment.BookMainFragment;
 import com.chao.bookviki.ui.main.fragment.AboutFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
@@ -51,9 +51,6 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
-/**
- * Created by codeest on 16/8/9.
- */
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
@@ -74,9 +71,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private LoginBean mLoginBean;
 
-  //  ZhihuMainFragment mZhihuFragment;
-    GankMainFragment mGankFragment;
-    // GoldMainFragment mGoldFragment;
+    BestMainFragment mGankFragment;
     LikeFragment mLikeFragment;
     SettingFragment mSettingFragment;
     AboutFragment mAboutFragment;
@@ -106,14 +101,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             SharedPreferenceUtil.setNightModeState(false);
         } else {
             showFragment = SharedPreferenceUtil.getCurrentItem();
             hideFragment = Constants.TYPE_JINGXUAN1;
-
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
             mNavigationView.getMenu().findItem(R.id.drawer_gank).setChecked(false);
             //设置toolbar文字为Menu Item 文字
@@ -125,9 +118,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void initEventAndData() {
         setToolBar(mToolbar,"发现阅读");
-     //   mZhihuFragment = new ZhihuMainFragment();
-        mGankFragment = new GankMainFragment();
-        // mGoldFragment = new GoldMainFragment();
+        mGankFragment = new BestMainFragment();
         mBookMainFragment = new BookMainFragment();
         mLikeFragment = new LikeFragment();
         mSettingFragment = new SettingFragment();
@@ -157,18 +148,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                   /* case R.id.drawer_zhihu:
-                        showFragment = Constants.TYPE_ZHIHU;
-                        mSearchMenuItem.setVisible(false);
-                        break;*/
                     case R.id.drawer_gank:
                         showFragment = Constants.TYPE_JINGXUAN1;
                         mSearchMenuItem.setVisible(true);
                         break;
-                    /*case R.id.drawer_gold:
-                        showFragment = Constants.TYPE_GOLD;
-                        mSearchMenuItem.setVisible(false);
-                        break;*/
                     case R.id.drawer_book:
                         showFragment = Constants.TYPE_GOLD;
                         mSearchMenuItem.setVisible(false);
@@ -267,11 +250,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-              //  PushManager.stopWork(mContext);
-             //   SharedPreferenceUtil.setBaiYunBindState(false);
               App.getInstance().exitApp();
-               // RxBus.getDefault().post(new MyPushBean());
-
             }
         });
         builder.show();
@@ -279,13 +258,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private SupportFragment getTargetFragment(int item) {
         switch (item) {
-            /*case Constants.TYPE_ZHIHU:
-                return mZhihuFragment;*/
             case Constants.TYPE_JINGXUAN1:
                 return mGankFragment;
             case Constants.TYPE_GOLD:
-                // return mGoldFragment;
-
                 return mBookMainFragment;
             case Constants.TYPE_LIKE:
                 return mLikeFragment;
@@ -301,16 +276,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private int getCurrentItem(int item) {
         switch (item) {
-            /*case Constants.TYPE_ZHIHU:
-                return R.id.drawer_zhihu;*/
-
             case Constants.TYPE_JINGXUAN1:
                 return R.id.drawer_gank;
-
             case Constants.TYPE_GOLD:
                 return R.id.drawer_book;
-
-
             case Constants.TYPE_LIKE:
                 return R.id.drawer_like;
             case Constants.TYPE_SETTING:
@@ -371,8 +340,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         }
     }
 
-
-
     @Override
     public void startDownloadService(String downloadUrl) {
         Intent intent = new Intent(mContext,UpdateService.class);
@@ -415,19 +382,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     }
 
-    /*public void showLoginOk() {
-        Intent intent = getIntent();
-        if(intent.getBooleanExtra("loginOk",false)){
-            SnackbarUtil.showShort(getWindow().getDecorView(),"登陆成功");
-            Bundle bundle = intent.getExtras();
-            LoginBean bean = bundle.getParcelable("beanInfo");
-            mLoginBean = bean;
-            //userName = bean.name;
-            tv_login_name.setText(bean.name);
-
-        }
-    }*/
-
     @Override
     public void showLogInInfo(LoginBean bean) {
       //  super.showLogInOutInfo(bean);
@@ -453,9 +407,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showDefaultUserInfo() {
-         //   tv_login_name.setText(loginBean.getName());
-       //     btnLogout.setVisibility(View.VISIBLE);
-
             tv_login_name.setText("点击头像登录");
             btnLogout.setVisibility(View.GONE);
         img_avatar.setImageResource(R.drawable.image_placeholder);

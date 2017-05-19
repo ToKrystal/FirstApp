@@ -3,9 +3,6 @@ package com.chao.bookviki.util;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-/**
- * Created by codeest on 16/9/3.
- */
 
 public class SnackbarUtil {
 

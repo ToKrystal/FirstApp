@@ -9,9 +9,6 @@ import android.widget.Toast;
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.App;
 
-/**
- * Created by codeest on 2016/8/4.
- */
 public class ToastUtil {
 
     static ToastUtil td;

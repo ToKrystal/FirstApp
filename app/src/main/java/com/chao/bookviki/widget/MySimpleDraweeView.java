@@ -12,10 +12,6 @@ import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-/**
- * Created by Jessica on 2017/3/25.
- */
-
 public class MySimpleDraweeView extends SimpleDraweeView {
 
     public MySimpleDraweeView(Context context, GenericDraweeHierarchy hierarchy) {

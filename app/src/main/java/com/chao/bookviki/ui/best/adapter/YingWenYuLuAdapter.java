@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.adapter;
+package com.chao.bookviki.ui.best.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.chao.bookviki.R;
 import com.chao.bookviki.model.bean.YingWenYuLuBean;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
 
 import java.util.List;
 

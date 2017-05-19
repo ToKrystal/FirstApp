@@ -59,7 +59,7 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.chao.bookviki.ui.gank.activity.TechDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.best.activity.TechDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
@@ -67,11 +67,11 @@
 
 
 
-        <activity android:name="com.chao.bookviki.ui.gold.activity.BookFollowActivity"
+        <activity android:name="com.chao.bookviki.ui.daily.activity.BookFollowActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         //book
-        <activity android:name="com.chao.bookviki.ui.gold.activity.BookDetailActivity"
+        <activity android:name="com.chao.bookviki.ui.daily.activity.BookDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"

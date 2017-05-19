@@ -1,6 +1,6 @@
 package com.chao.bookviki.di.module;
 
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
+import com.chao.bookviki.ui.best.fragment.BestMainFragment;
 import com.chao.bookviki.ui.main.fragment.AboutFragment;
 import com.chao.bookviki.ui.main.fragment.LikeFragment;
 import com.chao.bookviki.ui.main.fragment.SettingFragment;
@@ -19,8 +19,8 @@ public class PageModule {
 
     @Singleton
     @Provides
-    GankMainFragment provideGankMain() {
-        return new GankMainFragment();
+    BestMainFragment provideGankMain() {
+        return new BestMainFragment();
     }
 
     @Singleton

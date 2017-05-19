@@ -1,10 +1,10 @@
-package com.chao.bookviki.ui.gold.adapter;
+package com.chao.bookviki.ui.daily.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.chao.bookviki.ui.gold.fragment.BookPagerFragment;
+import com.chao.bookviki.ui.daily.fragment.BookPagerFragment;
 
 import java.util.List;
 

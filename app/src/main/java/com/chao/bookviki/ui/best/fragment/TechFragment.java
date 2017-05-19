@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.fragment;
+package com.chao.bookviki.ui.best.fragment;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,8 +16,8 @@ import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.JingXuanNewsBean;
 import com.chao.bookviki.presenter.TechPresenter;
 import com.chao.bookviki.presenter.contract.TechContract;
-import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
-import com.chao.bookviki.ui.gank.adapter.TechAdapter;
+import com.chao.bookviki.ui.best.activity.TechDetailActivity;
+import com.chao.bookviki.ui.best.adapter.TechAdapter;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.util.SystemUtil;
 import com.chao.bookviki.widget.ProgressImageView;

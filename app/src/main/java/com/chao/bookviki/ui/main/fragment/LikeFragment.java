@@ -20,9 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by codeest on 16/8/23.
- */
 
 public class LikeFragment extends BaseFragment<LikePresenter> implements LikeContract.View {
 

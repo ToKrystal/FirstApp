@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.activity;
+package com.chao.bookviki.ui.daily.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import com.chao.bookviki.model.bean.BookManagerBean;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.presenter.FollowPresenter;
 import com.chao.bookviki.presenter.contract.FollowContract;
-import com.chao.bookviki.ui.gold.adapter.BookFollowAdapter;
+import com.chao.bookviki.ui.daily.adapter.BookFollowAdapter;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.widget.DefaultItemTouchHelpCallback;
 

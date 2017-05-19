@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gold.adapter;
+package com.chao.bookviki.ui.daily.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageButton;
@@ -12,7 +12,7 @@ import com.chao.bookviki.R;
 import com.chao.bookviki.component.RxBus;
 import com.chao.bookviki.model.bean.BookManagerItemBean;
 import com.chao.bookviki.model.bean.FollowBean;
-import com.chao.bookviki.ui.gold.fragment.BookMainFragment;
+import com.chao.bookviki.ui.daily.fragment.BookMainFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

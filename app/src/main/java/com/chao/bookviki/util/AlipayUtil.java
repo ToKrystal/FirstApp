@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import java.net.URISyntaxException;
 
 /**
- * Created by codeest on 16/10/17.
  * https://github.com/fython/AlipayZeroSdk/blob/master/library/src/main/java/moe/feng/alipay/zerosdk/AlipayZeroSdk.java
  */
 

@@ -11,9 +11,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by codeest on 2016/8/3.
- */
 public class RxUtil {
 
     /**

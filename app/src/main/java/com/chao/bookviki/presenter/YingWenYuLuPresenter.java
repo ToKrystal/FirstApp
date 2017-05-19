@@ -10,7 +10,7 @@ import com.chao.bookviki.model.http.RetrofitHelper;
 import com.chao.bookviki.model.http.response.BookHttpResponse;
 import com.chao.bookviki.model.http.response.YingWenYuLuResponse;
 import com.chao.bookviki.presenter.contract.YingWenYuLuContract;
-import com.chao.bookviki.ui.gank.fragment.GankMainFragment;
+import com.chao.bookviki.ui.best.fragment.BestMainFragment;
 import com.chao.bookviki.util.RxUtil;
 import com.chao.bookviki.widget.CommonSubscriber;
 
@@ -31,7 +31,7 @@ public class YingWenYuLuPresenter extends RxPresenter<YingWenYuLuContract.View> 
     private RetrofitHelper mRetrofitHelper;
 
     private String queryStr = null;
-    private String currentTech = GankMainFragment.tabTitle[0];
+    private String currentTech = BestMainFragment.tabTitle[0];
     private int currentType = Constants.YU_LU_CONSTATNT;
     private List<YingWenYuLuBean> mList;
 

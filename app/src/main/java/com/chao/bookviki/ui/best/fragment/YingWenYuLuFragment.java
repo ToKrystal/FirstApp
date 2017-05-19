@@ -1,4 +1,4 @@
-package com.chao.bookviki.ui.gank.fragment;
+package com.chao.bookviki.ui.best.fragment;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,7 +15,7 @@ import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.YingWenYuLuBean;
 import com.chao.bookviki.presenter.YingWenYuLuPresenter;
 import com.chao.bookviki.presenter.contract.YingWenYuLuContract;
-import com.chao.bookviki.ui.gank.adapter.YingWenYuLuAdapter;
+import com.chao.bookviki.ui.best.adapter.YingWenYuLuAdapter;
 import com.chao.bookviki.util.EnCodeSign;
 import com.chao.bookviki.util.SnackbarUtil;
 import com.chao.bookviki.util.SystemUtil;
