@@ -24,7 +24,6 @@ public interface FragmentComponent {
 
     void inject(TechFragment techFragment);
 
-
     void inject(LikeFragment likeFragment);
 
     void inject(SettingFragment settingFragment);

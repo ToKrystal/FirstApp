@@ -11,9 +11,7 @@ import android.widget.TextView;
 
 import com.chao.bookviki.R;
 import com.chao.bookviki.app.Constants;
-import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.RealmLikeBean;
-import com.chao.bookviki.ui.gank.activity.GirlDetailActivity;
 import com.chao.bookviki.ui.gank.activity.TechDetailActivity;
 import com.chao.bookviki.ui.gold.activity.BookDetailActivity;
 
@@ -52,11 +50,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ARTICLE) {
             return new ArticleViewHolder(inflater.inflate(R.layout.item_like_article, parent, false));
-        } else {
-            return new GirlViewHolder(inflater.inflate(R.layout.item_like_girl, parent, false));
-        }
     }
 
     @Override
@@ -102,14 +96,6 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     break;
 
             }
-        } else if(holder instanceof GirlViewHolder) {
-            ImageLoader.load(mContext, mList.get(position).getImage(), ((GirlViewHolder) holder).image);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    gotoGirlDetail(mList.get(holder.getAdapterPosition()).getImage(),mList.get(holder.getAdapterPosition()).getId());
-                }
-            });
         }
     }
 
@@ -163,13 +149,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 .setType(type));
     }
 
-    public void gotoGirlDetail(String url,String id) {
-        Intent intent = new Intent();
-        intent.setClass(mContext, GirlDetailActivity.class);
-        intent.putExtra("url",url);
-        intent.putExtra("id",id);
-        mContext.startActivity(intent);
-    }
+
 
 
 }

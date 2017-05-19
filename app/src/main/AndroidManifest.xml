@@ -33,9 +33,6 @@
     </permission>
 
 
-
-
-
     //自己 application
     <application
         android:name="com.chao.bookviki.app.App"
@@ -62,26 +59,17 @@
             android:screenOrientation="portrait">
         </activity>
 
-
-
-        //Gank
         <activity android:name="com.chao.bookviki.ui.gank.activity.TechDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.chao.bookviki.ui.gank.activity.GirlDetailActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
 
-        //掘金
+
 
         <activity android:name="com.chao.bookviki.ui.gold.activity.BookFollowActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-
-
-
         //book
         <activity android:name="com.chao.bookviki.ui.gold.activity.BookDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -91,10 +79,6 @@
             >
 
         </activity>
-
-
-
-
 
 
         <activity android:name="com.chao.bookviki.ui.userinfo.activity.UserEditActivity"

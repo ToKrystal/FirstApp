@@ -12,6 +12,7 @@ import java.util.List;
 public class HtmlUtil
 {
 
+
     //css样式,隐藏header
     private static final String HIDE_HEADER_STYLE = "<style>div.headline{display:none;}</style>";
 

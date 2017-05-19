@@ -4,16 +4,10 @@ import com.chao.bookviki.BuildConfig;
 import com.chao.bookviki.app.App;
 import com.chao.bookviki.app.Constants;
 import com.chao.bookviki.di.qualifier.BookUrl;
-import com.chao.bookviki.di.qualifier.GankUrl;
 import com.chao.bookviki.di.qualifier.JingXuanNewsUrl;
-import com.chao.bookviki.di.qualifier.MyUrl;
-import com.chao.bookviki.di.qualifier.VtexUrl;
 import com.chao.bookviki.di.qualifier.YingWenYuLuUrl;
-import com.chao.bookviki.di.qualifier.ZhihuUrl;
 import com.chao.bookviki.model.http.api.BookApis;
 import com.chao.bookviki.model.http.api.JingXuanNewsApis;
-import com.chao.bookviki.model.http.api.MyApis;
-import com.chao.bookviki.model.http.api.VtexApis;
 import com.chao.bookviki.model.http.api.YingWenYuLuApis;
 import com.chao.bookviki.util.SystemUtil;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -65,12 +59,7 @@ public class HttpModule {
         return new OkHttpClient.Builder();
     }
 
-    @Singleton
-    @Provides
-    @VtexUrl
-    Retrofit provideVtexRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, VtexApis.HOST);
-    }
+
 
     @Singleton
     @Provides
@@ -93,12 +82,6 @@ public class HttpModule {
         return createRetrofit(builder, client, YingWenYuLuApis.HOST);
     }
 
-    @Singleton
-    @Provides
-    @MyUrl
-    Retrofit provideMyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, MyApis.HOST);
-    }
 
     @Singleton
     @Provides
@@ -169,11 +152,6 @@ public class HttpModule {
         return builder.build();
     }
 
-    @Singleton
-    @Provides
-    VtexApis provideVtexService(@VtexUrl Retrofit retrofit) {
-        return retrofit.create(VtexApis.class);
-    }
 
     @Singleton
     @Provides
@@ -193,12 +171,6 @@ public class HttpModule {
         return retrofit.create(YingWenYuLuApis.class);
     }
 
-
-    @Singleton
-    @Provides
-    MyApis provideMyService(@MyUrl Retrofit retrofit) {
-        return retrofit.create(MyApis.class);
-    }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
         //if (client.cookieJar() == CookieJar.NO_COOKIES) return;

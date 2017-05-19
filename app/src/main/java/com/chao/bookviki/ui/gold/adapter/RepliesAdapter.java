@@ -11,7 +11,6 @@ import com.chao.bookviki.R;
 import com.chao.bookviki.component.ImageLoader;
 import com.chao.bookviki.model.bean.BookListBean;
 import com.chao.bookviki.model.bean.RepliesListBean;
-import com.chao.bookviki.presenter.VtexPresenter;
 import com.chao.bookviki.util.DateUtil;
 import com.chao.bookviki.widget.SquareImageView;
 
@@ -62,6 +61,10 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return new ViewHolder(inflater.inflate(R.layout.item_replies, parent, false));
     }
 
+    public static String parseImg(String str) {
+        return "http:" + str;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TopViewHolder) {
@@ -69,7 +72,7 @@ public class RepliesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mTopBean == null) {//楼主
                 return;
             }
-            ImageLoader.load(mContext, VtexPresenter.parseImg(mTopBean.getUrl()), topHolder.ivRepliesTopFace);
+            ImageLoader.load(mContext, parseImg(mTopBean.getUrl()), topHolder.ivRepliesTopFace);
             topHolder.tvRepliesTopContent.setHtml(mTopBean.getContent(), new HtmlHttpImageGetter(topHolder.tvRepliesTopContent));
             topHolder.tvRepliesTopName.setText(mTopBean.getUser().getUsername());
             topHolder.tvRepliesTopTitle.setText(mTopBean.getTitle());
